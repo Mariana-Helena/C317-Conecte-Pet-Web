@@ -11,40 +11,28 @@ export default function Login() {
     const styles = useStyles();
 
     return (
-        <div style={{ 
-            backgroundImage: `url(${background})` ,
-            width:'100%',
-            height:'auto',
-            backgroundPosition: 'center',
-            backgroundSize: 'cover'}}>
-                <div style={{height:'100px'}}> </div>
-                <Container maxWidth="sm"  style={{ 
-                    width:'500px',
-                    height:'500px',
-                    backgroundColor:'white',
-                    padding: 25
-                    }}>
-                <img src={logo} style={{width:'150px',  display: 'block',
-                marginLeft: 'auto', marginRight: 'auto'}}/> 
-                <div style={{display: 'block',
-                marginLeft: 'auto', marginRight: 'auto', textAlign:'center'}}>
+        <div className={styles.background} style={{backgroundImage: `url(${background})`}}>
+            <div style={{height:'90px'}}> </div>
+            <Container maxWidth="sm" className={styles.container}>
+                <img src={logo} className={styles.logo}/> 
+                <div className={styles.tituloDiv}>
                     <span className={styles.titulo}> Login </span>
                 </div>
                 
-                <TextField id="outlined-basic" label="E-mail" variant="outlined" />
-                <TextField id="outlined-basic" label="Senha" variant="outlined" type="password"/>
+                <TextField id="outlined-basic" label="E-mail" size="small" fullWidth  variant="outlined" className={styles.textfield}/>
+                <TextField id="outlined-basic" label="Senha" size="small" fullWidth variant="outlined" type="password" className={styles.textfield}/>
 
-                <Button >
+                <Button className={styles.button}>
                     Esqueceu a senha?
                 </Button>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" className={styles.buttonContainedBlue}>
                     Entrar
                 </Button>
-                <Button variant="contained" >
+                <Button variant="contained" className={styles.buttonContainedGray}>
                     Cadastrar
                 </Button>
-                </Container>
-                <div style={{height:'150px'}}> </div>
+            </Container>
+            <div style={{height:'150px'}}> </div>
         </div>
     );
 }
