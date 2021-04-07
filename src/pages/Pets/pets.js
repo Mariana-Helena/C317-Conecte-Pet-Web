@@ -2,12 +2,15 @@ import React, {useState,useEffect} from 'react';
 import useStyles from './styles.js';
 import Menu from '../../components/Menu/menu';
 import Button from '@material-ui/core/Button';
+import { useHistory } from 'react-router-dom';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+
 export default function Pets() {
 
     const styles = useStyles();
 
+    const history = useHistory();
     
-
     /*
     Pet de exemplo
     */
@@ -21,25 +24,42 @@ export default function Pets() {
         peso: '1 kg',
         observacoes: ''
     }
-    const [pets, setPets] = useState([pet1, pet1, pet1]);
+    const [pets, setPets] = useState([pet1,pet1,pet1,pet1,pet1,pet1]);
 
     useEffect(() => {
        
     });
 
+    function handleClickMenuItem(rota) {
+        history.push("/"+rota);
+    }
+
     return (
         <Menu>
-            <span className={styles.titulo}> Pets cadastrados</span>
-            <Button variant="contained" className={styles.buttonContainedBlue}>
-                Cadastrar novo pet
-            </Button>
+            <div className={styles.primeiraDiv}>
+                <span className={styles.titulo}> Pets cadastrados</span>
+                <Button variant="contained" className={styles.buttonContainedBlue} 
+                onClick={()=>handleClickMenuItem('pets/cadastro')}>
+                    Cadastrar novo pet
+                </Button>
 
+            </div>
+            
+            
             {pets.map((pet,index) => 
             <div className={styles.petDiv}>
+                <HighlightOffIcon className={styles.closeIcon}/>
                 <div className={styles.circleGray}>
                 </div>
                 <span className={styles.subtitulo}> {pet.nome} </span>
-                {console.log(pet)}
+                <div>
+                    <p> <span className={styles.campos}>Espécie: </span> <span> {pet.especie}</span> </p>
+                    <p> <span className={styles.campos}>Raça: </span> <span> {pet.raca}</span> </p>
+                    <p> <span className={styles.campos}>Sexo: </span> <span> {pet.sexo}</span> </p>
+                    <p> <span className={styles.campos}>Idade: </span> <span> {pet.idade}</span> </p>
+                    <p> <span className={styles.campos}>Peso: </span> <span> {pet.peso}</span> </p>
+                    <p> <span className={styles.campos}>Observações: </span> <span> {pet.observacoes? pet.observacoes : '-'}</span> </p>
+                </div>
             </div>
             ) }
         </Menu>

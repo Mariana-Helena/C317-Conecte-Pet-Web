@@ -1,5 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+const defaultColor = '#1C587C';
+
 const useStyles = makeStyles(() => ({
   buttonContainedBlue:{
     width: '300px',
@@ -7,21 +9,41 @@ const useStyles = makeStyles(() => ({
     display: 'block',
     marginLeft: 'auto', 
     marginRight: 'auto',
-    backgroundColor: '#1C587C',
+    backgroundColor: defaultColor,
     color: 'white',
-    textTransform: 'inherit'
+    textTransform: 'inherit',
+    display: 'inline-block',
+    float:  'right'
+  },
+  closeIcon:{
+    color: defaultColor,
+    marginLeft: '170px',
+    fontSize: '32px',
+    position: 'relative',
+    top: '50px'
+  },
+  campos:{
+    color: defaultColor,
+    fontWeight: 'bold',
   },
   circleGray:{
     backgroundColor: '#E5E9F2',
     borderRadius: '100%',
     width: '150px',
     height: '150px',
+    display: 'block',
+    marginLeft: 'auto', 
+    marginRight: 'auto',
   },
   petDiv:{
-    widht: '278px',
-    height: '575px',
-    float: 'right',
-    margin: '30px',
+    width: '200px',
+    height: 'auto',    
+    margin: '20px',
+    marginTop: '30px',
+    display: 'inline-block',
+  },
+  primeiraDiv:{    
+    marginBottom: '20px',
   },
   subtitulo: {
     marginTop: '10px',
@@ -35,9 +57,10 @@ const useStyles = makeStyles(() => ({
     textAlign:'center',
   },
   titulo: {
-    color: '#1C587C',
+    color: defaultColor,
     fontSize: '20px',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    display: 'inline-block'
   },
 }));
 

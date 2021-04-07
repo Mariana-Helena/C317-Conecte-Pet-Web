@@ -1,6 +1,7 @@
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 const drawerWidth = 200;
+const defaultColor = '#1C587C';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -10,11 +11,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   barraSuperior: {
-    backgroundColor: '#1C587C',
+    backgroundColor: defaultColor,
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    paddingTop: theme.spacing(3),
+    paddingLeft: theme.spacing(10),
+    paddingRight: theme.spacing(1),
   },  
   drawer: {
     [theme.breakpoints.up('sm')]: {
@@ -26,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   item: {
-    color: '#1C587C',
+    color: defaultColor,
   },
   itemSelected: {
     color: 'white',
@@ -48,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   selectedItem: {
     '&.Mui-selected': {
-      backgroundColor: "#1C587C",
+      backgroundColor: defaultColor,
       color: "white",
       fontWeight: 600
     }
