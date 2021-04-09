@@ -15,9 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    paddingTop: theme.spacing(3),
-    paddingLeft: theme.spacing(10),
-    paddingRight: theme.spacing(1),
+    paddingLeft: theme.spacing(3),
   },  
   drawer: {
     [theme.breakpoints.up('sm')]: {
@@ -33,6 +31,14 @@ const useStyles = makeStyles((theme) => ({
   },
   itemSelected: {
     color: 'white',
+  },
+  text: {
+    color: defaultColor,
+    fontWeight: 'bold'
+  },
+  textSelected: {
+    color: 'white',
+    fontWeight: 'bold'
   },
   logo:{
     width:'200px',  
@@ -58,7 +64,12 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: theme.mixins.toolbar,
   vaccineIcon: {
-    fontSize: '21px'
+    fontSize: '21px',
+    color: defaultColor,
+  },
+  vaccineIconSelected: {
+    fontSize: '21px',
+    color: 'white'
   },
   user:{
     position:'fixed',

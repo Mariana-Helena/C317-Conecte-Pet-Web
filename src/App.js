@@ -10,6 +10,7 @@ import {
 
 import Login from "./pages/Login/login"
 import Pets from "./pages/Pets/pets"
+import RegistroVacina from './pages/RegistroVacina/registroVacina';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Switch>
                 <Route path="/" exact component={Login} />
                 <Route path="/pets" exact component={Pets} />
+                <Route path="/vacinas/registro" exact component={RegistroVacina} />
             </Switch>
     </BrowserRouter>
   );
