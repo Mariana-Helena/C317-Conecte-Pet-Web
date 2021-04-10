@@ -21,6 +21,14 @@ import { FaSyringe } from "react-icons/fa";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { useLocation } from 'react-router-dom';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const tema = createMuiTheme({
+    palette: {
+      primary: { main: '#1C587C' }, 
+      secondary: {main: '#7A96AC'}
+    },
+});
 
 function Menu(props) {
   const { window } = props;
@@ -136,7 +144,8 @@ function Menu(props) {
       </nav>
       <main className={styles.content}>
         <div className={styles.toolbar} />
-        {props.children}
+        <MuiThemeProvider theme={tema}>{props.children}</MuiThemeProvider>
+        
       </main>
     </div>
   );

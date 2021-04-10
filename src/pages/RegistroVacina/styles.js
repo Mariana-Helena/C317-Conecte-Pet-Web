@@ -1,8 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const defaultColor = '#1C587C';
-
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     banner:{    
         width:'100%',
         height:'200px',
@@ -10,15 +8,35 @@ const useStyles = makeStyles(() => ({
         backgroundSize: 'cover',
         marginBottom: '20px'
     },
+    buttonContained:{
+        width:'300px',
+        marginRight: '45px'
+    },
     calendario:{
         borderBottom: '1px solid white',
-        marginLeft: '75px',
+        marginLeft: '105px',
+        width: '175px'
     },
     campos: {
         marginLeft: '75px',
     },
+    container: {
+        width: '1030px',
+        minWidth: '1030px',
+        maxWidth: '1030px',
+    },
     data:{
-        color: 'white'
+        color: 'white',
+        fontSize: '20px'
+    },
+    formControl: {
+        margin: '0px',
+        minWidth: 120,
+        width: '300px',
+    },
+    radioGroup: {        
+        position: 'relative',
+        float:'right',
     },
     titulo: {
         color: 'white',
@@ -30,12 +48,17 @@ const useStyles = makeStyles(() => ({
     },
     textField: {
         width: '300px',
-        marginRight: '75px',
-        marginBottom: '30px'
+        marginRight: '45px',
+        marginBottom: '20px'
     },
     textArea: {
-        width: '1000px',
-        marginBottom: '30px'
+        width: '750px',
+        marginBottom: '30px',
+        minWidth: '750px',
+        maxWidth: '750px',
+        minHeight: '50px',
+        maxHeight: '120px',
+        height:'50px'
     }
 }));
 
