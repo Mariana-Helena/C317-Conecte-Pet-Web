@@ -62,6 +62,10 @@ export default function AgendamentoConsulta() {
         setSelectedDate(date);
     };
 
+    const handleHourChange = (hora) => {
+        setSelectedHour(hora);
+    };
+
     const handleChangePet = (pet) => {
         setSelectedPet(pet);
     };
@@ -137,8 +141,8 @@ export default function AgendamentoConsulta() {
                     <KeyboardTimePicker
                     margin="normal"
                     id="time-picker"
-                    value={selectedDate}
-                    onChange={handleDateChange}
+                    value={selectedHour}
+                    onChange={(value)=>handleHourChange(value)}
                     keyboardIcon={<AccessTimeIcon />}
                     KeyboardButtonProps={{
                         'aria-label': 'change time',
