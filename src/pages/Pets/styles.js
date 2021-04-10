@@ -8,7 +8,6 @@ const useStyles = makeStyles(() => ({
     marginBottom: '10px',
     marginLeft: 'auto', 
     marginRight: 'auto',
-    backgroundColor: defaultColor,
     color: 'white',
     textTransform: 'inherit',
     display: 'inline-block',

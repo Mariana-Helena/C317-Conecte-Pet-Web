@@ -49,7 +49,7 @@ export default function Pets() {
             <div className={styles.primeiraDiv}>
                 <span className={styles.titulo}> Pets cadastrados</span>
                 <Button variant="contained" className={styles.buttonContainedBlue} 
-                onClick={()=>handleClickMenuItem('pets/cadastro')}>
+                onClick={()=>handleClickMenuItem('pets/cadastro')} color='primary'>
                     Cadastrar novo pet
                 </Button>
 
