@@ -10,6 +10,8 @@ import {
 
 import Login from "./pages/Login/login"
 import Pets from "./pages/Pets/pets"
+import cadastroPet from "./pages/CadastroPet/cadastroPet"
+import cadastroUsuario from "./pages/CadastroUsuario/cadastroUsuario"
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
             <Switch>
                 <Route path="/" exact component={Login} />
                 <Route path="/pets" exact component={Pets} />
+                <Route path="/pets/cadastro" exact component={cadastroPet} />
+                <Route path="/usuario/cadastro" exact component={cadastroUsuario} />
             </Switch>
     </BrowserRouter>
   );
