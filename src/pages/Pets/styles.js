@@ -6,14 +6,17 @@ const useStyles = makeStyles(() => ({
   buttonContainedBlue:{
     width: '300px',
     marginBottom: '10px',
-    display: 'block',
     marginLeft: 'auto', 
     marginRight: 'auto',
-    backgroundColor: defaultColor,
     color: 'white',
     textTransform: 'inherit',
     display: 'inline-block',
     float:  'right'
+  },
+  container: {
+    marginLeft: '75px',
+    marginTop: '25px',
+    marginRight: '25px'
   },
   closeIcon:{
     color: defaultColor,

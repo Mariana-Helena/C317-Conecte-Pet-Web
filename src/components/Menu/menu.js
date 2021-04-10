@@ -21,6 +21,14 @@ import { FaSyringe } from "react-icons/fa";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { useLocation } from 'react-router-dom';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const tema = createMuiTheme({
+    palette: {
+      primary: { main: '#1C587C' }, 
+      secondary: {main: '#7A96AC'}
+    },
+});
 
 function Menu(props) {
   const { window } = props;
@@ -43,8 +51,8 @@ function Menu(props) {
   useEffect(() => {
     let rota = location.pathname;
     if (rota === '/pets') setPets(true);
-    else if (rota === '/vacinas') setVacinas(true);
-    else if (rota === '/consultas') setConsultas(true);
+    else if (rota === '/vacinas' || rota === '/vacinas/registro') setVacinas(true);
+    else if (rota === '/consultas'  || rota === '/consultas/agendamento') setConsultas(true);
   });
 
   function handleClickMenuItem(rota) {
@@ -60,15 +68,18 @@ function Menu(props) {
       <List>
       <Divider />
       <ListItem button onClick={() => handleClickMenuItem('pets')} selected={pets} classes={{ selected: styles.selectedItem }}> 
-        <ListItemIcon> <PetsIcon className={pets? styles.itemSelected : styles.item}/> </ListItemIcon> Pets 
+        <ListItemIcon> <PetsIcon className={pets? styles.itemSelected : styles.item}/> </ListItemIcon> 
+        <span className={pets? styles.textSelected : styles.text}>  Pets</span> 
       </ListItem>
       <Divider />
-      <ListItem button onClick={() => handleClickMenuItem('vacinas')} selected={vacinas}>  
-        <ListItemIcon> <FaSyringe className={styles.vaccineIcon}/> </ListItemIcon> Carteira de vacinação
+      <ListItem button onClick={() => handleClickMenuItem('vacinas')} selected={vacinas} classes={{ selected: styles.selectedItem }}>  
+        <ListItemIcon> <FaSyringe className={vacinas? styles.vaccineIconSelected : styles.vaccineIcon}/> </ListItemIcon> 
+        <span className={vacinas? styles.textSelected : styles.text}>   Carteira de vacinação</span>
       </ListItem>
       <Divider />
-      <ListItem button onClick={() => handleClickMenuItem('consultas')} selected={consultas}> 
-        <ListItemIcon> <EventIcon /> </ListItemIcon> Consultas 
+      <ListItem button onClick={() => handleClickMenuItem('consultas')} selected={consultas} classes={{ selected: styles.selectedItem }}> 
+        <ListItemIcon> <EventIcon className={consultas? styles.itemSelected : styles.item}/> </ListItemIcon> 
+        <span className={consultas? styles.textSelected : styles.text}>   Consultas </span> 
       </ListItem>
       <Divider />
       </List>
@@ -133,7 +144,8 @@ function Menu(props) {
       </nav>
       <main className={styles.content}>
         <div className={styles.toolbar} />
-        {props.children}
+        <MuiThemeProvider theme={tema}>{props.children}</MuiThemeProvider>
+        
       </main>
     </div>
   );

@@ -4,12 +4,15 @@ import Menu from '../../components/Menu/menu';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import ExcluirPet from './ExcluirPet/excluirPet';
 
 export default function Pets() {
 
     const styles = useStyles();
 
     const history = useHistory();
+
+    const [open, setOpen] = useState(false);
     
     /*
     Pet de exemplo
@@ -34,12 +37,19 @@ export default function Pets() {
         history.push("/"+rota);
     }
 
+    const handleDialogClose = () => {
+        setOpen(false);
+    }
+
     return (
         <Menu>
+            <div  className={styles.container}>
+            <ExcluirPet open={open} onClose={()=>handleDialogClose()}/>
+
             <div className={styles.primeiraDiv}>
                 <span className={styles.titulo}> Pets cadastrados</span>
                 <Button variant="contained" className={styles.buttonContainedBlue} 
-                onClick={()=>handleClickMenuItem('pets/cadastro')}>
+                onClick={()=>handleClickMenuItem('pets/cadastro')} color='primary'>
                     Cadastrar novo pet
                 </Button>
 
@@ -48,7 +58,7 @@ export default function Pets() {
             
             {pets.map((pet,index) => 
             <div className={styles.petDiv}>
-                <HighlightOffIcon className={styles.closeIcon}/>
+                <HighlightOffIcon className={styles.closeIcon} onClick={()=>setOpen(true)}/>
                 <div className={styles.circleGray}>
                 </div>
                 <span className={styles.subtitulo}> {pet.nome} </span>
@@ -62,6 +72,7 @@ export default function Pets() {
                 </div>
             </div>
             ) }
+            </div>
         </Menu>
     );
 }

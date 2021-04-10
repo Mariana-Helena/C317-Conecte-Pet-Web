@@ -5,10 +5,16 @@ import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import useStyles from './styles.js';
+import { useHistory } from 'react-router-dom'
 
 export default function Login() {
 
     const styles = useStyles();
+    const history = useHistory();
+
+    function handleClickMenuItem(rota) {
+        history.push(rota);
+    }
 
     return (
         <div className={styles.background} style={{backgroundImage: `url(${background})`}}>
@@ -25,7 +31,7 @@ export default function Login() {
                 <Button className={styles.button}>
                     Esqueceu a senha?
                 </Button>
-                <Button variant="contained" className={styles.buttonContainedBlue}>
+                <Button variant="contained" className={styles.buttonContainedBlue} onClick={()=>handleClickMenuItem('/pets')}>
                     Entrar
                 </Button>
                 <Button variant="contained" className={styles.buttonContainedGray}>
