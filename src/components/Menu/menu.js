@@ -52,7 +52,7 @@ function Menu(props) {
     let rota = location.pathname;
     if (rota === '/pets') setPets(true);
     else if (rota === '/vacinas' || rota === '/vacinas/registro') setVacinas(true);
-    else if (rota === '/consultas') setConsultas(true);
+    else if (rota === '/consultas'  || rota === '/consultas/agendamento') setConsultas(true);
   });
 
   function handleClickMenuItem(rota) {
