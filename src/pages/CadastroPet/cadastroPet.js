@@ -59,6 +59,7 @@ export default function Pets() {
 
             <div className={styles.banner} style={{backgroundImage: `url(${bannerCadastro})`}}>     
                 <span className={styles.titulo}> Cadastrar Pet</span>
+                <br/>
                 <Avatar className={styles.avatar}></Avatar>
                 <IconButton className={styles.camera}>
                     <PhotoCamera />

@@ -158,7 +158,7 @@ const useStyles = makeStyles((theme) => ({
   camera: {
     color: "white",
     marginLeft: '180px',
-    marginTop: '0px',
+    marginTop: '-25px',
     display: 'block',
   }
   

@@ -48,6 +48,7 @@ export default function Pets() {
             </Toolbar>
 
             <div className={styles.banner} style={{backgroundImage: `url(${bannerCadastro})`}}>
+                <br/>
                 <Avatar className={styles.avatar}></Avatar>
                 <IconButton className={styles.camera}>
                     <PhotoCamera />

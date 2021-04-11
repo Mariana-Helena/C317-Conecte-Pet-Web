@@ -10,10 +10,12 @@ import {
 
 import Login from "./pages/Login/login"
 import Pets from "./pages/Pets/pets"
-import cadastroPet from "./pages/CadastroPet/cadastroPet"
-import cadastroUsuario from "./pages/CadastroUsuario/cadastroUsuario"
+import CadastroPet from "./pages/CadastroPet/cadastroPet"
+import CadastroUsuario from "./pages/CadastroUsuario/cadastroUsuario"
 import RegistroVacina from './pages/RegistroVacina/registroVacina';
 import AgendamentoConsulta from './pages/AgendamentoConsulta/agendamentoConsulta';
+import Consultas from './pages/Consultas/consultas';
+import CarteiraDeVacinacao from './pages/CarteiraDeVacinacao/carteiraDeVacinacao'
 
 function App() {
   return (
@@ -21,10 +23,12 @@ function App() {
             <Switch>
                 <Route path="/" exact component={Login} />
                 <Route path="/pets" exact component={Pets} />
-                <Route path="/pets/cadastro" exact component={cadastroPet} />
-                <Route path="/usuario/cadastro" exact component={cadastroUsuario} />
+                <Route path="/pets/cadastro" exact component={CadastroPet} />
+                <Route path="/usuario/cadastro" exact component={CadastroUsuario} />
                 <Route path="/vacinas/registro" exact component={RegistroVacina} />
                 <Route path="/consultas/agendamento" exact component={AgendamentoConsulta} />
+                <Route path="/consultas" exact component={Consultas} />
+                <Route path="/vacinas" exact component={CarteiraDeVacinacao} />
             </Switch>
     </BrowserRouter>
   );
