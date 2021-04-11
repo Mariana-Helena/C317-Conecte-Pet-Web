@@ -4,6 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 const defaultColor = '#1C587C';
 
 const useStyles = makeStyles((theme) => ({
+  banner:{ 
+    marginTop: '-20px',   
+    width:'100%',
+    height:'200px',
+    backgroundSize: 'cover',
+    marginBottom: '20px'
+  },
   barraSuperior: {
     backgroundColor: defaultColor,
   },  
@@ -143,7 +150,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     marginTop: '20px',
-    marginBottom: '-60px',
+    marginBottom: '0px',
     marginLeft: '60px',
     width: '130px',
     height: '130px',
@@ -151,7 +158,7 @@ const useStyles = makeStyles((theme) => ({
   camera: {
     color: "white",
     marginLeft: '180px',
-    marginTop: '20px',
+    marginTop: '0px',
     display: 'block',
   }
   

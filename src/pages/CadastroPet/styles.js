@@ -4,6 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 const defaultColor = '#1C587C';
 
 const useStyles = makeStyles((theme) => ({
+  banner:{    
+    width:'100%',
+    height:'200px',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    marginBottom: '20px'
+  },
   buttonContainedBlue:{
     width: '250px',
     marginTop: '25px',
@@ -69,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline-block',
     marginLeft: '60px',
     marginTop: '-24px',
+    marginTop: '10px'
   },
   nomePet: {
     '& > *': {
@@ -124,15 +132,18 @@ const useStyles = makeStyles((theme) => ({
     width: '840px',
   },
   avatar: {
-    marginTop: '10px',
-    marginBottom: '-40px',
+    marginTop: '20px',
+    marginBottom: '-70px',
     marginLeft: '60px',
-    width: '110px',
-    height: '110px',
+    width: '115px',
+    height: '115px',
+    position: 'relative',
   },
   camera: {
     color: "white",
-    marginLeft: '160px',
+    marginLeft: '180px',
+    marginBottom: '0px',
+    marginTop: '35px',
     display: 'block',
   }
   

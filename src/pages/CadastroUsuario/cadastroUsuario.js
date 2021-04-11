@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import useStyles from './styles.js';
 import logo from "../../images/Logo.png";
+import bannerCadastro from "../../images/banner_cadastroUser.png";
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
@@ -9,7 +10,6 @@ import { compose, spacing, palette } from '@material-ui/system';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -47,14 +47,12 @@ export default function Pets() {
                 </Typography>            
             </Toolbar>
 
-            <div className={styles.primeiraDiv}>
-                <Box className={styles.box} p={3}>
-                    <Avatar className={styles.avatar}></Avatar>
-                    <IconButton className={styles.camera}>
-                        <PhotoCamera />
-                    </IconButton>
-                </Box>  
-            </div>
+            <div className={styles.banner} style={{backgroundImage: `url(${bannerCadastro})`}}>
+                <Avatar className={styles.avatar}></Avatar>
+                <IconButton className={styles.camera}>
+                    <PhotoCamera />
+                </IconButton>
+            </div>    
 
             <div className={styles.petDiv}>
                 <form  noValidate autoComplete="off">

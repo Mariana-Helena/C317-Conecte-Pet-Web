@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import useStyles from './styles.js';
 import Menu from '../../components/Menu/menu';
+import bannerCadastro from "../../images/banner_cadastro.png";
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
@@ -56,14 +57,12 @@ export default function Pets() {
     return (
         <Menu>
 
-            <div className={styles.primeiraDiv}>
-                <Box className={styles.box} p={2}>
-                    <span className={styles.titulo}> Cadastrar Pet</span>
-                    <Avatar className={styles.avatar}></Avatar>
-                    <IconButton className={styles.camera}>
-                        <PhotoCamera />
-                    </IconButton>
-                </Box>  
+            <div className={styles.banner} style={{backgroundImage: `url(${bannerCadastro})`}}>     
+                <span className={styles.titulo}> Cadastrar Pet</span>
+                <Avatar className={styles.avatar}></Avatar>
+                <IconButton className={styles.camera}>
+                    <PhotoCamera />
+                </IconButton>
             </div>
 
             <div className={styles.petDiv}>
