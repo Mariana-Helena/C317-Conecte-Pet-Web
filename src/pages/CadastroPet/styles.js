@@ -135,8 +135,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '20px',
     marginBottom: '-70px',
     marginLeft: '60px',
-    width: '115px',
-    height: '115px',
+    width: '120px !important',
+    height: '120px !important',
     position: 'relative',
   },
   camera: {

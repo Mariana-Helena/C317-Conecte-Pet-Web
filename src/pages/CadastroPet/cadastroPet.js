@@ -68,7 +68,8 @@ export default function Pets() {
 
             <div className={styles.petDiv}>
                 <form  noValidate autoComplete="off">
-                    <TextField className={styles.nomePet} id="outlined-basic" label="Nome" variant="outlined"  helperText="Por favor, digite o nome do Pet" />
+                    <TextField className={styles.nomePet} size='small'
+                    id="outlined-basic" label="Nome" variant="outlined"  helperText="Por favor, digite o nome do Pet" />
                     <TextField
                         className={styles.especiePet}
                         id="outlined-select-especie"
