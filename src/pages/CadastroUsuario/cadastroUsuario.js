@@ -5,17 +5,15 @@ import bannerCadastro from "../../images/banner_cadastroUser.png";
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
-import { styled } from '@material-ui/core/styles';
-import { compose, spacing, palette } from '@material-ui/system';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import FormGroup from '@material-ui/core/FormGroup';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import FormLabel from '@material-ui/core/FormLabel';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 export default function Pets() {
 
@@ -23,65 +21,101 @@ export default function Pets() {
 
     const history = useHistory();
 
-
-    const Box = styled('div')(compose(spacing, palette));
-
-    const handleChange = (event) => {
-        setCurrency(event.target.value);
-    };
+    const [usuario, setUsuario] = useState();
 
     useEffect(() => {
        
     });
 
     function handleClickMenuItem(rota) {
-        history.push("/"+rota);
+        history.push(rota);
+    }
+
+    const handleUsuario = (value) => {
+        setUsuario(value);
     }
 
     return (
         <div>
-            <Toolbar className={styles.barraSuperior}> 
-                <img src={logo} className={styles.logo}/> 
-                <Typography variant="h6" noWrap className={styles.userName} color="white">
-                Cadastrar Usuário 
-                </Typography>            
-            </Toolbar>
+            <form  noValidate autoComplete="off">
+                <Toolbar className={styles.barraSuperior}> 
+                    <img src={logo} className={styles.logo}/> 
+                    <Typography variant="h6" noWrap className={styles.userName} color="white">
+                    Cadastrar Usuário 
+                    </Typography>            
+                </Toolbar>
 
-            <div className={styles.banner} style={{backgroundImage: `url(${bannerCadastro})`}}>
-                <br/>
-                <Avatar className={styles.avatar}></Avatar>
-                <IconButton className={styles.camera}>
-                    <PhotoCamera />
-                </IconButton>
-            </div>    
+                <div className={styles.banner} style={{backgroundImage: `url(${bannerCadastro})`}}>
+                    <br/>
+                    <Avatar className={styles.avatar}></Avatar>
+                    <IconButton className={styles.camera}>
+                        <PhotoCamera />
+                    </IconButton>
+                </div>    
 
-            <div className={styles.petDiv}>
-                <form  noValidate autoComplete="off">
-                    <TextField className={styles.nomeUser} id="outlined-basic" label="Nome" variant="outlined"  helperText="Por favor, digite o seu nome" />
-                    <TextField className={styles.telUser} id="outlined-basic" label="Telefone" variant="outlined"  helperText="Por favor, digite o seu telefone" />
-                    <TextField className={styles.emailUser} id="outlined-basic" label="Email" variant="outlined"  helperText="Por favor, digite o seu email" />
-                    <TextField className={styles.senhaUser} id="outlined-basic" label="Senha" variant="outlined"  helperText="Por favor, digite a sua senha" />
-                    <FormLabel component="legend" className={styles.typePerson}>Você é:</FormLabel>
-                    <FormGroup >
-                        <FormControlLabel
-                            control={<Checkbox checked={false} onChange={handleChange} name="Veterinario"/>}
-                            label="Veterinário" className={styles.user}
+                <div className={styles.campos}>
+                    <TextField
+                        id="outlined-helperText"
+                        label="Nome"
+                        helperText="Por favor, digite o seu nome"
+                        variant="outlined"
+                        size="small"
+                        className={styles.textField}
+                    />
+                    <RadioGroup row aria-label="gender" name="gender1" value={usuario}
+                        onChange={(value)=>handleUsuario(value)} className={styles.radioGroup}>
+                        <FormControlLabel value="0" control={<Radio  color='gray'/>} label="Dono de Pet" />
+                        <FormControlLabel value="1" control={<Radio color='gray'/>} label="Veterinário" />
+                        <FormHelperText className={styles.helpertext}>Você é:</FormHelperText>
+                    </RadioGroup>
+                    <br/>
+                    <br/>
+                    <div className={styles.container}>
+                        <TextField
+                            id="outlined-helperText"
+                            label="Telefone"
+                            helperText="Por favor, digite o seu telefone"
+                            variant="outlined"
+                            size="small"
+                            className={styles.textField}
                         />
-                        <FormControlLabel
-                            control={<Checkbox checked={false} onChange={handleChange} name="DonoPet" />}
-                            label="Dono de pet" className={styles.vet}
+                        <div></div>
+                        <TextField
+                            id="outlined-helperText"
+                            label="Email"
+                            helperText="Por favor, digite o seu email"
+                            variant="outlined"
+                            size="small"
+                            className={styles.textField}
                         />
-                    </FormGroup>
-                    <TextField className={styles.crmv} id="outlined-basic" label="CRMV" variant="outlined"  helperText="Por favor, digite o seu CRMV" />
-                    <Button variant="contained" className={styles.buttonContainedBlue}>
-                        Cadastrar
+                        <div></div>
+                        <TextField
+                            id="outlined-helperText"
+                            label="Senha"
+                            helperText="Por favor, digite a seu senha"
+                            variant="outlined"
+                            size="small"
+                            className={styles.textField}
+                        />
+                        <TextField
+                            id="outlined-helperText"
+                            label="CRMV"
+                            helperText="Por favor, digite o seu CRMV"
+                            variant="outlined"
+                            size="small"
+                            className={styles.textFieldCRMV}
+                        />
+                    </div>
+                    <Button variant="contained" className={styles.buttonContained} 
+                        onClick={()=>handleCadastroVacina()} >
+                        Cadastrar 
                     </Button>
-                    <Button variant="contained" className={styles.buttonContainedBlueC}>
+                    <Button variant="contained" className={styles.buttonContainedC} 
+                        onClick={()=>handleClickMenuItem('/')}>
                         Cancelar
                     </Button>
-                </form> 
-            </div>
-
+                </div>
+            </form> 
         </div>
     );
 }

@@ -26,21 +26,22 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '5px'
   },
   toolbar: theme.mixins.toolbar,  
-  buttonContainedBlue:{
-    width: '250px',
-    marginTop: '160px',
-    marginLeft: '600px', 
-    backgroundColor: defaultColor,
-    color: 'white',
-    textTransform: 'inherit',
+  buttonContained:{
+    width:'300px',
+    marginLeft: '200px',
+    backgroundColor: '#1C587C',
+    color: 'white'
   },
-  buttonContainedBlueC:{
-    marginTop: '-61px',
-    width: '250px',
-    marginLeft: '900px', 
-    backgroundColor: '#7a96ac',
-    color: 'white',
-    textTransform: 'inherit',
+  buttonContainedC:{
+    width:'300px',
+    marginLeft: '200px',
+    backgroundColor: '#7A96AC',
+    color: 'white'
+  },
+  radioGroup: {        
+    position: 'fix',
+    marginLeft: '400px',
+    marginTop: '-85px',
   },
   closeIcon:{
     color: defaultColor,
@@ -62,12 +63,8 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto', 
     marginRight: 'auto',
   },
-  petDiv:{
-    width: '200px',
-    height: 'auto',    
-    margin: '20px',
-    marginTop: '30px',
-    display: 'inline-block',
+  campos: {
+    marginLeft: '75px',
   },
   primeiraDiv:{    
     marginBottom: '20px',
@@ -92,57 +89,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '60px',
     marginTop: '-24px',
   },
-  nomeUser: {
-    '& > *': {
-    margin: theme.spacing(1),
-    width: '450px',
-    },
-    marginTop: '-40px'
-  },
-  telUser: {
-    '& > *': {
-    margin: theme.spacing(1),
-    width: '210px',
-    },
-    marginLeft: '0px',
-  },
-  crmv: {
-    '& > *': {
-    margin: theme.spacing(1),
-    width: '210px',
-    },
-    marginLeft: '830px',
-    marginTop: '-70px',
-  },
-  emailUser: {
-    '& > *': {
-    margin: theme.spacing(1),
-    width: '450px',
-    },
-  },
-  senhaUser: {
-    '& > *': {
-    margin: theme.spacing(1),
-    width: '450px',
-    },
-  },
-  vet: {
-    marginLeft: '670px',
-    marginTop: '-42px',
-    position: 'relative',
-    display: 'block'
-  },
-  user: {
-    marginLeft: '830px',
-    marginTop: '6px',
-    width: '200px',
-  },
-  box: {
-    backgroundColor: "#7a96ac",
-    marginTop: '-24px',
-    marginRight: '0px',
-    marginLeft: '-52px',
-  },
   typePerson: {
     marginTop: '-420px',
     marginLeft: '680px',
@@ -160,6 +106,31 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '180px',
     marginTop: '-25px',
     display: 'block',
+  },
+  textField: {
+    width: '300px',
+    marginRight: '45px',
+    marginBottom: '20px'
+  },
+  textFieldCRMV: {
+    width: '300px',
+    marginLeft: '200px',
+    marginTop: '-210px',
+    marginBottom: '20px'
+  },
+  formControl: {
+    marginTop: '400px',
+    minWidth: 120,
+    width: '300px',
+  },
+  container: {
+    width: '1030px',
+    minWidth: '1030px',
+    maxWidth: '1030px',
+  },
+  helpertext: {
+    marginLeft: '-300px',
+    marginTop: '-8px'
   }
   
 }));

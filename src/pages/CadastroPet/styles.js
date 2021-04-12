@@ -48,17 +48,9 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 120,
     width: '300px',
   },
-  petDiv:{
-    width: '200px',
-    height: 'auto',    
-    margin: '20px',
-    marginTop: '30px',
-    display: 'inline-block',
-  },
   primeiraDiv:{    
     marginBottom: '20px',
   },
-
   subtitulo: {
     marginTop: '10px',
     marginBottom: '10px',
@@ -119,12 +111,6 @@ const useStyles = makeStyles((theme) => ({
     },
     marginLeft: '300px',
     marginTop: '-107px'
-  },
-  box: {
-    backgroundColor: "#7a96ac",
-    marginTop: '-24px',
-    marginRight: '-8px',
-    marginLeft: '-52px',
   },
   obs: {
     marginTop: '-20px',

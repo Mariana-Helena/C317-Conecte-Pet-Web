@@ -34,7 +34,7 @@ export default function Login() {
                 <Button variant="contained" className={styles.buttonContainedBlue} onClick={()=>handleClickMenuItem('/pets')}>
                     Entrar
                 </Button>
-                <Button variant="contained" className={styles.buttonContainedGray}>
+                <Button variant="contained" className={styles.buttonContainedGray} onClick={()=>handleClickMenuItem('/usuario/cadastro')}>
                     Cadastrar
                 </Button>
             </Container>

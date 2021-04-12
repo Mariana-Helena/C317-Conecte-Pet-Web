@@ -18,6 +18,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import { useHistory } from 'react-router-dom';
 
 export default function Pets() {
 
@@ -27,7 +28,7 @@ export default function Pets() {
 
     const [selectedEspecie, setSelectedEspecie] = useState();
 
-    const handleChangePet = (pet) => {
+    const handleChangeEPet = (pet) => {
         setSelectedEspecie(pet);
     };
 
@@ -35,8 +36,14 @@ export default function Pets() {
        
     });
 
+    const history = useHistory();
+
     const handleSexo = (value) => {
         setSexo(value);
+    }
+
+    function handleClickMenuItem(rota) {
+        history.push(rota);
     }
 
     return (
@@ -66,11 +73,11 @@ export default function Pets() {
                         labelId="demo-simple-select-outlined-label"
                         id="demo-simple-select-outlined"
                         value={selectedEspecie}
-                        onChange={(value) => handleChangePet(value)}
+                        onChange={(value) => handleChangeEPet(value)}
                         label="Especie"
                         >
-                        <MenuItem value={0}>Fêmea</MenuItem> 
-                        <MenuItem value={1}>Macho</MenuItem>            
+                        <MenuItem value={0}>Cachorro</MenuItem> 
+                        <MenuItem value={1}>Gato</MenuItem>            
                         </Select>
                         <FormHelperText>Por favor, selecione a espécie do Pet</FormHelperText>
                     </FormControl>

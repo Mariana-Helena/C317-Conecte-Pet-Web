@@ -148,7 +148,7 @@ export default function AgendamentoConsulta() {
                         'aria-label': 'change time',
                     }}
                     InputProps={{ disableUnderline: true, className: styles.hora}}
-                    helperText="Por favor, digite o email do dono do pet"
+                    helperText="Por favor, insira o horário desejado da consulta do pet"
                     />
             </MuiPickersUtilsProvider>
            <br/>
