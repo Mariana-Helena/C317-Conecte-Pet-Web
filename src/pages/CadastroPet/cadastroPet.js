@@ -9,11 +9,16 @@ import { styled } from '@material-ui/core/styles';
 import { compose, spacing, palette } from '@material-ui/system';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
+import InputLabel from '@material-ui/core/InputLabel';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import Checkbox from '@material-ui/core/Checkbox';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 export default function Pets() {
 
@@ -21,10 +26,8 @@ export default function Pets() {
 
     const history = useHistory();
 
+    const [sexo, setSexo] = useState();
     
-    /*
-    Pet de exemplo
-    */
     const especies = [
         {
             value: '',
@@ -40,82 +43,106 @@ export default function Pets() {
         }
     ];
 
+    const [selectedEspecie, setSelectedEspecie] = useState();
+
     const Box = styled('div')(compose(spacing, palette));
 
-    const handleChange = (event) => {
-        setCurrency(event.target.value);
+    const handleChangePet = (pet) => {
+        setSelectedEspecie(pet);
     };
 
     useEffect(() => {
        
     });
 
-    function handleClickMenuItem(rota) {
-        history.push("/"+rota);
+    const handleSexo = (value) => {
+        setSexo(value);
     }
 
     return (
         <Menu>
+            <form  noValidate autoComplete="off">
+                <div className={styles.banner} style={{backgroundImage: `url(${bannerCadastro})`}}>     
+                    <span className={styles.titulo}> Cadastrar Pet</span>
+                    <br/>
+                    <Avatar className={styles.avatar}></Avatar>
+                    <IconButton className={styles.camera}>
+                        <PhotoCamera />
+                    </IconButton>
+                </div>
 
-            <div className={styles.banner} style={{backgroundImage: `url(${bannerCadastro})`}}>     
-                <span className={styles.titulo}> Cadastrar Pet</span>
-                <br/>
-                <Avatar className={styles.avatar}></Avatar>
-                <IconButton className={styles.camera}>
-                    <PhotoCamera />
-                </IconButton>
-            </div>
-
-            <div className={styles.petDiv}>
-                <form  noValidate autoComplete="off">
-                    <TextField className={styles.nomePet} id="outlined-basic" label="Nome" variant="outlined"  helperText="Por favor, digite o nome do Pet" />
+                <div className={styles.campos}>
                     <TextField
-                        className={styles.especiePet}
-                        id="outlined-select-especie"
-                        select
-                        label="Espécie"
-                        value={especies}
-                        onChange={handleChange}
-                        SelectProps={{
-                            native: true,
-                        }}
-                        helperText="Por favor, selecione a espécie do Pet"
+                        id="outlined-helperText"
+                        label="Nome do Pet"
+                        helperText="Por favor, digite o nome do Pet"
                         variant="outlined"
-                        >
-                        {especies.map((option) => (
-                            <option key={option.value} value={option.value}>
-                            {option.label}
-                            </option>
-                        ))}
-                    </TextField>
-                    <TextField className={styles.racaPet} id="outlined-basic" label="Raça" variant="outlined"  helperText="Por favor, digite a raça do Pet" />
-                    <TextField className={styles.nomePet} id="outlined-basic" label="Idade" variant="outlined"  helperText="Por favor, digite a idade do Pet" />
-                    <TextField className={styles.pesoPet} id="outlined-basic" label="Peso" variant="outlined"  helperText="Por favor, digite o peso do Pet" />
-                    <FormGroup >
-                        <FormControlLabel
-                            control={<Checkbox checked={false} onChange={handleChange} name="Macho"/>}
-                            label="Macho" className={styles.sexoPetF}
-                        />
-                        <FormControlLabel
-                            control={<Checkbox checked={false} onChange={handleChange} name="Fêmea" />}
-                            label="Fêmea" className={styles.sexoPetM}
-                        />
-                    </FormGroup>
-                    <TextField className={styles.obs}
-                        id="obsPet"
-                        label="Observações"
-                        multiline
-                        rows={4}
-                        variant="outlined"
+                        size="small"
+                        className={styles.textField}
                     />
-                    <Button variant="contained" className={styles.buttonContainedBlue}>
-                        Cadastrar
+                    <FormControl variant="outlined" className={styles.formControl} size='small'>
+                        <InputLabel id="demo-simple-select-outlined-label">Espécie</InputLabel>
+                        <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        value={selectedEspecie}
+                        onChange={(value) => handleChangePet(value)}
+                        label="Especie"
+                        >
+                        <MenuItem value={0}>Fêmea</MenuItem> 
+                        <MenuItem value={1}>Macho</MenuItem>            
+                        </Select>
+                        <FormHelperText>Por favor, selecione a espécie do Pet</FormHelperText>
+                    </FormControl>
+                    <TextField
+                        id="outlined-helperText"
+                        label="Raça"
+                        helperText="Por favor, digite a raça do Pet"
+                        variant="outlined"
+                        size="small"
+                        className={styles.textFieldRaca}
+                    />
+                    <br/>
+                    <div className={styles.container}>
+                        <TextField
+                            id="outlined-helperText"
+                            label="Idade"
+                            helperText="Por favor, digite a idade do Pet"
+                            variant="outlined"
+                            size="small"
+                            className={styles.textField}
+                        />
+                        <TextField
+                            id="outlined-helperText"
+                            label="Peso"
+                            helperText="Por favor, digite o peso do Pet"
+                            variant="outlined"
+                            size="small"
+                            className={styles.textField}
+                        />
+                        <RadioGroup row aria-label="gender" name="gender1" value={sexo}
+                            onChange={(value)=>handleSexo(value)} className={styles.radioGroup}>
+                            <FormControlLabel value="0" control={<Radio  color='primary'/>} label="Fêmea" />
+                            <FormControlLabel value="1" control={<Radio color='primary'/>} label="Macho" />
+                        </RadioGroup>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <TextareaAutosize aria-label="minimum height" placeholder="Observações:" 
+                    className={styles.textArea}/>
+                    <br/>
+                    <Button variant="contained" className={styles.buttonContained} 
+                        onClick={()=>handleCadastroVacina()} color='primary'>
+                        Cadastrar 
                     </Button>
-                    <Button variant="contained" className={styles.buttonContainedBlueC}>
+                    <Button variant="contained" className={styles.buttonContained} 
+                        onClick={()=>handleClickMenuItem('/vacinas')} color='secondary'>
                         Cancelar
                     </Button>
-                </form> 
-            </div>
+                </div>
+            </form> 
+            
 
         </Menu>
     );

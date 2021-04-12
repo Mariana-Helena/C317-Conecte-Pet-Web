@@ -11,21 +11,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     marginBottom: '20px'
   },
-  buttonContainedBlue:{
-    width: '250px',
-    marginTop: '25px',
-    marginLeft: '8px', 
-    backgroundColor: defaultColor,
-    color: 'white',
-    textTransform: 'inherit',
-  },
-  buttonContainedBlueC:{
-    marginTop: '-58px',
-    width: '250px',
-    marginLeft: '350px', 
-    backgroundColor: '#7a96ac',
-    color: 'white',
-    textTransform: 'inherit',
+  buttonContained:{
+    width:'300px',
+    marginRight: '45px'
   },
   closeIcon:{
     color: defaultColor,
@@ -38,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     color: defaultColor,
     fontWeight: 'bold',
   },
+  campos: {
+    marginLeft: '75px',
+  },
   circleGray:{
     backgroundColor: '#E5E9F2',
     borderRadius: '100%',
@@ -46,6 +37,16 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     marginLeft: 'auto', 
     marginRight: 'auto',
+  },
+  container: {
+    width: '1030px',
+    minWidth: '1030px',
+    maxWidth: '1030px',
+  },
+  formControl: {
+    margin: '0px',
+    minWidth: 120,
+    width: '300px',
   },
   petDiv:{
     width: '200px',
@@ -68,6 +69,16 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto', 
     marginRight: 'auto',
     textAlign:'center',
+  },
+  textField: {
+    width: '300px',
+    marginRight: '45px',
+    marginBottom: '20px'
+  },
+  textFieldRaca: {
+    width: '300px',
+    marginBottom: '20px',
+    marginLeft: '45px',
   },
   titulo: {
     color: 'white',
@@ -109,17 +120,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '300px',
     marginTop: '-107px'
   },
-  sexoPetF: {
-    marginLeft: '630px',
-    marginTop: '-115px',
-    position: 'relative',
-    display: 'block'
-  },
-  sexoPetM: {
-    marginLeft: '750px',
-    marginTop: '-66px',
-    position: 'relative',
-  },
   box: {
     backgroundColor: "#7a96ac",
     marginTop: '-24px',
@@ -135,8 +135,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '20px',
     marginBottom: '-70px',
     marginLeft: '60px',
-    width: '115px',
-    height: '115px',
+    width: '115px !important',
+    height: '115px !important',
     position: 'relative',
   },
   camera: {
@@ -145,6 +145,21 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '0px',
     marginTop: '35px',
     display: 'block',
+  },
+  radioGroup: {        
+    position: 'fix',
+    marginLeft: '750px',
+    marginTop: '-90px',
+    
+  },
+  textArea: {
+    width: '750px',
+    marginBottom: '30px',
+    minWidth: '750px',
+    maxWidth: '750px',
+    minHeight: '50px',
+    maxHeight: '120px',
+    height:'50px'
   }
   
 }));
