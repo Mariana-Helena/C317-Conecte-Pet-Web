@@ -5,6 +5,7 @@ import bannerVacinacao from "../../images/banner_vacinacao.png";
 import 'date-fns';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
+import Button from '@material-ui/core/Button';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -17,6 +18,8 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 
 export default function RegistroVacina() {
+
+    const [vet, setVet] = useState(false);
 
     function createData(id,fabricante, vacina, aplicacao, paplicacao,veterinario,observacoes) {
         return { id,fabricante, vacina, aplicacao, paplicacao,veterinario,observacoes};
@@ -63,10 +66,18 @@ export default function RegistroVacina() {
             <div className={styles.banner} style={{backgroundImage: `url(${bannerVacinacao})`}}>
                 <span className={styles.titulo}> Vacinas do Pet</span>
                 <br/>
-                <div className={styles.circleGray}>
-                </div>
-                <div className={styles.circleGray2}>
-            </div>   
+                {vet ?
+                <Button> Registrar vacina</Button>
+                :
+                    <div>
+                        <div className={styles.circleGray}>
+                        </div>
+                        <div className={styles.circleGray2}>
+                        </div>   
+                    </div>
+               
+                }
+               
             </div>
             <ExcluirVacina open={open} onClose={()=>handleDialogClose()}/>
             <div className={styles.campos} >

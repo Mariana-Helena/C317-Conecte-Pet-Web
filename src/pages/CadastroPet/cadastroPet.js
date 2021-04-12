@@ -3,7 +3,6 @@ import useStyles from './styles.js';
 import Menu from '../../components/Menu/menu';
 import bannerCadastro from "../../images/banner_cadastro.png";
 import Button from '@material-ui/core/Button';
-import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { styled } from '@material-ui/core/styles';
 import { compose, spacing, palette } from '@material-ui/system';
@@ -24,28 +23,9 @@ export default function Pets() {
 
     const styles = useStyles();
 
-    const history = useHistory();
-
     const [sexo, setSexo] = useState();
-    
-    const especies = [
-        {
-            value: '',
-            label: '',
-        },
-        {
-            value: 'Cachorro',
-            label: 'Cachorro',
-        },
-        {
-            value: 'Gato',
-            label: 'Gato',
-        }
-    ];
 
     const [selectedEspecie, setSelectedEspecie] = useState();
-
-    const Box = styled('div')(compose(spacing, palette));
 
     const handleChangePet = (pet) => {
         setSelectedEspecie(pet);
@@ -128,7 +108,7 @@ export default function Pets() {
                     </div>
                     <br/>
                     <br/>
-                    <br/>
+                    
                     <TextareaAutosize aria-label="minimum height" placeholder="Observações:" 
                     className={styles.textArea}/>
                     <br/>
