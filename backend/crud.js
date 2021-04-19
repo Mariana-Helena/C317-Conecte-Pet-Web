@@ -1,0 +1,27 @@
+/*
+
+LOGIN:
+verificar email e senha na tabela usuarios
+
+CADASTRO DE USUARIO:
+
+CADASTRO DO PET:
+
+CADASTRO DA VACINA:
+
+CADASTRO DA CONSULTA:
+
+RETORNO DOS PETS (busca pelo email do usuario)
+
+RETORNO DAS VACINAS USUÁRIO:
+email do usuario 
+
+RETORNO DAS VACINAS VETERINÁRIO:
+CRMV
+
+RETORNO DAS CONSULTAS USUÁRIO:
+email do usuario 
+
+RETORNO DAS CONSULTAS VETERINÁRIO:
+CRMV
+*/
