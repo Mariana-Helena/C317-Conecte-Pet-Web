@@ -21,8 +21,8 @@ function App() {
 
   useEffect(() => {
     // Atualiza o titulo do documento usando a API do browser
-    callApi().then(res => console.log({ response: res.express }))
-            .catch(err => console.log(err));
+    //callApi().then(res => console.log({ response: res.express }))
+            //.catch(err => console.log(err));
   });
 
   const callApi = async () => {
