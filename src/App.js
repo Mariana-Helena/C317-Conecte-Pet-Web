@@ -1,6 +1,6 @@
 import './App.css';
 
-import React from "react";
+import React,{useEffect} from "react";
 
 import {
   BrowserRouter,
@@ -18,6 +18,20 @@ import Consultas from './pages/Consultas/consultas';
 import CarteiraDeVacinacao from './pages/CarteiraDeVacinacao/carteiraDeVacinacao'
 
 function App() {
+
+  useEffect(() => {
+    // Atualiza o titulo do documento usando a API do browser
+    callApi().then(res => console.log({ response: res.express }))
+            .catch(err => console.log(err));
+  });
+
+  const callApi = async () => {
+    const response = await fetch('/pets');
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  };
+
   return (
     <BrowserRouter>
             <Switch>
