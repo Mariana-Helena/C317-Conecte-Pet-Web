@@ -53,7 +53,9 @@ export default function Pets() {
 
                 {pets.map((pet, index) =>
                     <div className={styles.petDiv} >
-                        <HighlightOffIcon className={styles.closeIcon} onClick={() => setOpen(true)} />
+                        <Button onClick={() => setOpen(true)} className={styles.closeIconButton} >
+                        <HighlightOffIcon className={styles.closeIcon}/>
+                        </Button>
                         <div className={styles.circleGray}>
                         </div>
                         <span className={styles.subtitulo}> {pet.nome} </span>

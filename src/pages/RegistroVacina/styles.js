@@ -34,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 120,
         width: '300px',
     },
+    helperText:{
+        margin: '0px',
+        padding: '0px'
+    },
     radioGroup: {        
         position: 'relative',
         float:'right',

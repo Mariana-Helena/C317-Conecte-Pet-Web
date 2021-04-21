@@ -1,5 +1,5 @@
 const express = require('express');
-
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -21,6 +21,21 @@ app.get('/pets', (req, res) => {
     res.send({ express: response });
   });   
   
+});
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  })
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+
+app.post('/vacinas/registro', (req, res) => {
+  const collection = client.db("ConectePet").collection("Vacinas");    
+  collection.insertOne(req.body);
+  res.end();
 });
 
 client.connect();

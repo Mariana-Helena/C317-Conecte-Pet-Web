@@ -20,8 +20,10 @@ const useStyles = makeStyles(() => ({
   },
   closeIcon:{
     color: defaultColor,
-    marginLeft: '170px',
     fontSize: '32px',
+  },
+  closeIconButton:{
+    marginLeft: '170px',
     position: 'relative',
     top: '50px'
   },
