@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     },
     campos: {
         marginLeft: '75px',
+        width: '1030px',
+        minWidth: '1030px',
+        maxWidth: '1030px',
     },
     data:{
         color: 'white',

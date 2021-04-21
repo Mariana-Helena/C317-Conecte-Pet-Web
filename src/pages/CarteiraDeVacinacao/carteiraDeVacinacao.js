@@ -28,7 +28,16 @@ export default function RegistroVacina() {
     */
      const history = useHistory();
 
-    const [vet, setVet] = useState(true);
+    const [vet, setVet] = useState(false);
+
+    useEffect(() => {
+        getUser();
+    }), [localStorage.getItem('user')];
+
+    const getUser = () => {
+        const usuario = localStorage.getItem('user');
+        setVet(JSON.parse(usuario).ehveterinario);
+    }
 
     function createData(id,fabricante, vacina, aplicacao, paplicacao,veterinario,observacoes) {
         return { id,fabricante, vacina, aplicacao, paplicacao,veterinario,observacoes};

@@ -52,13 +52,25 @@ function Menu(props) {
   const location = useLocation();
 
   useEffect(() => {
+    const usuario = localStorage.getItem('user'); 
+    const veterinario = (JSON.parse(usuario).ehveterinario);
     let rota = location.pathname;
     if (rota === '/pets' || rota == '/pets/cadastro') {
-      if (vet) handleClickMenuItem('vacinas');
+      if (veterinario) handleClickMenuItem('vacinas');
       else setPets(true);
     }
-    else if (rota === '/vacinas' || rota === '/vacinas/registro') setVacinas(true);
-    else if (rota === '/consultas'  || rota === '/consultas/agendamento') setConsultas(true);
+    else if (rota === '/vacinas' || rota === '/vacinas/registro') {
+      if (!veterinario && rota === '/vacinas/registro') {
+        handleClickMenuItem('vacinas');
+      }
+      setVacinas(true);      
+    }
+    else if (rota === '/consultas'  || rota === '/consultas/agendamento') {
+      if (!veterinario && rota === '/consultas/agendamento') {
+        handleClickMenuItem('consultas');
+      }
+      setConsultas(true);
+    }
   });
 
   useEffect(() => {
@@ -68,8 +80,7 @@ function Menu(props) {
   const getUser = ()=>{
     const usuario = localStorage.getItem('user'); 
     setUserName(JSON.parse(usuario).nome);
-    //setVet(JSON.parse(usuario).ehveterinario);
-    setVet(true);
+    setVet(JSON.parse(usuario).ehveterinario);
   }
 
   const handleClickMenuItem = (rota) => {

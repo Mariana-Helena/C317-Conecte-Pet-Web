@@ -35,8 +35,7 @@ export default function AgendamentoConsulta() {
 
     const getUser = () => {
         const usuario = localStorage.getItem('user');
-        //setVet(JSON.parse(usuario).ehveterinario);
-        setVet(true);
+        setVet(JSON.parse(usuario).ehveterinario);
     }
 
 
