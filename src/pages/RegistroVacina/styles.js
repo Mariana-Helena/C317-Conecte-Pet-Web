@@ -29,6 +29,15 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
         fontSize: '20px'
     },
+    error:{
+        background: '#a30000',
+        color: 'white',
+        width: '250px',
+        height: '50px',
+        borderRadius: '10px',
+        textAlign: 'center',
+        lineHeight:'50px'
+    },
     formControl: {
         margin: '0px',
         minWidth: 120,
@@ -38,9 +47,24 @@ const useStyles = makeStyles((theme) => ({
         margin: '0px',
         padding: '0px'
     },
+    helperText2:{
+        margin: '0px',
+        padding: '0px',
+        paddingTop: '3px',
+        paddingLeft: '14px'
+    },
     radioGroup: {        
         position: 'relative',
         float:'right',
+    },
+    success:{
+        background: '#349c00',
+        color: 'white',
+        width: '250px',
+        height: '50px',
+        borderRadius: '10px',
+        textAlign: 'center',
+        lineHeight:'50px'
     },
     titulo: {
         color: 'white',

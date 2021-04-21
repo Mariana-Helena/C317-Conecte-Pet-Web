@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useStyles from './styles.js';
 import Menu from '../../components/Menu/menu';
 import Button from '@material-ui/core/Button';
@@ -14,142 +14,179 @@ import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
+import SearchIcon from '@material-ui/icons/Search';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Snackbar from '@material-ui/core/Snackbar';
 import { Controller, useForm } from "react-hook-form";
 import axios from 'axios';
+import ClearIcon from '@material-ui/icons/Clear';
 
 export default function RegistroVacina() {
+    const hoje = new Date();
 
     const defaultValues = {
         email: null,
+        pet_id: null, 
         vacina: null,
-        fabricante: null
+        fabricante: null,
+        observacao: '',
+        data: hoje,
+        tipo: 'aplicada'
     };
 
     const styles = useStyles();
 
     const history = useHistory();
 
-    const [open, setOpen] = useState(false);
+    const [email, setEmail] = useState('');
 
-    const [tipoVacina, setTipoVacina] = useState('1');
+    const [openSnackbar, setOpenSnackbar] = useState(false);
 
-    const hoje = new Date();
+    const { register, handleSubmit, errors, control, reset } = useForm({ defaultValues });
 
-    const [selectedDate, setSelectedDate] = useState(hoje);
+    const [message, setMessage] = useState('');
 
-    const { register, handleSubmit, errors, control } = useForm({ defaultValues });
+    const [success, setSuccess] = useState(false);
 
-    /*
-   Pet de exemplo
-   */
-    const pet1 = {
-        img: '', ///?????
-        nome: 'Gatinho',
-        especie: 'gato',
-        raca: 'raca do gatinho',
-        sexo: 'macho',
-        idade: '2 anos',
-        peso: '1 kg',
-        observacoes: ''
-    }
-    const pet2 = {
-        img: '', ///?????
-        nome: 'Doguinho',
-        especie: 'cachorro',
-        raca: 'raca do dog',
-        sexo: 'macho',
-        idade: '3 anos',
-        peso: '2 kg',
-        observacoes: ''
-    }
-
-    const [pets, setPets] = useState([pet1, pet2]);
+    const [pets, setPets] = useState([]);
 
     const [selectedPet, setSelectedPet] = useState();
 
-    useEffect(() => {
-
-    });
-
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
+    const handleClear = () => {        
+        setPets([]);
     };
 
-    const handleChangePet = (pet) => {
-        setSelectedPet(pet);
+    const handleSearch = () => {
+        const regexp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        if (regexp.test(email)){
+           callApi();
+       }
+    };
+
+    const callApi = async () => {
+        axios.get(`/vacinas/registro/${email}`).then(res => {
+            console.log(res.data);
+            if(res.data.express.length!==0){
+                setOpenSnackbar(true);
+                setMessage('Pet encontrado!');
+                setSuccess(true);
+                setPets(res.data.express);
+            }
+            else {
+                setOpenSnackbar(true);
+                setMessage('Nenhum pet encontrado!');
+                setSuccess(false);
+                setPets([]);
+            }
+            
+          })
+        .catch(err => {
+            setOpenSnackbar(true);
+            setMessage('Erro na busca!');
+            setPets([]);
+        });
+       
+      
     };
 
     function handleClickMenuItem(rota) {
         history.push(rota);
     }
 
-    const handleDialogClose = () => {
-        setOpen(false);
-    }
-
-    const handleTipoVacina = (value) => {
-        setTipoVacina(value.target.value);
+    const handleClose = () => {
+        setOpenSnackbar(false);
     }
 
     const onSubmit = (data) => {
-        console.log(data);
-        axios
-        .post('/vacinas/registro', data)
-        .then(() => console.log('Vacina registrada!'))
-        .catch(err => {
-            console.error(err);
-        });
 
-    };
-
-    const callApi = async () => {
         axios
             .post('/vacinas/registro', data)
-            .then(() => console.log('Vacina registrada!'))
+            .then(() => {
+                setOpenSnackbar(true);
+                setMessage('Vacinação registrada!');
+                setSuccess(true);
+                setPets([]);
+                reset({})
+            })
             .catch(err => {
-                console.error(err);
+                setOpenSnackbar(true);
+                setMessage('Erro no registro!');
+                setSuccess(false);
             });
-
     };
 
     return (
         <Menu>
+            <Snackbar 
+                open={openSnackbar} 
+                autoHideDuration={6000} 
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+               
+            >
+                <div  className={success?  styles.success : styles.error}>
+                {message}
+                </div>
+                
+            </Snackbar>
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <div className={styles.banner} style={{ backgroundImage: `url(${bannerVacinacao})` }}>
                     <span className={styles.titulo}> Registrar vacinação</span>
                     <br />
+
                     <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                        <KeyboardDatePicker
-                            className={styles.calendario}
-                            disableToolbar
-                            variant="inline"
-                            format="dd/MM/yyyy"
-                            margin="normal"
-                            id="date-picker-inline"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                                style: { color: 'white' }
-                            }}
-                            InputProps={{ disableUnderline: true, className: styles.data }}
-                        />
+                        <FormControl variant="outlined" className={styles.formControl} size='small'>
+                            <Controller
+                                initialFocusedDate={hoje}
+                                defaultValue={hoje}
+                                as={
+                                    <KeyboardDatePicker
+                                        className={styles.calendario}
+                                        disableToolbar
+                                        variant="inline"
+                                        format="dd/MM/yyyy"
+                                        margin="normal"
+                                        id="date-picker-inline"
+                                        KeyboardButtonProps={{
+                                            style: { color: 'white' }
+                                        }}
+                                        InputProps={{ disableUnderline: true, className: styles.data }}
+                                    />}
+                                name="data"
+                                control={control}
+                                errors={errors.data}
+                                ref={
+                                    register('data', {
+                                        required: true
+                                    })
+                                }
+                                inputRef={register}
+                                control={control}
+                                rules={{ required: true }}
+                            />
+                        </FormControl>
                     </MuiPickersUtilsProvider>
+
 
                 </div>
                 <div className={styles.campos} >
                     <TextField
+                        disabled={pets.length!==0}
                         id="email"
                         label="Email do dono do pet"
                         variant="outlined"
                         size="small"
                         className={styles.textField}
+                        onChange={(e)=>setEmail(e.target.value)}
                         name="email"
                         errors={errors.email}
                         inputRef={register({
@@ -171,27 +208,27 @@ export default function RegistroVacina() {
                         </FormHelperText>}
 
                     />
+                    
+
                     <FormControl variant="outlined" className={styles.formControl} size='small'>
                         <InputLabel id="demo-simple-select-outlined-label">Pet</InputLabel>
                         <Controller
                             as={<Select
+                                disabled={pets.length===0}
                                 labelId="demo-simple-select-outlined-label"
-                                id="pet"
+                                id="pet_id"
                                 value={selectedPet}
-                                onChange={(value) => handleChangePet(value)}
                                 label="Pet"
-
-
                             >
                                 {pets.map((pet, index) =>
-                                    <MenuItem value={10}> {pet?.nome}</MenuItem>
+                                    <MenuItem value={pet._id}> {pet?.nome}</MenuItem>
                                 )}
                             </Select>}
-                            name="pet"
+                            name="pet_id"
                             control={control}
-                            errors={errors.pet}
+                            errors={errors.pet_id}
                             ref={
-                                register('pet', {
+                                register('pet_id', {
                                     required: true
                                 })
                             }
@@ -199,14 +236,16 @@ export default function RegistroVacina() {
                             control={control}
                             rules={{ required: true }}
                         />
-                        <FormHelperText error={errors?.pet} className={styles.helperText}>
-                            {errors?.pet && errors?.pet?.type === "required" ?
+                        <FormHelperText error={errors?.pet_id} className={styles.helperText2}>
+                            {errors?.pet_id && errors?.pet_id?.type === "required" ?
                                 "Esse campo é obrigatório."
                                 :
                                 "Por favor, selecione o pet"
                             }
                         </FormHelperText>
                     </FormControl>
+                    <Button onClick={handleSearch} ><SearchIcon color='primary'/></Button>
+                    <Button onClick={handleClear}><ClearIcon color='primary'/></Button>
                     <br />
                     <div className={styles.container}>
                         <TextField
@@ -247,24 +286,49 @@ export default function RegistroVacina() {
                                 }
                             </FormHelperText>}
                         />
-                        <RadioGroup row aria-label="gender" name="gender1" value={tipoVacina}
-                            onChange={(value) => handleTipoVacina(value)} className={styles.radioGroup}>
-                            <FormControlLabel value='1' control={<Radio color='primary' />} label="Vacina aplicada" />
-                            <FormControlLabel value='2' control={<Radio color='primary' />} label="Vacina agendada" />
-                        </RadioGroup>
+                        <Controller
+                            as={
+                                <RadioGroup row className={styles.radioGroup}>
+                                    <FormControlLabel
+                                        value="aplicada"
+                                        control={<Radio color='primary' />}
+                                        label="Vacina aplicada"
+                                    />
+                                    <FormControlLabel
+                                        value="agendada"
+                                        control={<Radio color='primary' />}
+                                        label="Vacina agendada"
+                                    />
+                                </RadioGroup>
+                            }
+                            name="tipo"
+                            control={control}
+                            defaultValue={'aplicada'}
+                        />
                     </div>
                     <br />
-                    <TextareaAutosize aria-label="minimum height" placeholder="Observações:"
-                        className={styles.textArea} />
+                    <FormControl variant="outlined" className={styles.formControl} size='small'>
+                        <Controller
+                            as={
+                                <TextareaAutosize aria-label="minimum height" placeholder="Observações:"
+                                    className={styles.textArea}
+                                />}
+                            name="observacao"
+                            control={control}
+                            ref={register()}
+                            inputRef={register}
+                            defaultValue={''}
+                        />
+                    </FormControl>
                     <br />
                     <Button variant="contained" className={styles.buttonContained}
                         onClick={handleSubmit(onSubmit)} color='primary' type='submit'>
                         Cadastrar
-            </Button>
+                    </Button>
                     <Button variant="contained" className={styles.buttonContained}
                         onClick={() => handleClickMenuItem('/vacinas')} color='secondary'>
                         Cancelar
-            </Button>
+                    </Button>
                 </div>
             </form>
         </Menu >

@@ -31,6 +31,17 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.get('/vacinas/registro/:email', (req, res) => {
+  var response;
+  const collection = client.db("ConectePet").collection("Pet");    
+  console.log(req.params.email)
+  collection.find({usuario: req.params.email}).toArray(function(err, result) {
+    if (err) throw err;
+    response=result;
+    res.send({ express: response });
+  });   
+  
+});
 
 app.post('/vacinas/registro', (req, res) => {
   const collection = client.db("ConectePet").collection("Vacinas");    
