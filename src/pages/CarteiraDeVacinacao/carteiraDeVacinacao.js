@@ -17,7 +17,6 @@ import ExcluirVacina from './ExcluirVacina/excluirVacina';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 
-
 export default function RegistroVacina() {
     /** 
     ***********************************************

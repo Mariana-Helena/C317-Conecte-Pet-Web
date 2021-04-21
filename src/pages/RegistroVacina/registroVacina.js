@@ -124,6 +124,9 @@ export default function RegistroVacina() {
     * Parâmetro: data (data,pet_id,vacina,fabricante,tipo,observacao)
     */
     const onSubmit = (data) => {
+        const usuario = localStorage.getItem('user'); 
+        const crmv = (JSON.parse(usuario).crmv);
+        data.crmv = crmv;
         axios.post('/vacinas/registro', data)
             .then(() => {
                 setOpenSnackbar(true);
@@ -340,7 +343,7 @@ export default function RegistroVacina() {
                     </Button>
                     <Button variant="contained" className={styles.buttonContained}
                         onClick={() => handleClickMenuItem('/vacinas')} color='secondary'>
-                        Cancelar
+                        Voltar
                     </Button>
                 </div>
             </form>

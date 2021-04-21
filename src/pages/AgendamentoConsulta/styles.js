@@ -24,10 +24,29 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
         fontSize: '20px'
     },
+    error:{
+        background: '#a30000',
+        color: 'white',
+        width: '250px',
+        height: '50px',
+        borderRadius: '10px',
+        textAlign: 'center',
+        lineHeight:'50px'
+    },
     formControl: {
         margin: '0px',
         minWidth: 120,
         width: '300px',
+    },
+    helperText:{
+        margin: '0px',
+        padding: '0px'
+    },
+    helperText2:{
+        margin: '0px',
+        padding: '0px',
+        paddingTop: '3px',
+        paddingLeft: '14px'
     },
     hora: {
         border: '1px solid #c0c0c0',
@@ -36,6 +55,15 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: '4px',
         paddingBottom: '4px',
         width: '300px'
+    },
+    success:{
+        background: '#349c00',
+        color: 'white',
+        width: '250px',
+        height: '50px',
+        borderRadius: '10px',
+        textAlign: 'center',
+        lineHeight:'50px'
     },
     titulo: {
         color: 'white',
