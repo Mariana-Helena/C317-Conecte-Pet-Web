@@ -14,6 +14,14 @@ const useStyles = makeStyles((theme) => ({
         width:'300px',
         marginRight: '45px'
     },
+    buttonContainedBlue:{
+        width: '300px',
+        marginTop: '30px',
+        marginLeft: '50px', 
+        color: 'white',
+        textTransform: 'inherit',
+        display: 'inline-block',
+    },
     calendario:{
         borderBottom: '1px solid white',
         marginLeft: '95px',

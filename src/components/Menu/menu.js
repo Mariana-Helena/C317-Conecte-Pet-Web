@@ -45,17 +45,34 @@ function Menu(props) {
   const [pets, setPets] = useState(false);
   const [vacinas, setVacinas] = useState(false);
   const [consultas, setConsultas] = useState(false);
+  
+  const [userName, setUserName] = useState('');
+  const [vet, setVet] = useState(false);
 
   const location = useLocation();
 
   useEffect(() => {
     let rota = location.pathname;
-    if (rota === '/pets' || rota == '/pets/cadastro') setPets(true);
+    if (rota === '/pets' || rota == '/pets/cadastro') {
+      if (vet) handleClickMenuItem('vacinas');
+      else setPets(true);
+    }
     else if (rota === '/vacinas' || rota === '/vacinas/registro') setVacinas(true);
     else if (rota === '/consultas'  || rota === '/consultas/agendamento') setConsultas(true);
   });
 
-  function handleClickMenuItem(rota) {
+  useEffect(() => {
+    getUser();
+  }), [localStorage.getItem('user')];
+
+  const getUser = ()=>{
+    const usuario = localStorage.getItem('user'); 
+    setUserName(JSON.parse(usuario).nome);
+    //setVet(JSON.parse(usuario).ehveterinario);
+    setVet(true);
+  }
+
+  const handleClickMenuItem = (rota) => {
     history.push("/"+rota);
     if (rota === 'pets') setPets(true);
     else if (rota === 'vacinas') setVacinas(true);
@@ -67,10 +84,12 @@ function Menu(props) {
       <img src={logo} className={styles.logo}/> 
       <List>
       <Divider />
+      {!vet && (
       <ListItem button onClick={() => handleClickMenuItem('pets')} selected={pets} classes={{ selected: styles.selectedItem }}> 
         <ListItemIcon> <PetsIcon className={pets? styles.itemSelected : styles.item}/> </ListItemIcon> 
         <span className={pets? styles.textSelected : styles.text}>  Pets</span> 
       </ListItem>
+      )}
       <Divider />
       <ListItem button onClick={() => handleClickMenuItem('vacinas')} selected={vacinas} classes={{ selected: styles.selectedItem }}>  
         <ListItemIcon> <FaSyringe className={vacinas? styles.vaccineIconSelected : styles.vaccineIcon}/> </ListItemIcon> 
@@ -105,7 +124,7 @@ function Menu(props) {
           <div className={styles.user}>
             <AccountCircleIcon className={styles.userIcon}/>
             <Typography variant="h6" noWrap className={styles.userName} >
-              Nome do Usuário 
+              {userName}
             </Typography>
             <KeyboardArrowDownIcon className={styles.userMenu}/>
           </div>          

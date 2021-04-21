@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import useStyles from './styles.js';
+import { useHistory } from 'react-router-dom';
 import Menu from '../../components/Menu/menu';
 import bannerVacinacao from "../../images/banner_vacinacao.png";
 import 'date-fns';
@@ -18,8 +19,17 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 
 export default function RegistroVacina() {
+    /** 
+    ***********************************************
+                    VARIÁVEIS
+    ***********************************************
+    **/
+    /** 
+    * Navegação pelas páginas
+    */
+     const history = useHistory();
 
-    const [vet, setVet] = useState(false);
+    const [vet, setVet] = useState(true);
 
     function createData(id,fabricante, vacina, aplicacao, paplicacao,veterinario,observacoes) {
         return { id,fabricante, vacina, aplicacao, paplicacao,veterinario,observacoes};
@@ -59,6 +69,12 @@ export default function RegistroVacina() {
         setOpen(false);
     }
 
+    /**
+    * Navegação entre as páginas (altera a rota)
+    */
+     function handleClickMenuItem(rota) {
+        history.push("/" + rota);
+    }
     return (
         <Menu>
             <form>
@@ -67,7 +83,8 @@ export default function RegistroVacina() {
                 <span className={styles.titulo}> Vacinas do Pet</span>
                 <br/>
                 {vet ?
-                <Button> Registrar vacina</Button>
+                <Button variant="contained" className={styles.buttonContainedBlue}
+                onClick={() => handleClickMenuItem('vacinas/registro')} color='primary'> Registrar vacina</Button>
                 :
                     <div>
                         <div className={styles.circleGray}>

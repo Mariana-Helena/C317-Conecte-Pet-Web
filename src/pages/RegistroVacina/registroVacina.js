@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Controller, useForm } from "react-hook-form";
+import axios from 'axios';
+import 'date-fns';
 import useStyles from './styles.js';
+import bannerVacinacao from "../../images/banner_vacinacao.png";
+import DateFnsUtils from '@date-io/date-fns';
+import {MuiPickersUtilsProvider,KeyboardDatePicker} from '@material-ui/pickers';
 import Menu from '../../components/Menu/menu';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { useHistory } from 'react-router-dom';
-import bannerVacinacao from "../../images/banner_vacinacao.png";
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
-import SearchIcon from '@material-ui/icons/Search';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -22,56 +20,85 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Snackbar from '@material-ui/core/Snackbar';
-import { Controller, useForm } from "react-hook-form";
-import axios from 'axios';
+import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 
 export default function RegistroVacina() {
+    /** 
+    ***********************************************
+                    VARIÁVEIS
+    ***********************************************
+    **/
+    /** 
+    * CSS
+    */
+    const styles = useStyles();
+    /** 
+    * Navegação pelas páginas
+    */
+    const history = useHistory();
+    /** 
+    * Hook form (validação e submit)
+    */
     const hoje = new Date();
-
     const defaultValues = {
         email: null,
-        pet_id: null, 
+        pet_id: null,
         vacina: null,
         fabricante: null,
         observacao: '',
         data: hoje,
         tipo: 'aplicada'
     };
-
-    const styles = useStyles();
-
-    const history = useHistory();
-
-    const [email, setEmail] = useState('');
-
-    const [openSnackbar, setOpenSnackbar] = useState(false);
-
     const { register, handleSubmit, errors, control, reset } = useForm({ defaultValues });
-
+    /**
+    * Messagens de erro/sucesso
+    */
+    const [openSnackbar, setOpenSnackbar] = useState(false);
     const [message, setMessage] = useState('');
-
     const [success, setSuccess] = useState(false);
-
+    /**
+    * Email do dono do pet p/ realizar a busca
+    */
+    const [email, setEmail] = useState('');
+    /**
+    * Vetor com os pets encontrados
+    */
     const [pets, setPets] = useState([]);
-
-    const [selectedPet, setSelectedPet] = useState();
-
-    const handleClear = () => {        
+    /** 
+    ***********************************************
+                    FUNÇÕES
+    ***********************************************
+    **/
+    /**
+    * Navegação entre as páginas (altera a rota)
+    */
+    function handleClickMenuItem(rota) {
+        history.push(rota);
+    }
+    /**
+    * Apaga os pets buscados e libera o campo email
+    */
+    const handleClear = () => {
         setPets([]);
     };
-
+    /**
+    * Verifica se o email é válido para fazer a busca no banco.
+    * Caso seja, chama a api.
+    */
     const handleSearch = () => {
         const regexp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-        if (regexp.test(email)){
-           callApi();
-       }
+        if (regexp.test(email)) {
+            callApi();
+        }
     };
-
+    /**
+    * GET para buscar os pets no banco
+    * Parâmetro: email
+    */
     const callApi = async () => {
         axios.get(`/vacinas/registro/${email}`).then(res => {
-            console.log(res.data);
-            if(res.data.express.length!==0){
+            if (res.data.express.length !== 0) {
                 setOpenSnackbar(true);
                 setMessage('Pet encontrado!');
                 setSuccess(true);
@@ -83,29 +110,21 @@ export default function RegistroVacina() {
                 setSuccess(false);
                 setPets([]);
             }
-            
-          })
-        .catch(err => {
-            setOpenSnackbar(true);
-            setMessage('Erro na busca!');
-            setPets([]);
-        });
-       
-      
+
+        })
+            .catch(err => {
+                setOpenSnackbar(true);
+                setMessage('Erro na busca!');
+                setPets([]);
+                setSuccess(false);
+            });
     };
-
-    function handleClickMenuItem(rota) {
-        history.push(rota);
-    }
-
-    const handleClose = () => {
-        setOpenSnackbar(false);
-    }
-
+    /**
+    * POST para enviar o cadastro da vacina para o banco
+    * Parâmetro: data (data,pet_id,vacina,fabricante,tipo,observacao)
+    */
     const onSubmit = (data) => {
-
-        axios
-            .post('/vacinas/registro', data)
+        axios.post('/vacinas/registro', data)
             .then(() => {
                 setOpenSnackbar(true);
                 setMessage('Vacinação registrada!');
@@ -119,30 +138,30 @@ export default function RegistroVacina() {
                 setSuccess(false);
             });
     };
-
+    /** 
+    ***********************************************
+                INTERFACE/COMPONENTES
+    ***********************************************
+    **/
     return (
         <Menu>
-            <Snackbar 
-                open={openSnackbar} 
-                autoHideDuration={6000} 
-                onClose={handleClose}
+            <Snackbar
+                open={openSnackbar}
+                autoHideDuration={6000}
+                onClose={() => setOpenSnackbar(false)}
                 anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
                 }}
-               
             >
-                <div  className={success?  styles.success : styles.error}>
-                {message}
+                <div className={success ? styles.success : styles.error}>
+                    {message}
                 </div>
-                
             </Snackbar>
             <form onSubmit={handleSubmit(onSubmit)}>
-
                 <div className={styles.banner} style={{ backgroundImage: `url(${bannerVacinacao})` }}>
                     <span className={styles.titulo}> Registrar vacinação</span>
                     <br />
-
                     <MuiPickersUtilsProvider utils={DateFnsUtils} >
                         <FormControl variant="outlined" className={styles.formControl} size='small'>
                             <Controller
@@ -175,18 +194,16 @@ export default function RegistroVacina() {
                             />
                         </FormControl>
                     </MuiPickersUtilsProvider>
-
-
                 </div>
                 <div className={styles.campos} >
                     <TextField
-                        disabled={pets.length!==0}
+                        disabled={pets.length !== 0}
                         id="email"
                         label="Email do dono do pet"
                         variant="outlined"
                         size="small"
                         className={styles.textField}
-                        onChange={(e)=>setEmail(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                         name="email"
                         errors={errors.email}
                         inputRef={register({
@@ -206,18 +223,14 @@ export default function RegistroVacina() {
                                     "Por favor, digite o email do dono do pet"
                             }
                         </FormHelperText>}
-
                     />
-                    
-
                     <FormControl variant="outlined" className={styles.formControl} size='small'>
                         <InputLabel id="demo-simple-select-outlined-label">Pet</InputLabel>
                         <Controller
                             as={<Select
-                                disabled={pets.length===0}
+                                disabled={pets.length === 0}
                                 labelId="demo-simple-select-outlined-label"
                                 id="pet_id"
-                                value={selectedPet}
                                 label="Pet"
                             >
                                 {pets.map((pet, index) =>
@@ -244,8 +257,8 @@ export default function RegistroVacina() {
                             }
                         </FormHelperText>
                     </FormControl>
-                    <Button onClick={handleSearch} ><SearchIcon color='primary'/></Button>
-                    <Button onClick={handleClear}><ClearIcon color='primary'/></Button>
+                    <Button onClick={handleSearch} ><SearchIcon color='primary' /></Button>
+                    <Button onClick={handleClear}><ClearIcon color='primary' /></Button>
                     <br />
                     <div className={styles.container}>
                         <TextField
