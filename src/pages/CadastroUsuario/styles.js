@@ -4,6 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 const defaultColor = '#1C587C';
 
 const useStyles = makeStyles((theme) => ({
+  avatar: {
+    marginTop: '20px',
+    marginBottom: '0px',
+    marginLeft: '60px',
+    width: '130px',
+    height: '130px',
+  },
   banner:{ 
     marginTop: '-20px',   
     width:'100%',
@@ -13,19 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   barraSuperior: {
     backgroundColor: defaultColor,
-  },  
-  logo:{
-    width:'65px',  
-    display: 'block',
-    marginLeft: '-23px', 
   },
-  userName: {
-    color: 'white',  
-    marginLeft: '30px',
-    float: 'left',
-    marginTop: '5px'
-  },
-  toolbar: theme.mixins.toolbar,  
   buttonContained:{
     width:'300px',
     marginLeft: '200px',
@@ -37,11 +32,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '200px',
     backgroundColor: '#7A96AC',
     color: 'white'
-  },
-  radioGroup: {        
-    position: 'fix',
-    marginLeft: '400px',
-    marginTop: '-85px',
   },
   closeIcon:{
     color: defaultColor,
@@ -63,13 +53,57 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto', 
     marginRight: 'auto',
   },
+  camera: {
+    color: "white",
+    marginLeft: '180px',
+    marginTop: '-25px',
+    display: 'block',
+  },
   campos: {
     marginLeft: '75px',
   },
+  container: {
+    width: '1030px',
+    minWidth: '1030px',
+    maxWidth: '1030px',
+  },
+  error:{
+    background: '#a30000',
+    color: 'white',
+    width: '250px',
+    height: '50px',
+    borderRadius: '10px',
+    textAlign: 'center',
+    lineHeight:'50px'
+  },
+  formControl: {
+    marginTop: '400px',
+    minWidth: 120,
+    width: '300px',
+  },
+  helperText:{
+    margin: '0px',
+    padding: '0px'
+  },
+  helperText2:{
+    margin: '0px',
+    padding: '0px',
+    paddingTop: '3px',
+    paddingLeft: '14px'
+  }, 
+  logo:{
+    width:'65px',  
+    display: 'block',
+    marginLeft: '-23px', 
+  },  
   primeiraDiv:{    
     marginBottom: '20px',
   },
-
+  radioGroup: {        
+    position: 'fix',
+    marginLeft: '400px',
+    marginTop: '-85px',
+  },
   subtitulo: {
     marginTop: '10px',
     marginBottom: '10px',
@@ -80,6 +114,26 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto', 
     marginRight: 'auto',
     textAlign:'center',
+  },
+  success:{
+    background: '#349c00',
+    color: 'white',
+    width: '250px',
+    height: '50px',
+    borderRadius: '10px',
+    textAlign: 'center',
+    lineHeight:'50px'
+  },
+  textField: {
+    width: '300px',
+    marginRight: '45px',
+    marginBottom: '20px'
+  },
+  textFieldCRMV: {
+    width: '300px',
+    marginLeft: '200px',
+    marginTop: '-210px',
+    marginBottom: '20px'
   },
   titulo: {
     color: 'white',
@@ -94,45 +148,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '680px',
     width: '840px',
   },
-  avatar: {
-    marginTop: '20px',
-    marginBottom: '0px',
-    marginLeft: '60px',
-    width: '130px',
-    height: '130px',
-  },
-  camera: {
-    color: "white",
-    marginLeft: '180px',
-    marginTop: '-25px',
-    display: 'block',
-  },
-  textField: {
-    width: '300px',
-    marginRight: '45px',
-    marginBottom: '20px'
-  },
-  textFieldCRMV: {
-    width: '300px',
-    marginLeft: '200px',
-    marginTop: '-210px',
-    marginBottom: '20px'
-  },
-  formControl: {
-    marginTop: '400px',
-    minWidth: 120,
-    width: '300px',
-  },
-  container: {
-    width: '1030px',
-    minWidth: '1030px',
-    maxWidth: '1030px',
-  },
-  helpertext: {
-    marginLeft: '-300px',
-    marginTop: '-8px'
-  }
-  
+  toolbar: theme.mixins.toolbar,  
+  userName: {
+    color: 'white',  
+    marginLeft: '30px',
+    float: 'left',
+    marginTop: '5px'
+  },  
 }));
 
 export default useStyles;

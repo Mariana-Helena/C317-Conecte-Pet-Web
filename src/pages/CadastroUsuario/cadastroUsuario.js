@@ -3,7 +3,9 @@ import useStyles from './styles.js';
 import logo from "../../images/Logo.png";
 import bannerCadastro from "../../images/banner_cadastroUser.png";
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { Controller, useForm } from "react-hook-form";
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,32 +14,106 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import Snackbar from '@material-ui/core/Snackbar';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-export default function Pets() {
-
+export default function CadastroUsuario() {
+    /** 
+    ***********************************************
+                    VARIÁVEIS
+    ***********************************************
+    **/
+    /** 
+    * CSS
+    */
     const styles = useStyles();
-
+    /** 
+    * Navegação pelas páginas
+    */
     const history = useHistory();
-
-    const [usuario, setUsuario] = useState();
+    /** 
+    * Hook form (validação e submit)
+    */
+    const defaultValues = {
+        nome: null,
+        telefone: null,
+        email: null,
+        senha: null,
+        crmv: null,
+        ehveterinario: "false"
+    };
+    const { register, handleSubmit, errors, control, reset } = useForm({ defaultValues });
+    /**
+    * Messagens de erro/sucesso
+    */
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [message, setMessage] = useState('');
+    const [success, setSuccess] = useState(false);
+    /**
+    * Email do dono do pet p/ realizar a busca
+    */
+    const [email, setEmail] = useState('');
 
     useEffect(() => {
        
     });
 
-    function handleClickMenuItem(rota) {
+    /** 
+    ***********************************************
+                    FUNÇÕES
+    ***********************************************
+    **/
+    /**
+    * Navegação entre as páginas (altera a rota)
+    */
+     function handleClickMenuItem(rota) {
         history.push(rota);
     }
 
-    const handleUsuario = (value) => {
-        setUsuario(value);
-    }
-
+    /**
+    * POST para enviar o cadastro da vacina para o banco
+    * Parâmetro: data (nome,telefone,email,senha,ehveterinario,crmv)
+    */
+    const onSubmit = (data) => {
+    //const usuario = localStorage.getItem('user'); 
+    //const crmv = (JSON.parse(usuario).crmv);
+    //data.crmv = crmv;
+    console.log(data)
+    axios.post('/usuario/cadastro', data)
+        .then(() => {
+            setOpenSnackbar(true);
+            setMessage('Usuário registrado!');
+            setSuccess(true);
+            reset({})
+        })
+        .catch(err => {
+            setOpenSnackbar(true);
+            setMessage('Erro no registro!');
+            setSuccess(false);
+        });
+    };
+    /** 
+    ***********************************************
+                INTERFACE/COMPONENTES
+    ***********************************************
+    **/
     return (
         <div>
-            <form  noValidate autoComplete="off">
+            <Snackbar
+                open={openSnackbar}
+                autoHideDuration={6000}
+                onClose={() => setOpenSnackbar(false)}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+            >
+                <div className={success ? styles.success : styles.error}>
+                    {message}
+                </div>
+            </Snackbar>
+            <form  onSubmit={handleSubmit(onSubmit)}>
                 <Toolbar className={styles.barraSuperior}> 
                     <img src={logo} className={styles.logo}/> 
                     <Typography variant="h6" noWrap className={styles.userName} color="white">
@@ -55,64 +131,140 @@ export default function Pets() {
 
                 <div className={styles.campos}>
                     <TextField
-                        id="outlined-helperText"
+                        id="nome"
                         label="Nome"
-                        helperText="Por favor, digite o seu nome"
                         variant="outlined"
                         size="small"
                         className={styles.textField}
+                        name='nome'
+                        errors={errors.nome}
+                        inputRef={register({
+                            required: "This is a required field",
+                        })}
+                        helperText={<FormHelperText error={errors?.nome} className={styles.helperText}>
+                            {errors?.nome && errors?.nome?.type === "required" ?
+                                "Esse campo é obrigatório."
+                                :
+                                "Por favor, digite o seu nome"
+                            }
+                        </FormHelperText>}
                     />
-                    <RadioGroup row aria-label="gender" name="gender1" value={usuario}
-                        onChange={(value)=>handleUsuario(value)} className={styles.radioGroup}>
-                        <FormControlLabel value="0" control={<Radio  color='gray'/>} label="Dono de Pet" />
-                        <FormControlLabel value="1" control={<Radio color='gray'/>} label="Veterinário" />
-                        <FormHelperText className={styles.helpertext}>Você é:</FormHelperText>
-                    </RadioGroup>
+                    <Controller
+                        as={
+                            <RadioGroup row className={styles.radioGroup}>
+                                <FormControlLabel
+                                    value="false"
+                                    control={<Radio color='primary' />}
+                                    label="Dono de Pet"
+                                />
+                                <FormControlLabel
+                                    value="true"
+                                    control={<Radio color='primary' />}
+                                    label="Veterinário"
+                                />
+                            </RadioGroup>
+                        }
+                        name="ehveterinario"
+                        control={control}
+                        defaultValue={'false'}
+                    />
                     <br/>
                     <br/>
                     <div className={styles.container}>
                         <TextField
-                            id="outlined-helperText"
+                            id="telefone"
                             label="Telefone"
-                            helperText="Por favor, digite o seu telefone"
                             variant="outlined"
                             size="small"
                             className={styles.textField}
+                            name='telefone'
+                            errors={errors.telefone}
+                            inputRef={register({
+                                required: "This is a required field",
+                            })}
+                            helperText={<FormHelperText error={errors?.telefone} className={styles.helperText}>
+                                {errors?.telefone && errors?.telefone?.type === "required" ?
+                                    "Esse campo é obrigatório."
+                                    :
+                                    "Por favor, digite o seu telefone"
+                                }
+                            </FormHelperText>}
                         />
                         <div></div>
                         <TextField
-                            id="outlined-helperText"
+                            id="email"
                             label="Email"
-                            helperText="Por favor, digite o seu email"
                             variant="outlined"
                             size="small"
                             className={styles.textField}
+                            onChange={(e) => setEmail(e.target.value)}
+                            name="email"
+                            errors={errors.email}
+                            inputRef={register({
+                                required: "This is a required field",
+                                pattern: {
+                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                    message: "Invalid email address.",
+                                },
+                            })}
+                            helperText={<FormHelperText error={errors?.email} className={styles.helperText}>
+                                {errors?.email && errors?.email?.type === "required" ?
+                                    "Esse campo é obrigatório."
+                                    :
+                                    errors?.email && errors?.email?.type === "pattern" ?
+                                        "Email inválido"
+                                        :
+                                        "Por favor, digite o seu email"
+                                }
+                            </FormHelperText>}
                         />
                         <div></div>
                         <TextField
-                            id="outlined-helperText"
+                            id="senha"
                             label="Senha"
-                            helperText="Por favor, digite a seu senha"
                             variant="outlined"
                             size="small"
                             className={styles.textField}
+                            name='senha'
+                            errors={errors.senha}
+                            inputRef={register({
+                                required: "This is a required field",
+                            })}
+                            helperText={<FormHelperText error={errors?.senha} className={styles.helperText}>
+                                {errors?.senha && errors?.senha?.type === "required" ?
+                                    "Esse campo é obrigatório."
+                                    :
+                                    "Por favor, digite a sua senha"
+                                }
+                            </FormHelperText>}
                         />
                         <TextField
-                            id="outlined-helperText"
+                            id="crmv"
                             label="CRMV"
-                            helperText="Por favor, digite o seu CRMV"
                             variant="outlined"
                             size="small"
                             className={styles.textFieldCRMV}
+                            name='crmv'
+                            errors={errors.crmv}
+                            inputRef={register({
+                                required: "This is a required field",
+                            })}
+                            helperText={<FormHelperText error={errors?.crmv} className={styles.helperText}>
+                                {errors?.crmv && errors?.crmv?.type === "required" ?
+                                    "Esse campo é obrigatório."
+                                    :
+                                    "Por favor, digite o seu CRMV"
+                                }
+                            </FormHelperText>}
                         />
                     </div>
-                    <Button variant="contained" className={styles.buttonContained} 
-                        onClick={()=>handleCadastroVacina()} >
-                        Cadastrar 
+                    <Button variant="contained" className={styles.buttonContained}
+                        onClick={handleSubmit(onSubmit)} color='primary' type='submit'>
+                        Cadastrar
                     </Button>
-                    <Button variant="contained" className={styles.buttonContainedC} 
-                        onClick={()=>handleClickMenuItem('/')}>
-                        Cancelar
+                    <Button variant="contained" className={styles.buttonContainedC}
+                        onClick={() => handleClickMenuItem('/')} color='secondary'>
+                        Voltar
                     </Button>
                 </div>
             </form> 
