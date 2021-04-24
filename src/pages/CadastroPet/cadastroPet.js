@@ -4,8 +4,7 @@ import Menu from '../../components/Menu/menu';
 import bannerCadastro from "../../images/banner_cadastro.png";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { styled } from '@material-ui/core/styles';
-import { compose, spacing, palette } from '@material-ui/system';
+import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -19,36 +18,103 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { useHistory } from 'react-router-dom';
+import { Controller, useForm } from "react-hook-form";
+import Snackbar from '@material-ui/core/Snackbar';
+
 
 export default function Pets() {
-
+    /** 
+    ***********************************************
+                    VARIÁVEIS
+    ***********************************************
+    **/
+    /** 
+    * CSS
+    */
     const styles = useStyles();
-
-    const [sexo, setSexo] = useState();
-
-    const [selectedEspecie, setSelectedEspecie] = useState();
-
-    const handleChangeEPet = (pet) => {
-        setSelectedEspecie(pet);
+    /** 
+    * Navegação pelas páginas
+    */
+    const history = useHistory();
+    /** 
+    * Hook form (validação e submit)
+    */
+     const defaultValues = {
+        nome: null,
+        especie: null,
+        raca: null,
+        idade: null,
+        peso: null,
+        sexo: "fêmea",
+        observacao: ''
     };
+    const { register, handleSubmit, errors, control, reset } = useForm({ defaultValues });
+    /**
+    * Messagens de erro/sucesso
+    */
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [message, setMessage] = useState('');
+    const [success, setSuccess] = useState(false);
 
+    /** 
+    ***********************************************
+                    FUNÇÕES
+    ***********************************************
+    **/
+    /**
+    * Navegação entre as páginas (altera a rota)
+    */
+    function handleClickMenuItem(rota) {
+        history.push(rota);
+    }
+    
     useEffect(() => {
        
     });
 
-    const history = useHistory();
-
-    const handleSexo = (value) => {
-        setSexo(value);
-    }
-
-    function handleClickMenuItem(rota) {
-        history.push(rota);
-    }
-
+    /**
+    * POST para enviar o cadastro da vacina para o banco
+    * Parâmetro: data (data,pet_id,vacina,fabricante,tipo,observacao)
+    */
+    const onSubmit = (data) => {
+        const user = localStorage.getItem('user'); 
+        const usuario = (JSON.parse(user).email);
+        data.usuario = usuario;
+        console.log(data)
+        axios.post('/pets/cadastro', data)
+            .then(() => {
+                setOpenSnackbar(true);
+                setMessage('Pet cadastrado!');
+                setSuccess(true);
+                reset({})
+            })
+            .catch(err => {
+                setOpenSnackbar(true);
+                setMessage('Erro no cadastro!');
+                setSuccess(false);
+            });
+    };
+    /** 
+    ***********************************************
+                INTERFACE/COMPONENTES
+    ***********************************************
+    **/
     return (
         <Menu>
-            <form  noValidate autoComplete="off">
+            <Snackbar
+                open={openSnackbar}
+                autoHideDuration={6000}
+                onClose={() => setOpenSnackbar(false)}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+            >
+                <div className={success ? styles.success : styles.error}>
+                    {message}
+                </div>
+            </Snackbar>
+            <form  onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.banner} style={{backgroundImage: `url(${bannerCadastro})`}}>     
                     <span className={styles.titulo}> Cadastrar Pet</span>
                     <br/>
@@ -60,72 +126,157 @@ export default function Pets() {
 
                 <div className={styles.campos}>
                     <TextField
-                        id="outlined-helperText"
+                        id="nome"
                         label="Nome do Pet"
-                        helperText="Por favor, digite o nome do Pet"
                         variant="outlined"
                         size="small"
                         className={styles.textField}
+                        name='nome'
+                        errors={errors.nome}
+                        inputRef={register({
+                            required: "This is a required field",
+                        })}
+                        helperText={<FormHelperText error={errors?.nome} className={styles.helperText}>
+                            {errors?.nome && errors?.nome?.type === "required" ?
+                                "Esse campo é obrigatório."
+                                :
+                                "Por favor, digite o nome do Pet"
+                            }
+                        </FormHelperText>}
                     />
                     <FormControl variant="outlined" className={styles.formControl} size='small'>
                         <InputLabel id="demo-simple-select-outlined-label">Espécie</InputLabel>
-                        <Select
-                        labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
-                        value={selectedEspecie}
-                        onChange={(value) => handleChangeEPet(value)}
-                        label="Especie"
-                        >
-                        <MenuItem value={0}>Cachorro</MenuItem> 
-                        <MenuItem value={1}>Gato</MenuItem>            
-                        </Select>
-                        <FormHelperText>Por favor, selecione a espécie do Pet</FormHelperText>
+                        <Controller
+                            as={<Select
+                                labelId="demo-simple-select-outlined-label"
+                                id="especie"
+                                label="Espécie"
+                            >
+                                <MenuItem value={"cachorro"}>Cachorro</MenuItem> 
+                                <MenuItem value={"gato"}>Gato</MenuItem>     
+                            </Select>}
+                            name="especie"
+                            control={control}
+                            errors={errors.especie}
+                            ref={
+                                register('especie', {
+                                    required: true
+                                })
+                            }
+                            inputRef={register}
+                            control={control}
+                            rules={{ required: true }}
+                        />
+                        <FormHelperText error={errors?.especie} className={styles.helperText2}>
+                            {errors?.especie && errors?.especie?.type === "required" ?
+                                "Esse campo é obrigatório."
+                                :
+                                "Por favor, selecione a espécie pet"
+                            }
+                        </FormHelperText>
                     </FormControl>
                     <TextField
-                        id="outlined-helperText"
+                        id="raca"
                         label="Raça"
-                        helperText="Por favor, digite a raça do Pet"
                         variant="outlined"
                         size="small"
                         className={styles.textFieldRaca}
+                        name='raca'
+                        errors={errors.raca}
+                        inputRef={register({
+                            required: "This is a required field",
+                        })}
+                        helperText={<FormHelperText error={errors?.raca} className={styles.helperText}>
+                            {errors?.raca && errors?.raca?.type === "required" ?
+                                "Esse campo é obrigatório."
+                                :
+                                "Por favor, digite a raça do Pet"
+                            }
+                        </FormHelperText>}
                     />
                     <br/>
                     <div className={styles.container}>
                         <TextField
-                            id="outlined-helperText"
+                            id="idade"
                             label="Idade"
-                            helperText="Por favor, digite a idade do Pet"
                             variant="outlined"
                             size="small"
                             className={styles.textField}
+                            name='idade'
+                            errors={errors.idade}
+                            inputRef={register({
+                                required: "This is a required field",
+                            })}
+                            helperText={<FormHelperText error={errors?.idade} className={styles.helperText}>
+                                {errors?.idade && errors?.idade?.type === "required" ?
+                                    "Esse campo é obrigatório."
+                                    :
+                                    "Por favor, digite a idade do Pet"
+                                }
+                            </FormHelperText>}
                         />
                         <TextField
-                            id="outlined-helperText"
+                            id="peso"
                             label="Peso"
-                            helperText="Por favor, digite o peso do Pet"
                             variant="outlined"
                             size="small"
                             className={styles.textField}
+                            name='peso'
+                            errors={errors.peso}
+                            inputRef={register({
+                                required: "This is a required field",
+                            })}
+                            helperText={<FormHelperText error={errors?.peso} className={styles.helperText}>
+                                {errors?.peso && errors?.peso?.type === "required" ?
+                                    "Esse campo é obrigatório."
+                                    :
+                                    "Por favor, digite o peso do Pet"
+                                }
+                            </FormHelperText>}
                         />
-                        <RadioGroup row aria-label="gender" name="gender1" value={sexo}
-                            onChange={(value)=>handleSexo(value)} className={styles.radioGroup}>
-                            <FormControlLabel value="0" control={<Radio  color='primary'/>} label="Fêmea" />
-                            <FormControlLabel value="1" control={<Radio color='primary'/>} label="Macho" />
-                        </RadioGroup>
+                        <Controller
+                            as={
+                                <RadioGroup row className={styles.radioGroup}>
+                                    <FormControlLabel
+                                        value="fêmea"
+                                        control={<Radio color='primary' />}
+                                        label="Fêmea"
+                                    />
+                                    <FormControlLabel
+                                        value="macho"
+                                        control={<Radio color='primary' />}
+                                        label="Macho"
+                                    />
+                                </RadioGroup>
+                            }
+                            name="sexo"
+                            control={control}
+                            defaultValue={'fêmea'}
+                        />
                     </div>
                     <br/>
                     <br/>
-                    
-                    <TextareaAutosize aria-label="minimum height" placeholder="Observações:" 
-                    className={styles.textArea}/>
+                    <FormControl variant="outlined" className={styles.formControl} size='small'>
+                        <Controller
+                            as={
+                                <TextareaAutosize aria-label="minimum height" placeholder="Observações:"
+                                    className={styles.textArea}
+                                />}
+                            name="observacao"
+                            control={control}
+                            ref={register()}
+                            inputRef={register}
+                            defaultValue={''}
+                        />
+                    </FormControl>
                     <br/>
-                    <Button variant="contained" className={styles.buttonContained} 
-                        onClick={()=>handleCadastroVacina()} color='primary'>
-                        Cadastrar 
+                    <Button variant="contained" className={styles.buttonContained}
+                        onClick={handleSubmit(onSubmit)} color='primary' type='submit'>
+                        Cadastrar
                     </Button>
-                    <Button variant="contained" className={styles.buttonContained} 
-                        onClick={()=>handleClickMenuItem('/vacinas')} color='secondary'>
-                        Cancelar
+                    <Button variant="contained" className={styles.buttonContained}
+                        onClick={() => handleClickMenuItem('/pets')} color='secondary'>
+                        Voltar
                     </Button>
                 </div>
             </form> 

@@ -76,20 +76,16 @@ export default function CadastroUsuario() {
     * Parâmetro: data (nome,telefone,email,senha,ehveterinario,crmv)
     */
     const onSubmit = (data) => {
-    //const usuario = localStorage.getItem('user'); 
-    //const crmv = (JSON.parse(usuario).crmv);
-    //data.crmv = crmv;
-    console.log(data)
     axios.post('/usuario/cadastro', data)
         .then(() => {
             setOpenSnackbar(true);
-            setMessage('Usuário registrado!');
+            setMessage('Usuário cadastrado!');
             setSuccess(true);
             reset({})
         })
         .catch(err => {
             setOpenSnackbar(true);
-            setMessage('Erro no registro!');
+            setMessage('Erro no cadastro!');
             setSuccess(false);
         });
     };

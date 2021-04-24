@@ -4,6 +4,14 @@ import { makeStyles } from '@material-ui/core/styles';
 const defaultColor = '#1C587C';
 
 const useStyles = makeStyles((theme) => ({
+  avatar: {
+    marginTop: '20px',
+    marginBottom: '-70px',
+    marginLeft: '60px',
+    width: '115px !important',
+    height: '115px !important',
+    position: 'relative',
+  },
   banner:{    
     width:'100%',
     height:'200px',
@@ -14,6 +22,13 @@ const useStyles = makeStyles((theme) => ({
   buttonContained:{
     width:'300px',
     marginRight: '45px'
+  },
+  camera: {
+    color: "white",
+    marginLeft: '180px',
+    marginBottom: '0px',
+    marginTop: '35px',
+    display: 'block',
   },
   closeIcon:{
     color: defaultColor,
@@ -43,13 +58,74 @@ const useStyles = makeStyles((theme) => ({
     minWidth: '1030px',
     maxWidth: '1030px',
   },
+  error:{
+    background: '#a30000',
+    color: 'white',
+    width: '250px',
+    height: '50px',
+    borderRadius: '10px',
+    textAlign: 'center',
+    lineHeight:'50px'
+  },
+  especiePet: {
+    '& > *': {
+    margin: theme.spacing(1),
+    width: '230px',
+    },
+    marginLeft: '300px',
+    marginTop: '-107px'
+  },
   formControl: {
     margin: '0px',
     minWidth: 120,
     width: '300px',
   },
+  helperText:{
+    margin: '0px',
+    padding: '0px'
+  },
+  helperText2:{
+    margin: '0px',
+    padding: '0px',
+    paddingTop: '3px',
+    paddingLeft: '14px'
+  }, 
+  nomePet: {
+    '& > *': {
+    margin: theme.spacing(1),
+    width: '210px',
+    },
+    marginTop: '-40px'
+  },
+  obs: {
+    marginTop: '-20px',
+    marginLeft: '8px',
+    width: '840px',
+  },
+  pesoPet: {
+    '& > *': {
+    margin: theme.spacing(1),
+    width: '230px',
+    },
+    marginLeft: '300px',
+    marginTop: '-107px'
+  },
   primeiraDiv:{    
     marginBottom: '20px',
+  },
+  racaPet: {
+    '& > *': {
+    margin: theme.spacing(1),
+    width: '210px',
+    },
+    marginLeft: '625px',
+    marginTop: '-127px'
+  },
+  radioGroup: {        
+    position: 'fix',
+    marginLeft: '750px',
+    marginTop: '-90px',
+    
   },
   subtitulo: {
     marginTop: '10px',
@@ -61,6 +137,15 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto', 
     marginRight: 'auto',
     textAlign:'center',
+  },
+  success:{
+    background: '#349c00',
+    color: 'white',
+    width: '250px',
+    height: '50px',
+    borderRadius: '10px',
+    textAlign: 'center',
+    lineHeight:'50px'
   },
   textField: {
     width: '300px',
@@ -80,63 +165,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '60px',
     marginTop: '-24px',
     marginTop: '10px'
-  },
-  nomePet: {
-    '& > *': {
-    margin: theme.spacing(1),
-    width: '210px',
-    },
-    marginTop: '-40px'
-  },
-  racaPet: {
-    '& > *': {
-    margin: theme.spacing(1),
-    width: '210px',
-    },
-    marginLeft: '625px',
-    marginTop: '-127px'
-  },
-  especiePet: {
-    '& > *': {
-    margin: theme.spacing(1),
-    width: '230px',
-    },
-    marginLeft: '300px',
-    marginTop: '-107px'
-  },
-  pesoPet: {
-    '& > *': {
-    margin: theme.spacing(1),
-    width: '230px',
-    },
-    marginLeft: '300px',
-    marginTop: '-107px'
-  },
-  obs: {
-    marginTop: '-20px',
-    marginLeft: '8px',
-    width: '840px',
-  },
-  avatar: {
-    marginTop: '20px',
-    marginBottom: '-70px',
-    marginLeft: '60px',
-    width: '115px !important',
-    height: '115px !important',
-    position: 'relative',
-  },
-  camera: {
-    color: "white",
-    marginLeft: '180px',
-    marginBottom: '0px',
-    marginTop: '35px',
-    display: 'block',
-  },
-  radioGroup: {        
-    position: 'fix',
-    marginLeft: '750px',
-    marginTop: '-90px',
-    
   },
   textArea: {
     width: '750px',
