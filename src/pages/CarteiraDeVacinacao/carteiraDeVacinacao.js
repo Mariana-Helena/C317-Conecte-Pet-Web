@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Menu from '../../components/Menu/menu';
 import bannerVacinacao from "../../images/banner_vacinacao.png";
 import 'date-fns';
+import axios from 'axios';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import Button from '@material-ui/core/Button';
@@ -26,28 +27,60 @@ export default function RegistroVacina() {
     /** 
     * Navegação pelas páginas
     */
-     const history = useHistory();
+    const styles = useStyles();    
+    /** 
+    * Navegação pelas páginas
+    */
+    const history = useHistory();
+    /** 
+    * Vetor de vacinas
+    */
+    const [vacinas, setVacinas] = useState([]);
 
     const [vet, setVet] = useState(false);
 
-    useEffect(() => {
-        getUser();
-    }), [localStorage.getItem('user')];
+    /** 
+    ***********************************************
+                    FUNÇÕES
+    ***********************************************
+    **/
+    /** 
+    * Chamada toda vez que há alteração no localStorage
+    */
+     useEffect(() => {   
+        getUser();    
+        callApi();
+    }, [localStorage.getItem('user')]);
+    
+    /** 
+    * GET para buscar as vacinas dos pets no banco
+    * Parâmetro: pet_id
+    */
+    const callApi = async () => {
+        const usuario = localStorage.getItem('user'); 
+        const email = (JSON.parse(usuario).email);
+        axios.get(`/pets/${email}`).then(res => {
+            if (res.data.express.length !== 0) {
+                const resp = res.data.express[0];
+                const id_pet = resp['_id'];
+                axios.get(`/vacinas/${id_pet}`).then(res =>{
+                    if (res.data.express.length !== 0) {
+                        setVacinas(res.data.express);
+                    }
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    };
 
     const getUser = () => {
         const usuario = localStorage.getItem('user');
         setVet(JSON.parse(usuario).ehveterinario);
     }
-
-    function createData(id,fabricante, vacina, aplicacao, paplicacao,veterinario,observacoes) {
-        return { id,fabricante, vacina, aplicacao, paplicacao,veterinario,observacoes};
-    }
     
     const [open, setOpen] = useState(false);
-
-    const rows = [
-        createData(1,'LaboVet', 'Antirrabica', '19/05/2018', '19/05/2019', 'CRMV-MG 15.569',''),
-    ];
 
     const StyledTableCell = withStyles((theme) => ({
         head: {
@@ -67,8 +100,6 @@ export default function RegistroVacina() {
     },
     }))(TableRow);
 
-    const styles = useStyles();    
-
     useEffect(() => {
        
     });
@@ -76,7 +107,7 @@ export default function RegistroVacina() {
     const handleDialogClose = () => {
         setOpen(false);
     }
-
+    const idtable=0;
     /**
     * Navegação entre as páginas (altera a rota)
     */
@@ -121,17 +152,17 @@ export default function RegistroVacina() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                        {rows.map((row) => (
-                            <StyledTableRow key={row.name}>
-                                <StyledTableCell align="center">{row.id}</StyledTableCell>    
+                        {vacinas.map((vacina) => (
+                            <StyledTableRow key={vacina}>
+                                <StyledTableCell align="center">{idtable+1}</StyledTableCell>    
                                 <StyledTableCell component="th" scope="row">
-                                    {row.fabricante}
+                                    {vacina.fabricante}
                                 </StyledTableCell>
-                                <StyledTableCell align="center">{row.vacina}</StyledTableCell>
-                                <StyledTableCell align="center">{row.aplicacao}</StyledTableCell>
-                                <StyledTableCell align="center">{row.paplicacao}</StyledTableCell>
-                                <StyledTableCell align="center">{row.veterinario}</StyledTableCell>
-                                <StyledTableCell align="center">{row.observacao}</StyledTableCell>
+                                <StyledTableCell align="center">{vacina.vacina}</StyledTableCell>
+                                <StyledTableCell align="center">{vacina.data}</StyledTableCell>
+                                <StyledTableCell align="center">{vacina.data}</StyledTableCell>
+                                <StyledTableCell align="center">{vacina.crmv}</StyledTableCell>
+                                <StyledTableCell align="center">{vacina.observacao}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                         </TableBody>

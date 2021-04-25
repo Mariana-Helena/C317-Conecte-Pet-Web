@@ -4,6 +4,7 @@ import Menu from '../../components/Menu/menu';
 import { useHistory } from 'react-router-dom';
 import bannerVacinacao from "../../images/banner_consultas.png";
 import 'date-fns';
+import axios from 'axios';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -25,29 +26,59 @@ export default function AgendamentoConsulta() {
     /** 
     * Navegação pelas páginas
     */
+    const styles = useStyles();
+    /** 
+    * Navegação pelas páginas
+    */
     const history = useHistory();
+    /** 
+    * Vetor de consultas
+    */
+    const [consultas, setConsultas] = useState([]);
 
     const [vet, setVet] = useState(false);
-
-    useEffect(() => {
-        getUser();
-    }), [localStorage.getItem('user')];
+    /** 
+    ***********************************************
+                    FUNÇÕES
+    ***********************************************
+    **/
+    /** 
+    * Chamada toda vez que há alteração no localStorage
+    */
+     useEffect(() => {   
+        getUser();    
+        callApi();
+    }, [localStorage.getItem('user')]);
+    /** 
+    * GET para buscar as consultas dos pets no banco
+    * Parâmetro: pet_id
+    */
+     const callApi = async () => {
+        const usuario = localStorage.getItem('user'); 
+        const email = (JSON.parse(usuario).email);
+        axios.get(`/pets/${email}`).then(res => {
+            if (res.data.express.length !== 0) {
+                const resp = res.data.express[0];
+                const id_pet = resp['_id'];
+                axios.get(`/consultas/${id_pet}`).then(res =>{
+                    if (res.data.express.length !== 0) {
+                        console.log(res.data.express);
+                        setConsultas(res.data.express);
+                    }
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    };
 
     const getUser = () => {
         const usuario = localStorage.getItem('user');
         setVet(JSON.parse(usuario).ehveterinario);
     }
 
-
-    function createData(id, veterinario, consulta, retorno, observacoes) {
-        return { id, veterinario, consulta, retorno, observacoes };
-    }
-
     const [open, setOpen] = useState(false);
-
-    const rows = [
-        createData(1, 'CRMV-MG 15.569', '19/03/2021', '19/04/2021', 'Consulta Preventiva + 1ª vermifugação'),
-    ];
 
     const StyledTableCell = withStyles((theme) => ({
         head: {
@@ -66,8 +97,6 @@ export default function AgendamentoConsulta() {
             },
         },
     }))(TableRow);
-
-    const styles = useStyles();
 
     const handleDialogClose = () => {
         setOpen(false);
@@ -115,15 +144,15 @@ export default function AgendamentoConsulta() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows.map((row) => (
-                                    <StyledTableRow key={row.name}>
-                                        <StyledTableCell align="center">{row.id}</StyledTableCell>
+                                {consultas.map((consulta) => (
+                                    <StyledTableRow key={consulta}>
+                                        <StyledTableCell align="center">{1}</StyledTableCell>
                                         <StyledTableCell component="th" scope="row">
-                                            {row.veterinario}
+                                            {consulta.crmv}
                                         </StyledTableCell>
-                                        <StyledTableCell align="center">{row.consulta}</StyledTableCell>
-                                        <StyledTableCell align="center">{row.retorno}</StyledTableCell>
-                                        <StyledTableCell align="center">{row.observacoes}</StyledTableCell>
+                                        <StyledTableCell align="center">{consulta.data}</StyledTableCell>
+                                        <StyledTableCell align="center">{consulta.data}</StyledTableCell>
+                                        <StyledTableCell align="center">{consulta.observacoes}</StyledTableCell>
                                     </StyledTableRow>
                                 ))}
                             </TableBody>
