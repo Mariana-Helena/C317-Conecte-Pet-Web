@@ -36,6 +36,10 @@ export default function RegistroVacina() {
     * Vetor de vacinas
     */
     const [vacinas, setVacinas] = useState([]);
+    /** 
+    * Vetor de pets
+    */
+    const [pets, setPets] = useState([]);
 
     const [vet, setVet] = useState(false);
 
@@ -49,31 +53,40 @@ export default function RegistroVacina() {
     */
      useEffect(() => {   
         getUser();    
-        callApi();
+        callApi1();
     }, [localStorage.getItem('user')]);
     
     /** 
-    * GET para buscar as vacinas dos pets no banco
-    * Parâmetro: pet_id
+    * GET para buscar os pets no banco
     */
-    const callApi = async () => {
+    const callApi1 = async () => {
         const usuario = localStorage.getItem('user'); 
         const email = (JSON.parse(usuario).email);
         axios.get(`/pets/${email}`).then(res => {
             if (res.data.express.length !== 0) {
-                const resp = res.data.express[0];
-                const id_pet = resp['_id'];
-                axios.get(`/vacinas/${id_pet}`).then(res =>{
-                    if (res.data.express.length !== 0) {
-                        setVacinas(res.data.express);
-                    }
-                })
+                setPets(res.data.express);
             }
         })
         .catch(err => {
             console.log(err)
         });
+      
     };
+    /** 
+    * GET para buscar as consultas dos pets no banco
+    * Parâmetro: pet_id
+    */
+    function callApi2(id_pet) {
+        axios.get(`/vacinas/${id_pet}`).then(res =>{
+            if (res.data.express.length !== 0) {
+                console.log(res.data.express);
+                setVacinas(res.data.express);
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    }
 
     const getUser = () => {
         const usuario = localStorage.getItem('user');
@@ -126,10 +139,12 @@ export default function RegistroVacina() {
                 onClick={() => handleClickMenuItem('vacinas/registro')} color='primary'> Registrar vacina</Button>
                 :
                     <div>
-                        <div className={styles.circleGray}>
-                        </div>
-                        <div className={styles.circleGray2}>
-                        </div>   
+                        {pets.map((pet) => (
+                            <div 
+                            onClick={() => callApi2(pet._id)}
+                            className={styles.circleGray}>
+                            </div>
+                        ))}  
                     </div>
                
                 }
@@ -145,22 +160,22 @@ export default function RegistroVacina() {
                                 <StyledTableCell>#</StyledTableCell>
                                 <StyledTableCell>Fabricante</StyledTableCell>
                                 <StyledTableCell align="center">Vacina</StyledTableCell>
-                                <StyledTableCell align="center">Aplicação</StyledTableCell>
-                                <StyledTableCell align="center">Próxima Aplicação</StyledTableCell>
+                                <StyledTableCell align="center">Data</StyledTableCell>
+                                <StyledTableCell align="center">Aplicada/Agendada</StyledTableCell>
                                 <StyledTableCell align="center">Veterinário</StyledTableCell>
                                 <StyledTableCell align="center">Observações</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                         {vacinas.map((vacina) => (
-                            <StyledTableRow key={vacina}>
+                            <StyledTableRow key={vacina}>   
                                 <StyledTableCell align="center">{idtable+1}</StyledTableCell>    
                                 <StyledTableCell component="th" scope="row">
                                     {vacina.fabricante}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">{vacina.vacina}</StyledTableCell>
                                 <StyledTableCell align="center">{vacina.data}</StyledTableCell>
-                                <StyledTableCell align="center">{vacina.data}</StyledTableCell>
+                                <StyledTableCell align="center">{vacina.tipo}</StyledTableCell>
                                 <StyledTableCell align="center">{vacina.crmv}</StyledTableCell>
                                 <StyledTableCell align="center">{vacina.observacao}</StyledTableCell>
                             </StyledTableRow>

@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 'auto',
   },
   camera: {
+    width: '50px',
     color: "white",
     marginLeft: '180px',
     marginTop: '-25px',
@@ -91,6 +92,9 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '3px',
     paddingLeft: '14px'
   }, 
+  input: {
+    display: 'none',
+  },
   logo:{
     width:'65px',  
     display: 'block',

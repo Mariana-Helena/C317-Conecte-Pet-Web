@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '100%',
         width: '120px',
         height: '120px',
-        display: 'block',
+        display: 'inline-block',
         marginLeft: '80px', 
         marginTop: '10px',
     },

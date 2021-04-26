@@ -119,9 +119,12 @@ export default function Pets() {
                     <span className={styles.titulo}> Cadastrar Pet</span>
                     <br/>
                     <Avatar className={styles.avatar}></Avatar>
-                    <IconButton className={styles.camera}>
-                        <PhotoCamera />
-                    </IconButton>
+                    <input accept="image/*" className={styles.input} id="icon-button-file" type="file" />
+                    <label htmlFor="icon-button-file">
+                        <IconButton className={styles.camera} aria-label="upload picture" component="span">
+                            <PhotoCamera />
+                        </IconButton>
+                    </label>
                 </div>
 
                 <div className={styles.campos}>

@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '45px'
   },
   camera: {
+    width: '50px',
     color: "white",
     marginLeft: '180px',
     marginBottom: '0px',
@@ -90,6 +91,9 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '3px',
     paddingLeft: '14px'
   }, 
+  input: {
+    display: 'none',
+  },
   nomePet: {
     '& > *': {
     margin: theme.spacing(1),

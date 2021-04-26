@@ -35,6 +35,10 @@ export default function AgendamentoConsulta() {
     * Vetor de consultas
     */
     const [consultas, setConsultas] = useState([]);
+    /** 
+    * Vetor de pets
+    */
+    const [pets, setPets] = useState([]);
 
     const [vet, setVet] = useState(false);
     /** 
@@ -47,31 +51,39 @@ export default function AgendamentoConsulta() {
     */
      useEffect(() => {   
         getUser();    
-        callApi();
+        callApi1();
     }, [localStorage.getItem('user')]);
     /** 
-    * GET para buscar as consultas dos pets no banco
-    * Parâmetro: pet_id
+    * GET para buscar os pets no banco
     */
-     const callApi = async () => {
+    const callApi1 = async () => {
         const usuario = localStorage.getItem('user'); 
         const email = (JSON.parse(usuario).email);
         axios.get(`/pets/${email}`).then(res => {
             if (res.data.express.length !== 0) {
-                const resp = res.data.express[0];
-                const id_pet = resp['_id'];
-                axios.get(`/consultas/${id_pet}`).then(res =>{
-                    if (res.data.express.length !== 0) {
-                        console.log(res.data.express);
-                        setConsultas(res.data.express);
-                    }
-                })
+                setPets(res.data.express);
             }
         })
         .catch(err => {
             console.log(err)
         });
+      
     };
+    /** 
+    * GET para buscar as consultas dos pets no banco
+    * Parâmetro: pet_id
+    */
+    function callApi2(id_pet) {
+        axios.get(`/consultas/${id_pet}`).then(res =>{
+            if (res.data.express.length !== 0) {
+                console.log(res.data.express);
+                setConsultas(res.data.express);
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    }
 
     const getUser = () => {
         const usuario = localStorage.getItem('user');
@@ -109,6 +121,10 @@ export default function AgendamentoConsulta() {
         history.push("/" + rota);
     }
 
+    function funcao(){
+        // chama os dados do pet
+    }
+
     return (
         <Menu>
             <form>
@@ -120,12 +136,13 @@ export default function AgendamentoConsulta() {
                             onClick={() => handleClickMenuItem('consultas/agendamento')} color='primary'> Agendar Consulta </Button>
                         :
                         <div>
-                            <div className={styles.circleGray}>
-                            </div>
-                            <div className={styles.circleGray2}>
-                            </div>
-                        </div>
-
+                            {pets.map((pet) => (
+                                <div 
+                                onClick={() => callApi2(pet._id)}
+                                className={styles.circleGray}>
+                                </div>
+                            ))} 
+                        </div>  
                     }
 
                 </div>
@@ -139,7 +156,7 @@ export default function AgendamentoConsulta() {
                                     <StyledTableCell>#</StyledTableCell>
                                     <StyledTableCell>Veterinário</StyledTableCell>
                                     <StyledTableCell align="center">Consulta</StyledTableCell>
-                                    <StyledTableCell align="center">Retorno</StyledTableCell>
+                                    <StyledTableCell align="center">Horário</StyledTableCell>
                                     <StyledTableCell align="center">Observações</StyledTableCell>
                                 </TableRow>
                             </TableHead>
@@ -151,7 +168,7 @@ export default function AgendamentoConsulta() {
                                             {consulta.crmv}
                                         </StyledTableCell>
                                         <StyledTableCell align="center">{consulta.data}</StyledTableCell>
-                                        <StyledTableCell align="center">{consulta.data}</StyledTableCell>
+                                        <StyledTableCell align="center">{consulta.horario}</StyledTableCell>
                                         <StyledTableCell align="center">{consulta.observacoes}</StyledTableCell>
                                     </StyledTableRow>
                                 ))}
