@@ -127,6 +127,7 @@ export default function RegistroVacina() {
         const usuario = localStorage.getItem('user'); 
         const crmv = (JSON.parse(usuario).crmv);
         data.crmv = crmv;
+        data.data = new Date(data.data).toLocaleDateString();
         axios.post('/vacinas/registro', data)
             .then(() => {
                 setOpenSnackbar(true);

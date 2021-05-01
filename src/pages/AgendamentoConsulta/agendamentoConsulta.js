@@ -123,6 +123,7 @@ export default function AgendamentoConsulta() {
         const usuario = localStorage.getItem('user');
         const crmv = (JSON.parse(usuario).crmv);
         data.crmv = crmv;
+        data.data = new Date(data.data).toLocaleDateString();
         axios.post('/consultas/agendamento', data)
             .then(() => {
                 setOpenSnackbar(true);

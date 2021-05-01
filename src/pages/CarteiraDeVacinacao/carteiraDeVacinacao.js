@@ -195,7 +195,7 @@ export default function RegistroVacina() {
                                                 {vacina.fabricante}
                                             </StyledTableCell>
                                             <StyledTableCell align="center">{vacina.vacina}</StyledTableCell>
-                                            <StyledTableCell align="center">{new Date(vacina.data).toLocaleDateString()}</StyledTableCell>
+                                            <StyledTableCell align="center">{vacina.data}</StyledTableCell>
                                             <StyledTableCell align="center">{vacina.tipo}</StyledTableCell>
                                             {!vet && (<StyledTableCell align="center">{vacina.crmv}</StyledTableCell>)}
                                             <StyledTableCell align="center">{vacina.observacao}</StyledTableCell>
