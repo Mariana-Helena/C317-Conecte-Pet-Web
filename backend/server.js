@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+var ObjectId = require("bson-objectid")
 const port = process.env.PORT || 5000;
 
 const MongoClient = require('mongodb').MongoClient;
@@ -26,10 +27,44 @@ app.get('/pets/:email', (req, res) => {
   
 });
 
+app.get('/pet/:id_pet', (req, res) => {
+  var response;
+  const collection = client.db("ConectePet").collection("Pet");  
+  console.log(req)  
+  collection.find({_id: ObjectId(req.params.id_pet)}).toArray(function(err, result) {
+    if (err) throw err;
+    response=result;
+    console.log(response)
+    res.send({ express: response });
+  });   
+});
+
 app.get('/vacinas/:id_pet', (req, res) => {
   var response;
   const collection = client.db("ConectePet").collection("Vacinas");    
   collection.find({pet_id: req.params.id_pet}).toArray(function(err, result) {
+    if (err) throw err;
+    response=result;
+    res.send({ express: response });
+  });   
+  
+});
+
+app.get('/veterinario/vacinas/:vet_crmv', (req, res) => {
+  var response;
+  const collection = client.db("ConectePet").collection("Vacinas");    
+  collection.find({crmv: req.params.vet_crmv}).toArray(function(err, result) {
+    if (err) throw err;
+    response=result;
+    res.send({ express: response });
+  });   
+  
+});
+
+app.get('/veterinario/consultas/:vet_crmv', (req, res) => {
+  var response;
+  const collection = client.db("ConectePet").collection("Consultas");    
+  collection.find({crmv: req.params.vet_crmv}).toArray(function(err, result) {
     if (err) throw err;
     response=result;
     res.send({ express: response });

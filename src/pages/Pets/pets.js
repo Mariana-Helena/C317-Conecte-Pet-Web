@@ -86,8 +86,8 @@ export default function Pets() {
                             <p> <span className={styles.campos}>Espécie: </span> <span> {pet.especie}</span> </p>
                             <p> <span className={styles.campos}>Raça: </span> <span> {pet.raca}</span> </p>
                             <p> <span className={styles.campos}>Sexo: </span> <span> {pet.sexo}</span> </p>
-                            <p> <span className={styles.campos}>Idade: </span> <span> {pet.idade}</span> </p>
-                            <p> <span className={styles.campos}>Peso: </span> <span> {pet.peso}</span> </p>
+                            <p> <span className={styles.campos}>Idade: </span> <span> {pet.idade} anos</span> </p>
+                            <p> <span className={styles.campos}>Peso: </span> <span> {pet.peso} kg</span> </p>
                             <p> <span className={styles.campos}>Observações: </span> <span> {pet.observacoes ? pet.observacoes : '-'}</span> </p>
                         </div>
                     </div>

@@ -59,6 +59,19 @@ export default function AgendamentoConsulta() {
     const callApi1 = async () => {
         const usuario = localStorage.getItem('user'); 
         const email = (JSON.parse(usuario).email);
+        if (vet == true){
+            console.log(usuario)
+            const vet_crmv = (JSON.parse(usuario).crmv)
+            axios.get(`/veterinario/consultas/${vet_crmv}`).then(res =>{
+                if (res.data.express.length !== 0) {
+                    console.log(res.data.express);
+                    setVacinas(res.data.express);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        }
         axios.get(`/pets/${email}`).then(res => {
             if (res.data.express.length !== 0) {
                 setPets(res.data.express);

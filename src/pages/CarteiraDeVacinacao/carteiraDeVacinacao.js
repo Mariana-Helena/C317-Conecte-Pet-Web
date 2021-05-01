@@ -42,7 +42,7 @@ export default function RegistroVacina() {
     const [pets, setPets] = useState([]);
 
     const [vet, setVet] = useState(false);
-
+    const [pet, setPet] = useState([]);
     /** 
     ***********************************************
                     FUNÇÕES
@@ -62,6 +62,19 @@ export default function RegistroVacina() {
     const callApi1 = async () => {
         const usuario = localStorage.getItem('user'); 
         const email = (JSON.parse(usuario).email);
+        console.log(usuario)
+        if (vet == true){
+            const vet_crmv = (JSON.parse(usuario).crmv)
+            axios.get(`/veterinario/vacinas/${vet_crmv}`).then(res =>{
+                if (res.data.express.length !== 0) {
+                    console.log(res.data.express);
+                    setVacinas(res.data.express);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        }
         axios.get(`/pets/${email}`).then(res => {
             if (res.data.express.length !== 0) {
                 setPets(res.data.express);
@@ -73,14 +86,31 @@ export default function RegistroVacina() {
       
     };
     /** 
-    * GET para buscar as consultas dos pets no banco
+    * GET para buscar as vacinas dos pets no banco
     * Parâmetro: pet_id
     */
     function callApi2(id_pet) {
+        console.log("pegouvacinas")
         axios.get(`/vacinas/${id_pet}`).then(res =>{
             if (res.data.express.length !== 0) {
                 console.log(res.data.express);
                 setVacinas(res.data.express);
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    }
+    /** 
+    * GET para buscar os pets no banco pelo seu id
+    */
+    function callApi3(id_pet) {
+        console.log('CHamou aqui',id_pet);
+        axios.get(`/pet/${id_pet}`).then(res =>{
+            console.log('respostaaa',res.data.express)
+            if (res.data.express.length !== 0) {
+                console.log(res.data.express);
+                setPet(res.data.express);
             }
         })
         .catch(err => {
@@ -92,7 +122,8 @@ export default function RegistroVacina() {
         const usuario = localStorage.getItem('user');
         setVet(JSON.parse(usuario).ehveterinario);
     }
-    
+
+
     const [open, setOpen] = useState(false);
 
     const StyledTableCell = withStyles((theme) => ({
@@ -120,7 +151,18 @@ export default function RegistroVacina() {
     const handleDialogClose = () => {
         setOpen(false);
     }
-    const idtable=0;
+    var idtable=0;
+
+    if (vet){
+        var i;
+        for (i = 0; i < vacinas.length; i++) {
+            callApi3(vacinas[i]['pet_id']);
+            vacinas[i]['nomePet']= pet.nome;
+            vacinas[i]['donoPet']= pet.usuario;
+        }
+        console.log('vacinas',vacinas);
+    }
+
     /**
     * Navegação entre as páginas (altera a rota)
     */
@@ -158,6 +200,8 @@ export default function RegistroVacina() {
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>#</StyledTableCell>
+                                {vet &&(<StyledTableCell align="center">Nome do Pet</StyledTableCell>)}
+                                {vet &&(<StyledTableCell align="center">Email dono Pet</StyledTableCell>)}
                                 <StyledTableCell>Fabricante</StyledTableCell>
                                 <StyledTableCell align="center">Vacina</StyledTableCell>
                                 <StyledTableCell align="center">Data</StyledTableCell>
@@ -168,8 +212,10 @@ export default function RegistroVacina() {
                         </TableHead>
                         <TableBody>
                         {vacinas.map((vacina) => (
-                            <StyledTableRow key={vacina}>   
-                                <StyledTableCell align="center">{idtable+1}</StyledTableCell>    
+                            <StyledTableRow key={vacina}> 
+                                <StyledTableCell align="center">{idtable+1}</StyledTableCell>  
+                                {vet &&(<StyledTableCell align="center">{vacina.nomePet}</StyledTableCell>)}
+                                {vet &&(<StyledTableCell align="center">{vacina.donoPet}</StyledTableCell>)}  
                                 <StyledTableCell component="th" scope="row">
                                     {vacina.fabricante}
                                 </StyledTableCell>
