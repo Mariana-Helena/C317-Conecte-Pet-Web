@@ -161,7 +161,7 @@ export default function AgendamentoConsulta() {
                 </div>
                 <ExcluirConsulta open={open} onClose={() => handleDialogClose()} />
                 <div className={styles.campos} >
-                    <HighlightOffIcon className={styles.closeIcon} onClick={() => setOpen(true)} />
+                    
                     <TableContainer component={Paper} className={styles.tableContainer} >
                         <Table className={styles.table} aria-label="customized table">
                             <TableHead>
@@ -171,6 +171,7 @@ export default function AgendamentoConsulta() {
                                     <StyledTableCell align="center">Consulta</StyledTableCell>
                                     <StyledTableCell align="center">Horário</StyledTableCell>
                                     <StyledTableCell align="center">Observações</StyledTableCell>
+                                    <StyledTableCell/>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -183,6 +184,9 @@ export default function AgendamentoConsulta() {
                                         <StyledTableCell align="center">{consulta.data}</StyledTableCell>
                                         <StyledTableCell align="center">{consulta.horario}</StyledTableCell>
                                         <StyledTableCell align="center">{consulta.observacoes}</StyledTableCell>
+                                        <StyledTableCell align="center">
+                                        <HighlightOffIcon className={styles.closeIcon} onClick={() => setOpen(true)} />
+                                        </StyledTableCell>
                                     </StyledTableRow>
                                 ))}
                             </TableBody>
