@@ -43,7 +43,7 @@ export default function RegistroVacina() {
     const hoje = new Date();
     const defaultValues = {
         email: null,
-        pet_id: null,
+        pet: null,
         vacina: null,
         fabricante: null,
         observacao: '',
@@ -121,7 +121,7 @@ export default function RegistroVacina() {
     };
     /**
     * POST para enviar o cadastro da vacina para o banco
-    * Parâmetro: data (data,pet_id,vacina,fabricante,tipo,observacao)
+    * Parâmetro: data (data,pet,vacina,fabricante,tipo,observacao)
     */
     const onSubmit = (data) => {
         const usuario = localStorage.getItem('user'); 
@@ -133,7 +133,8 @@ export default function RegistroVacina() {
                 setMessage('Vacinação registrada!');
                 setSuccess(true);
                 setPets([]);
-                reset({})
+                reset();
+                
             })
             .catch(err => {
                 setOpenSnackbar(true);
@@ -233,18 +234,18 @@ export default function RegistroVacina() {
                             as={<Select
                                 disabled={pets.length === 0}
                                 labelId="demo-simple-select-outlined-label"
-                                id="pet_id"
+                                id="pet"
                                 label="Pet"
                             >
                                 {pets.map((pet, index) =>
-                                    <MenuItem value={pet._id}> {pet?.nome}</MenuItem>
+                                    <MenuItem value={{id: pet._id, nome: pet.nome, dono: pet.usuario}}> {pet?.nome}</MenuItem>
                                 )}
                             </Select>}
-                            name="pet_id"
+                            name="pet"
                             control={control}
-                            errors={errors.pet_id}
+                            errors={errors.pete}
                             ref={
-                                register('pet_id', {
+                                register('pet', {
                                     required: true
                                 })
                             }
@@ -252,8 +253,8 @@ export default function RegistroVacina() {
                             control={control}
                             rules={{ required: true }}
                         />
-                        <FormHelperText error={errors?.pet_id} className={styles.helperText2}>
-                            {errors?.pet_id && errors?.pet_id?.type === "required" ?
+                        <FormHelperText error={errors?.pet} className={styles.helperText2}>
+                            {errors?.pet && errors?.pet?.type === "required" ?
                                 "Esse campo é obrigatório."
                                 :
                                 "Por favor, selecione o pet"

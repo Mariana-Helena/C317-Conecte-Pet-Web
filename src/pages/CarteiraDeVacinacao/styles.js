@@ -50,11 +50,6 @@ const useStyles = makeStyles((theme) => ({
     },
     closeIcon:{
         color: defaultColor,
-        marginLeft: '1030px',
-        fontSize: '32px',
-        position: 'relative',
-        display: 'block',
-        top: '100px'
     },
     data:{
         color: 'white',
@@ -102,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
     tableContainer: {
         width: '1080px',
         marginLeft: '-50px',  
-        marginTop: '-35px',
+        marginTop: '15px',
     }
 }));
 

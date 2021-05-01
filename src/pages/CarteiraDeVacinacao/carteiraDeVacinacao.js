@@ -62,8 +62,10 @@ export default function RegistroVacina() {
     const callApi1 = async () => {
         const usuario = localStorage.getItem('user'); 
         const email = (JSON.parse(usuario).email);
+        const vet = (JSON.parse(usuario).ehveterinario);
         console.log(usuario)
         if (vet == true){
+            console.log('ok')
             const vet_crmv = (JSON.parse(usuario).crmv)
             axios.get(`/veterinario/vacinas/${vet_crmv}`).then(res =>{
                 if (res.data.express.length !== 0) {
@@ -75,14 +77,17 @@ export default function RegistroVacina() {
                 console.log(err)
             });
         }
-        axios.get(`/pets/${email}`).then(res => {
-            if (res.data.express.length !== 0) {
-                setPets(res.data.express);
-            }
-        })
-        .catch(err => {
-            console.log(err)
-        });
+        else {
+            axios.get(`/pets/${email}`).then(res => {
+                if (res.data.express.length !== 0) {
+                    setPets(res.data.express);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        }
+        
       
     };
     /** 
@@ -104,7 +109,7 @@ export default function RegistroVacina() {
     /** 
     * GET para buscar os pets no banco pelo seu id
     */
-    function callApi3(id_pet) {
+   /* function callApi3(id_pet) {
         console.log('CHamou aqui',id_pet);
         axios.get(`/pet/${id_pet}`).then(res =>{
             console.log('respostaaa',res.data.express)
@@ -116,7 +121,7 @@ export default function RegistroVacina() {
         .catch(err => {
             console.log(err)
         });
-    }
+    }*/
 
     const getUser = () => {
         const usuario = localStorage.getItem('user');
@@ -153,7 +158,7 @@ export default function RegistroVacina() {
     }
     var idtable=0;
 
-    if (vet){
+   /* if (vet){
         var i;
         for (i = 0; i < vacinas.length; i++) {
             callApi3(vacinas[i]['pet_id']);
@@ -161,7 +166,7 @@ export default function RegistroVacina() {
             vacinas[i]['donoPet']= pet.usuario;
         }
         console.log('vacinas',vacinas);
-    }
+    }*/
 
     /**
     * Navegação entre as páginas (altera a rota)
@@ -194,7 +199,7 @@ export default function RegistroVacina() {
             </div>
             <ExcluirVacina open={open} onClose={()=>handleDialogClose()}/>
             <div className={styles.campos} >
-                <HighlightOffIcon className={styles.closeIcon} onClick={()=>setOpen(true)}/>
+                
                 <TableContainer component={Paper} className={styles.tableContainer} >
                     <Table className={styles.table} aria-label="customized table">
                         <TableHead>
@@ -206,25 +211,28 @@ export default function RegistroVacina() {
                                 <StyledTableCell align="center">Vacina</StyledTableCell>
                                 <StyledTableCell align="center">Data</StyledTableCell>
                                 <StyledTableCell align="center">Aplicada/Agendada</StyledTableCell>
-                                <StyledTableCell align="center">Veterinário</StyledTableCell>
+                                {!vet &&(<StyledTableCell align="center">Veterinário</StyledTableCell>)}
                                 <StyledTableCell align="center">Observações</StyledTableCell>
+                                <StyledTableCell/>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                        {vacinas.map((vacina) => (
+                        {vacinas.map((vacina, index) => (
                             <StyledTableRow key={vacina}> 
-                                <StyledTableCell align="center">{idtable+1}</StyledTableCell>  
-                                {vet &&(<StyledTableCell align="center">{vacina.nomePet}</StyledTableCell>)}
-                                {vet &&(<StyledTableCell align="center">{vacina.donoPet}</StyledTableCell>)}  
+                                <StyledTableCell align="center">{index}</StyledTableCell>  
+                                {vet &&(<StyledTableCell align="center">{vacina.pet.nome}</StyledTableCell>)}
+                                {vet &&(<StyledTableCell align="center">{vacina.pet.dono}</StyledTableCell>)}  
                                 <StyledTableCell component="th" scope="row">
                                     {vacina.fabricante}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">{vacina.vacina}</StyledTableCell>
-                                <StyledTableCell align="center">{vacina.data}</StyledTableCell>
+                                <StyledTableCell align="center">{new Date(vacina.data).toLocaleDateString()}</StyledTableCell>
                                 <StyledTableCell align="center">{vacina.tipo}</StyledTableCell>
-                                <StyledTableCell align="center">{vacina.crmv}</StyledTableCell>
+                                {!vet &&(<StyledTableCell align="center">{vacina.crmv}</StyledTableCell>)}
                                 <StyledTableCell align="center">{vacina.observacao}</StyledTableCell>
+                                <StyledTableCell align="center"><HighlightOffIcon className={styles.closeIcon} onClick={()=>setOpen(true)}/></StyledTableCell>
                             </StyledTableRow>
+                           
                         ))}
                         </TableBody>
                     </Table>
