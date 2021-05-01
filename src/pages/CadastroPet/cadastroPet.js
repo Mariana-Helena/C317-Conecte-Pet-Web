@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import useStyles from './styles.js';
-import Menu from '../../components/Menu/menu';
+import MenuSite from '../../components/Menu/menu';
 import bannerCadastro from "../../images/banner_cadastro.png";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -100,7 +100,7 @@ export default function Pets() {
     ***********************************************
     **/
     return (
-        <Menu>
+        <MenuSite>
             <Snackbar
                 open={openSnackbar}
                 autoHideDuration={6000}
@@ -285,6 +285,6 @@ export default function Pets() {
             </form> 
             
 
-        </Menu>
+        </MenuSite>
     );
 }

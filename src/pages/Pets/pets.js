@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import useStyles from './styles.js';
 import ExcluirPet from './ExcluirPet/excluirPet';
-import Menu from '../../components/Menu/menu';
+import MenuSite from '../../components/Menu/menu';
 import Button from '@material-ui/core/Button';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
@@ -46,15 +46,18 @@ export default function Pets() {
     */
     const callApi = async () => {
         const usuario = localStorage.getItem('user'); 
-        const email = (JSON.parse(usuario).email);
-        axios.get(`/pets/${email}`).then(res => {
-            if (res.data.express.length !== 0) {
-                setPets(res.data.express);
-            }
-        })
-        .catch(err => {
-            console.log(err)
-        });
+        if(usuario){
+            const email = (JSON.parse(usuario).email);
+            axios.get(`/pets/${email}`).then(res => {
+                if (res.data.express.length !== 0) {
+                    setPets(res.data.express);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        }
+        
       
     };
     /**
@@ -64,13 +67,13 @@ export default function Pets() {
         history.push("/" + rota);
     }
     return (
-        <Menu>
+        <MenuSite>
             <div className={styles.container}>
                 <ExcluirPet open={open} onClose={() => setOpen(false)} />
                 <div className={styles.primeiraDiv}>
                     <span className={styles.titulo}> Pets cadastrados</span>
                     <Button variant="contained" className={styles.buttonContainedBlue}
-                        onClick={() => handleClickMenuItem('pets/cadastro')} color='primary'>
+                        onClick={() => handleClickMenuItem('pets/cadastro')} >
                         Cadastrar Novo Pet
                     </Button>
                 </div>
@@ -93,6 +96,6 @@ export default function Pets() {
                     </div>
                 )}
             </div>
-        </Menu>
+        </MenuSite>
     );
 }

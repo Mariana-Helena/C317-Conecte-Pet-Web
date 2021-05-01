@@ -7,7 +7,7 @@ import useStyles from './styles.js';
 import bannerVacinacao from "../../images/banner_vacinacao.png";
 import DateFnsUtils from '@date-io/date-fns';
 import {MuiPickersUtilsProvider,KeyboardDatePicker} from '@material-ui/pickers';
-import Menu from '../../components/Menu/menu';
+import MenuSite from '../../components/Menu/menu';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
@@ -148,7 +148,7 @@ export default function RegistroVacina() {
     ***********************************************
     **/
     return (
-        <Menu>
+        <MenuSite>
             <Snackbar
                 open={openSnackbar}
                 autoHideDuration={6000}
@@ -348,6 +348,6 @@ export default function RegistroVacina() {
                     </Button>
                 </div>
             </form>
-        </Menu >
+        </MenuSite >
     );
 }

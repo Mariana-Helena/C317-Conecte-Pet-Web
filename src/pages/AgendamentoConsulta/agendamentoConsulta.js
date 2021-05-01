@@ -6,7 +6,7 @@ import 'date-fns';
 import useStyles from './styles.js';
 import bannerVacinacao from "../../images/banner_consultas.png";
 import DateFnsUtils from '@date-io/date-fns';
-import Menu from '../../components/Menu/menu';
+import MenuSite from '../../components/Menu/menu';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { MuiPickersUtilsProvider, KeyboardDatePicker, KeyboardTimePicker } from '@material-ui/pickers';
@@ -143,7 +143,7 @@ export default function AgendamentoConsulta() {
     ***********************************************
     */
     return (
-        <Menu>
+        <MenuSite>
             <Snackbar
                 open={openSnackbar}
                 autoHideDuration={6000}
@@ -320,6 +320,6 @@ export default function AgendamentoConsulta() {
                     </Button>
                 </div>
             </form>
-        </Menu>
+        </MenuSite>
     );
 }

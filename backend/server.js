@@ -42,7 +42,7 @@ app.get('/pet/:id_pet', (req, res) => {
 app.get('/vacinas/:id_pet', (req, res) => {
   var response;
   const collection = client.db("ConectePet").collection("Vacinas");    
-  collection.find({pet_id: req.params.id_pet}).toArray(function(err, result) {
+  collection.find({'pet.id': req.params.id_pet}).toArray(function(err, result) {
     if (err) throw err;
     response=result;
     res.send({ express: response });
@@ -75,7 +75,7 @@ app.get('/veterinario/consultas/:vet_crmv', (req, res) => {
 app.get('/consultas/:id_pet', (req, res) => {
   var response;
   const collection = client.db("ConectePet").collection("Consultas");    
-  collection.find({pet_id: req.params.id_pet}).toArray(function(err, result) {
+  collection.find({'pet.id': req.params.id_pet}).toArray(function(err, result) {
     if (err) throw err;
     response=result;
     res.send({ express: response });

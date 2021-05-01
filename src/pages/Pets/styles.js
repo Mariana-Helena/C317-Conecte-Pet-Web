@@ -11,7 +11,8 @@ const useStyles = makeStyles(() => ({
     color: 'white',
     textTransform: 'inherit',
     display: 'inline-block',
-    float:  'right'
+    float:  'right',
+    backgroundColor: defaultColor
   },
   container: {
     marginLeft: '75px',

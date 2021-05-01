@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './styles.js';
-import Menu from '../../components/Menu/menu';
+import MenuSite from '../../components/Menu/menu';
 import { useHistory } from 'react-router-dom';
 import bannerVacinacao from "../../images/banner_consultas.png";
 import 'date-fns';
@@ -58,6 +58,7 @@ export default function AgendamentoConsulta() {
     */
     const callApi1 = async () => {
         const usuario = localStorage.getItem('user'); 
+        if(usuario){
         const email = (JSON.parse(usuario).email);
         if (vet == true){
             console.log(usuario)
@@ -80,7 +81,7 @@ export default function AgendamentoConsulta() {
         .catch(err => {
             console.log(err)
         });
-      
+    }
     };
     /** 
     * GET para buscar as consultas dos pets no banco
@@ -100,7 +101,7 @@ export default function AgendamentoConsulta() {
 
     const getUser = () => {
         const usuario = localStorage.getItem('user');
-        setVet(JSON.parse(usuario).ehveterinario);
+        if(usuario) setVet(JSON.parse(usuario).ehveterinario);
     }
 
     const [open, setOpen] = useState(false);
@@ -139,7 +140,7 @@ export default function AgendamentoConsulta() {
     }
 
     return (
-        <Menu>
+        <MenuSite>
             <form>
                 <div className={styles.banner} style={{ backgroundImage: `url(${bannerVacinacao})` }}>
                     <span className={styles.titulo}> Consultas do Pet</span>
@@ -194,6 +195,6 @@ export default function AgendamentoConsulta() {
                     </TableContainer>
                 </div>
             </form>
-        </Menu>
+        </MenuSite>
     );
 }
