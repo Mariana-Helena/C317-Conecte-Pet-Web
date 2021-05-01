@@ -41,6 +41,7 @@ export default function AgendamentoConsulta() {
     const [pets, setPets] = useState([]);
 
     const [vet, setVet] = useState(false);
+    const [clicked, setClicked]  = useState(false);
     /** 
     ***********************************************
                     FUNÇÕES
@@ -89,10 +90,8 @@ export default function AgendamentoConsulta() {
     */
     function callApi2(id_pet) {
         axios.get(`/consultas/${id_pet}`).then(res =>{
-            if (res.data.express.length !== 0) {
-                console.log(res.data.express);
-                setConsultas(res.data.express);
-            }
+            setConsultas(res.data.express);
+            setClicked(true);
         })
         .catch(err => {
             console.log(err)
@@ -162,7 +161,7 @@ export default function AgendamentoConsulta() {
                 </div>
                 <ExcluirConsulta open={open} onClose={() => handleDialogClose()} />
                 <div className={styles.campos} >
-                    
+                    {consultas.length!=0?
                     <TableContainer component={Paper} className={styles.tableContainer} >
                         <Table className={styles.table} aria-label="customized table">
                             <TableHead>
@@ -193,6 +192,20 @@ export default function AgendamentoConsulta() {
                             </TableBody>
                         </Table>
                     </TableContainer>
+                    :
+                        clicked?
+                        <div>
+                            Nenhuma consulta encontrada para esse pet!
+                        </div>
+                        :
+                        vet?
+                        <div>
+                            Nenhuma consulta encontrada!
+                        </div>
+                        :
+                        <div>
+                            Para visualizar as consultas, selecione algum pet.
+                        </div>}
                 </div>
             </form>
         </MenuSite>

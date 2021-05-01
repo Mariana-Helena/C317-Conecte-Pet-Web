@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
         textTransform: 'inherit',
         display: 'inline-block',
+        backgroundColor: defaultColor
     },
     calendario:{
         borderBottom: '1px solid white',

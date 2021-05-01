@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
     },
     buttonContained:{
         width:'300px',
-        marginRight: '45px'
+        marginRight: '45px',
+        backgroundColor: '#1C587C'
     },
     calendario:{
         borderBottom: '1px solid white',

@@ -212,11 +212,14 @@ export default function RegistroVacina() {
                             Nenhuma vacina encontrada para esse pet!
                         </div>
                         :
+                         vet?
+                         <div>
+                             Nenhuma vacina encontrada!
+                         </div>
+                        :
                         <div>
                             Para visualizar as vacinas, selecione algum pet.
-                        </div>}
-                        
-                    
+                        </div>}                      
                 </div>
             </form>
         </MenuSite>
