@@ -317,7 +317,7 @@ export default function AgendamentoConsulta() {
                     </Button>
                     <Button variant="contained" className={styles.buttonContained}
                         onClick={() => handleClickMenuItem('/consultas')} color='secondary'>
-                        Cancelar
+                        Voltar
                     </Button>
                 </div>
             </form>

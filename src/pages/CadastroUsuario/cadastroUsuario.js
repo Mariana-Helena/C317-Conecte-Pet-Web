@@ -44,17 +44,15 @@ export default function CadastroUsuario() {
         ehveterinario: "false"
     };
     const { register, handleSubmit, errors, control, reset } = useForm({ defaultValues });
+    const [ehveterinario, setEhvet] = useState(false);
     /**
     * Messagens de erro/sucesso
     */
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [message, setMessage] = useState('');
     const [success, setSuccess] = useState(false);
-    /**
-    * Email do dono do pet p/ realizar a busca
-    */
-    const [email, setEmail] = useState('');
-
+    const [email,setEmail] = useState('');
+    //var ehveterinario = false
     useEffect(() => {
        
     });
@@ -153,12 +151,12 @@ export default function CadastroUsuario() {
                             <RadioGroup row className={styles.radioGroup}>
                                 <FormControlLabel
                                     value="false"
-                                    control={<Radio color='primary' />}
+                                    control={<Radio color='primary' onClick={() => setEhvet(false)} />}
                                     label="Dono de Pet"
                                 />
                                 <FormControlLabel
                                     value="true"
-                                    control={<Radio color='primary' />}
+                                    control={<Radio color='primary'onClick={() => setEhvet(true)}/>}
                                     label="Veterinário"
                                 />
                             </RadioGroup>
@@ -237,25 +235,28 @@ export default function CadastroUsuario() {
                                 }
                             </FormHelperText>}
                         />
-                        <TextField
-                            id="crmv"
-                            label="CRMV"
-                            variant="outlined"
-                            size="small"
-                            className={styles.textFieldCRMV}
-                            name='crmv'
-                            errors={errors.crmv}
-                            inputRef={register({
-                                required: "This is a required field",
-                            })}
-                            helperText={<FormHelperText error={errors?.crmv} className={styles.helperText}>
-                                {errors?.crmv && errors?.crmv?.type === "required" ?
-                                    "Esse campo é obrigatório."
-                                    :
-                                    "Por favor, digite o seu CRMV"
-                                }
-                            </FormHelperText>}
-                        />
+                        { ehveterinario && (
+                            <TextField
+                                id="crmv"
+                                label="CRMV"
+                                variant="outlined"
+                                size="small"
+                                className={styles.textFieldCRMV}
+                                name='crmv'
+                                errors={errors.crmv}
+                                inputRef={register({
+                                    required: "This is a required field",
+                                })}
+                                helperText={<FormHelperText error={errors?.crmv} className={styles.helperText}>
+                                    {errors?.crmv && errors?.crmv?.type === "required" ?
+                                        "Esse campo é obrigatório."
+                                        :
+                                        "Por favor, digite o seu CRMV"
+                                    }
+                                </FormHelperText>}
+                            />
+                            )    
+                        }
                     </div>
                     <Button variant="contained" className={styles.buttonContained}
                         onClick={handleSubmit(onSubmit)} color='primary' type='submit'>
