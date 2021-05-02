@@ -217,6 +217,7 @@ export default function CadastroUsuario() {
                         />
                         <div></div>
                         <TextField
+                            type= 'password'
                             id="senha"
                             label="Senha"
                             variant="outlined"
