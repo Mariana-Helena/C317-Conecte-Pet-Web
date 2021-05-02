@@ -42,7 +42,6 @@ export default function RegistroVacina() {
     const [pets, setPets] = useState([]);
 
     const [vet, setVet] = useState(false);
-    const [pet, setPet] = useState([]);
     const [clicked, setClicked]  = useState(false);
     /** 
     ***********************************************

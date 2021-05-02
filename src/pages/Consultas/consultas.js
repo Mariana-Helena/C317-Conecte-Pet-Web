@@ -60,28 +60,30 @@ export default function AgendamentoConsulta() {
     const callApi1 = async () => {
         const usuario = localStorage.getItem('user'); 
         if(usuario){
-        const email = (JSON.parse(usuario).email);
-        if (vet == true){
-            console.log(usuario)
-            const vet_crmv = (JSON.parse(usuario).crmv)
-            axios.get(`/veterinario/consultas/${vet_crmv}`).then(res =>{
-                if (res.data.express.length !== 0) {
-                    console.log(res.data.express);
-                    setVacinas(res.data.express);
-                }
-            })
-            .catch(err => {
-                console.log(err)
-            });
-        }
-        axios.get(`/pets/${email}`).then(res => {
-            if (res.data.express.length !== 0) {
-                setPets(res.data.express);
+            const email = (JSON.parse(usuario).email);
+            const vet = (JSON.parse(usuario).ehveterinario);
+            if (vet == true){
+                const vet_crmv = (JSON.parse(usuario).crmv)
+                axios.get(`/veterinario/consultas/${vet_crmv}`).then(res =>{
+                    if (res.data.express.length !== 0) {
+                        console.log(res.data.express);
+                        setConsultas(res.data.express);
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                });
             }
-        })
-        .catch(err => {
-            console.log(err)
-        });
+            else {
+                axios.get(`/pets/${email}`).then(res => {
+                    if (res.data.express.length !== 0) {
+                        setPets(res.data.express);
+                    }
+                })
+                    .catch(err => {
+                        console.log(err)
+                    });
+            }
     }
     };
     /** 
@@ -134,10 +136,6 @@ export default function AgendamentoConsulta() {
         history.push("/" + rota);
     }
 
-    function funcao(){
-        // chama os dados do pet
-    }
-
     return (
         <MenuSite>
             <form>
@@ -162,37 +160,41 @@ export default function AgendamentoConsulta() {
                 <ExcluirConsulta open={open} onClose={() => handleDialogClose()} />
                 <div className={styles.campos} >
                     {consultas.length!=0?
-                    <TableContainer component={Paper} className={styles.tableContainer} >
-                        <Table className={styles.table} aria-label="customized table">
-                            <TableHead>
-                                <TableRow>
-                                    <StyledTableCell>#</StyledTableCell>
-                                    <StyledTableCell>Veterinário</StyledTableCell>
-                                    <StyledTableCell align="center">Consulta</StyledTableCell>
-                                    <StyledTableCell align="center">Horário</StyledTableCell>
-                                    <StyledTableCell align="center">Observações</StyledTableCell>
-                                    <StyledTableCell/>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {consultas.map((consulta) => (
-                                    <StyledTableRow key={consulta}>
-                                        <StyledTableCell align="center">{1}</StyledTableCell>
-                                        <StyledTableCell component="th" scope="row">
-                                            {consulta.crmv}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="center">{consulta.data}</StyledTableCell>
-                                        <StyledTableCell align="center">{consulta.horario}</StyledTableCell>
-                                        <StyledTableCell align="center">{consulta.observacoes}</StyledTableCell>
-                                        <StyledTableCell align="center">
-                                        <HighlightOffIcon className={styles.closeIcon} onClick={() => setOpen(true)} />
-                                        </StyledTableCell>
-                                    </StyledTableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                    :
+                        <TableContainer component={Paper} className={styles.tableContainer} >
+                            <Table className={styles.table} aria-label="customized table">
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell>#</StyledTableCell>
+                                        {vet && (<StyledTableCell align="center">Nome do Pet</StyledTableCell>)}
+                                        {vet && (<StyledTableCell align="center">Email dono Pet</StyledTableCell>)}
+                                        <StyledTableCell>Veterinário</StyledTableCell>
+                                        <StyledTableCell align="center">Consulta</StyledTableCell>
+                                        <StyledTableCell align="center">Horário</StyledTableCell>
+                                        <StyledTableCell align="center">Observações</StyledTableCell>
+                                        <StyledTableCell/>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {consultas.map((consulta,index) => (
+                                        <StyledTableRow key={consulta}>
+                                            <StyledTableCell align="center">{index}</StyledTableCell>
+                                            {vet && (<StyledTableCell align="center">{consulta.pet.nome}</StyledTableCell>)}
+                                            {vet && (<StyledTableCell align="center">{consulta.pet.dono}</StyledTableCell>)}
+                                            <StyledTableCell component="th" scope="row">
+                                                {consulta.crmv}
+                                            </StyledTableCell>
+                                            <StyledTableCell align="center">{consulta.data}</StyledTableCell>
+                                            <StyledTableCell align="center">{consulta.horario}</StyledTableCell>
+                                            <StyledTableCell align="center">{consulta.observacoes}</StyledTableCell>
+                                            <StyledTableCell align="center">
+                                            <HighlightOffIcon className={styles.closeIcon} onClick={() => setOpen(true)} />
+                                            </StyledTableCell>
+                                        </StyledTableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        :
                         clicked?
                         <div>
                             Nenhuma consulta encontrada para esse pet!
