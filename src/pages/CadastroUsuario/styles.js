@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '60px',
     width: '130px',
     height: '130px',
+    borderRadius: '50%'
   },
   banner:{ 
     marginTop: '-20px',   
