@@ -106,11 +106,13 @@ function MenuSite(props) {
       setUserName(JSON.parse(usuario).nome);
       setVet(JSON.parse(usuario).ehveterinario);
       var blobStr = (JSON.parse(usuario).foto);
-      var url = blobStr;
-      fetch(url).then((res) => {
-        console.log(res)
-        setUserPhoto(res.url)
-      });
+      if(blobStr){
+        var url = blobStr;
+        fetch(url).then((res) => {
+          setUserPhoto(res.url)
+        });
+      }
+      
 
     }
     else {

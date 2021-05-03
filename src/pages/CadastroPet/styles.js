@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     width: '115px !important',
     height: '115px !important',
     position: 'relative',
+    borderRadius: '50%'
   },
   banner:{    
     width:'100%',

@@ -69,7 +69,7 @@ export default function CadastroUsuario() {
         history.push(rota);
     }
     /**
-    * Navegação entre as páginas (altera a rota)
+    * Converte o arquivo de imagem para base64
     */
       function handleFoto(event) {        
         setFile(URL.createObjectURL(event.target.files[0]));

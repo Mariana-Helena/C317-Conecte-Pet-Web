@@ -46,18 +46,26 @@ export default function Pets() {
     */
     const callApi = async () => {
         const usuario = localStorage.getItem('user'); 
+        const images = [];
         if(usuario){
             const email = (JSON.parse(usuario).email);
             axios.get(`/pets/${email}`).then(res => {
                 if (res.data.express.length !== 0) {
-                    setPets(res.data.express);
+                    var petsArr = res.data.express;
+                    petsArr.forEach(pet => {
+                        var url = pet.foto;
+                        fetch(url).then((res) => {
+                            pet.foto = res.url;
+                        });
+                    });
+                    
+                    setPets(petsArr);
                 }
             })
             .catch(err => {
                 console.log(err)
             });
-        }
-        
+        }      
       
     };
     /**
@@ -81,9 +89,12 @@ export default function Pets() {
                     <div className={styles.petDiv} key={pet._id}>
                         <Button onClick={() => setOpen(true)} className={styles.closeIconButton} disabled={true}>
                         <HighlightOffIcon className={styles.closeIcon}/>
-                        </Button>
-                        <div className={styles.circleGray}>
-                        </div>
+                        </Button>                        
+                        {pet.foto?
+                            <img src={pet.foto} className={styles.circleGray}/> 
+                            :
+                            <div className={styles.circleGray}/>
+                        }
                         <span className={styles.subtitulo}> {pet.nome} </span>
                         <div>
                             <p> <span className={styles.campos}>Espécie: </span> <span> {pet.especie}</span> </p>
@@ -91,7 +102,7 @@ export default function Pets() {
                             <p> <span className={styles.campos}>Sexo: </span> <span> {pet.sexo}</span> </p>
                             <p> <span className={styles.campos}>Idade: </span> <span> {pet.idade} anos</span> </p>
                             <p> <span className={styles.campos}>Peso: </span> <span> {pet.peso} kg</span> </p>
-                            <p> <span className={styles.campos}>Observações: </span> <span> {pet.observacoes ? pet.observacoes : '-'}</span> </p>
+                            <p> <span className={styles.campos}>Observações: </span> <span> {pet.observacao ? pet.observacao : '-'}</span> </p>
                         </div>
                     </div>
                 )}

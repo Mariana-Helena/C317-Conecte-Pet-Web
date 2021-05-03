@@ -55,7 +55,11 @@ export default function Pets() {
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [message, setMessage] = useState('');
     const [success, setSuccess] = useState(false);
-
+    /**
+    * Arquivo de imagem
+    */
+    const [file, setFile] = useState();
+    const [fileString, setFileString] = useState('');
     /** 
     ***********************************************
                     FUNÇÕES
@@ -68,15 +72,28 @@ export default function Pets() {
         history.push(rota);
     }
     
-    useEffect(() => {
-       
-    });
+    
+    /**
+    * Converte o arquivo de imagem para base64
+    */
+     function handleFoto(event) {        
+        setFile(URL.createObjectURL(event.target.files[0]));
+
+        var blob = event.target.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(blob); 
+        reader.onloadend = function() {
+            var base64data = reader.result;                
+            setFileString(base64data);
+        }
+    }
 
     /**
     * POST para enviar o cadastro da vacina para o banco
     * Parâmetro: data (data,pet_id,vacina,fabricante,tipo,observacao)
     */
     const onSubmit = (data) => {
+        data.foto = fileString;
         const user = localStorage.getItem('user'); 
         const usuario = (JSON.parse(user).email);
         data.usuario = usuario;
@@ -118,8 +135,13 @@ export default function Pets() {
                 <div className={styles.banner} style={{backgroundImage: `url(${bannerCadastro})`}}>     
                     <span className={styles.titulo}> Cadastrar Pet</span>
                     <br/>
+                    {file?
+                    <img src={file} className={styles.avatar}/>                    
+                    :
                     <Avatar className={styles.avatar}></Avatar>
-                    <input accept="image/*" className={styles.input} id="icon-button-file" type="file" />
+                    }
+                    <input accept="image/*" className={styles.input} 
+                        id="icon-button-file" type="file" onChange={handleFoto} />
                     <label htmlFor="icon-button-file">
                         <IconButton className={styles.camera} aria-label="upload picture" component="span">
                             <PhotoCamera />
