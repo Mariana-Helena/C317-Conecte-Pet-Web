@@ -81,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '40px',
     float: 'left',
     marginRight: '10px',
+    borderRadius:'50%',
+    width: '40px',
+    height: '40px'
   },
   userMenu: {
     marginTop: '10px'

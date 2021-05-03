@@ -94,6 +94,8 @@ export default function CadastroUsuario() {
             setOpenSnackbar(true);
             setMessage('Usuário cadastrado!');
             setSuccess(true);
+            setFile();
+            setFileString('');
             reset({})
         })
         .catch(err => {

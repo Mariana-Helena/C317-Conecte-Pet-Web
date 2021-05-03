@@ -49,6 +49,7 @@ function MenuSite(props) {
   const [consultas, setConsultas] = useState(false);
 
   const [userName, setUserName] = useState('');
+  const [userPhoto, setUserPhoto] = useState();
   const [vet, setVet] = useState(false);
 
   const location = useLocation();
@@ -104,6 +105,13 @@ function MenuSite(props) {
     if (usuario) {
       setUserName(JSON.parse(usuario).nome);
       setVet(JSON.parse(usuario).ehveterinario);
+      var blobStr = (JSON.parse(usuario).foto);
+      var url = blobStr;
+      fetch(url).then((res) => {
+        console.log(res)
+        setUserPhoto(res.url)
+      });
+
     }
     else {
       history.push("/");
@@ -160,8 +168,11 @@ function MenuSite(props) {
             <MenuIcon />
           </IconButton>
           <div className={styles.user}>
+            {userPhoto?
+              <img src={userPhoto} className={styles.userIcon}/> 
+              :
             <AccountCircleIcon className={styles.userIcon} />
-
+            }
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}
