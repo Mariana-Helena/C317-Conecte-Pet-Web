@@ -89,6 +89,7 @@ export default function CadastroUsuario() {
     */
     const onSubmit = (data) => {
     data.foto = fileString;
+    data.ehveterinario=ehveterinario;
     axios.post('/usuario/cadastro', data)
         .then(() => {
             setOpenSnackbar(true);

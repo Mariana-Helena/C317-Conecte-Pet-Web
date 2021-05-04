@@ -103,6 +103,8 @@ export default function Pets() {
                 setOpenSnackbar(true);
                 setMessage('Pet cadastrado!');
                 setSuccess(true);
+                setFile();
+                setFileString('');
                 reset({})
             })
             .catch(err => {
