@@ -30,6 +30,10 @@ export default function Pets() {
     */
     const [pets, setPets] = useState([]);
     /** 
+    * Pet selecionado
+    */
+    const [selectedPet, setSelectedPet] = useState();
+    /** 
     ***********************************************
                     FUNÇÕES
     ***********************************************
@@ -37,17 +41,31 @@ export default function Pets() {
     /** 
     * Chamada toda vez que há alteração no localStorage
     */
-    useEffect(() => {       
+    useEffect(() => {
         callApi();
     }, [localStorage.getItem('user')]);
+    /** 
+    * Abre o diaologue e seta o pet selecionado
+    */
+    const handleDelete = (petSelecionado) => {
+        setOpen(true);
+        setSelectedPet(petSelecionado);    
+    }
+    /** 
+    * Executado após exclusão
+    */
+    const handleDeleteAfter = (value) => {
+        if (value == true) {
+            callApi();
+        }
+    }
     /** 
     * GET para buscar os pets no banco
     * Parâmetro: email
     */
     const callApi = async () => {
-        const usuario = localStorage.getItem('user'); 
-        const images = [];
-        if(usuario){
+        const usuario = localStorage.getItem('user');
+        if (usuario) {
             const email = (JSON.parse(usuario).email);
             axios.get(`/pets/${email}`).then(res => {
                 if (res.data.express.length !== 0) {
@@ -58,15 +76,15 @@ export default function Pets() {
                             pet.foto = res.url;
                         });
                     });
-                    
+
                     setPets(petsArr);
                 }
             })
-            .catch(err => {
-                console.log(err)
-            });
-        }      
-      
+                .catch(err => {
+                    console.log(err)
+                });
+        }
+
     };
     /**
     * Navegação entre as páginas (altera a rota)
@@ -77,7 +95,8 @@ export default function Pets() {
     return (
         <MenuSite>
             <div className={styles.container}>
-                <ExcluirPet open={open} onClose={() => setOpen(false)} />
+                <ExcluirPet open={open} onClose={() => setOpen(false)}
+                    deleted={(value) => handleDeleteAfter(value)} pet={selectedPet} />
                 <div className={styles.primeiraDiv}>
                     <span className={styles.titulo}> Pets cadastrados</span>
                     <Button variant="contained" className={styles.buttonContainedBlue}
@@ -85,15 +104,15 @@ export default function Pets() {
                         Cadastrar Novo Pet
                     </Button>
                 </div>
-                {pets.map((pet, index) =>
+                {pets.map((pet) =>
                     <div className={styles.petDiv} key={pet._id}>
-                        <Button onClick={() => setOpen(true)} className={styles.closeIconButton} disabled={true}>
-                        <HighlightOffIcon className={styles.closeIcon}/>
-                        </Button>                        
-                        {pet.foto?
-                            <img src={pet.foto} className={styles.circleGray}/> 
+                        <Button onClick={() => handleDelete(pet)} className={styles.closeIconButton} >
+                            <HighlightOffIcon className={styles.closeIcon} />
+                        </Button>
+                        {pet.foto ?
+                            <img src={pet.foto} className={styles.circleGray} />
                             :
-                            <div className={styles.circleGray}/>
+                            <div className={styles.circleGray} />
                         }
                         <span className={styles.subtitulo}> {pet.nome} </span>
                         <div>

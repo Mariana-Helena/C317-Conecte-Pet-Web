@@ -27,6 +27,17 @@ app.get('/pets/:email', (req, res) => {
   
 });
 
+app.delete('/pets/:id_pet', (req, res) => {
+  var response;
+  const collection = client.db("ConectePet").collection("Pet");    
+  collection.deleteOne({_id: ObjectId(req.params.id_pet)}, function(err, result) {
+    if (err) throw err;
+    response=result;
+    res.send({ express: response });
+  });   
+  
+});
+
 app.get('/pet/:id_pet', (req, res) => {
   var response;
   const collection = client.db("ConectePet").collection("Pet");  

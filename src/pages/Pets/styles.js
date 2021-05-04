@@ -41,6 +41,15 @@ const useStyles = makeStyles(() => ({
     marginLeft: 'auto', 
     marginRight: 'auto',
   },
+  error: {
+    background: '#a30000',
+    color: 'white',
+    width: '250px',
+    height: '50px',
+    borderRadius: '10px',
+    textAlign: 'center',
+    lineHeight: '50px'
+  }, 
   petDiv:{
     width: '200px',
     height: 'auto',    
@@ -61,6 +70,15 @@ const useStyles = makeStyles(() => ({
     marginLeft: 'auto', 
     marginRight: 'auto',
     textAlign:'center',
+  },
+  success: {
+    background: '#349c00',
+    color: 'white',
+    width: '250px',
+    height: '50px',
+    borderRadius: '10px',
+    textAlign: 'center',
+    lineHeight: '50px'
   },
   titulo: {
     color: defaultColor,
