@@ -47,6 +47,14 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
         fontSize: '20px'
     },
+    divFoto:{
+        display: 'inline-block', 
+        marginLeft: '20px',
+        marginTop: '10px' 
+    },
+    divFotos:{
+        marginLeft: '30px'
+    },
     formControl: {
         margin: '0px',
         minWidth: 120,

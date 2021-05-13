@@ -153,13 +153,18 @@ export default function RegistroVacina() {
                         <Button variant="contained" className={styles.buttonContainedBlue}
                             onClick={() => handleClickMenuItem('vacinas/registro')} color='primary'> Registrar vacina</Button>
                         :
-                        <div>
+                        <div className={styles.divFotos}>
                             {pets.map((pet) => (
                                 
                                 <div
                                     onClick={() => callApi2(pet._id)}
-                                    className={styles.circleGray}>
-                                    <img src={pet.foto} className={styles.circleGray} />
+                                    className={styles.divFoto}>
+                                        {pet.foto?
+                                        <img src={pet.foto} className={styles.circleGray} />
+                                        :
+                                        <div className={styles.circleGray} />
+                                    }
+                                    
                                 </div>
                             ))}
                         </div>

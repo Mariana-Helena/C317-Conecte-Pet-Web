@@ -146,15 +146,21 @@ export default function AgendamentoConsulta() {
                         <Button variant="contained" className={styles.buttonContainedBlue}
                             onClick={() => handleClickMenuItem('consultas/agendamento')} color='primary'> Agendar Consulta </Button>
                         :
-                        <div>
+                        <div className={styles.divFotos}>
                             {pets.map((pet) => (
+                                
                                 <div
-                                onClick={() => callApi2(pet._id)}
-                                className={styles.circleGray}>
-                                <img src={pet.foto} className={styles.circleGray} />
-                            </div>
-                            ))} 
-                        </div>  
+                                    onClick={() => callApi2(pet._id)}
+                                    className={styles.divFoto}>
+                                        {pet.foto?
+                                        <img src={pet.foto} className={styles.circleGray} />
+                                        :
+                                        <div className={styles.circleGray} />
+                                    }
+                                    
+                                </div>
+                            ))}
+                        </div>
                     }
 
                 </div>
