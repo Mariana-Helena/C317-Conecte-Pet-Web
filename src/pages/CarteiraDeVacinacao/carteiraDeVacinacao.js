@@ -155,9 +155,11 @@ export default function RegistroVacina() {
                         :
                         <div>
                             {pets.map((pet) => (
+                                
                                 <div
                                     onClick={() => callApi2(pet._id)}
                                     className={styles.circleGray}>
+                                    <img src={pet.foto} className={styles.circleGray} />
                                 </div>
                             ))}
                         </div>

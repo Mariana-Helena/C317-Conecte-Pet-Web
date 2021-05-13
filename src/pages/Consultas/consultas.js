@@ -148,10 +148,11 @@ export default function AgendamentoConsulta() {
                         :
                         <div>
                             {pets.map((pet) => (
-                                <div 
+                                <div
                                 onClick={() => callApi2(pet._id)}
                                 className={styles.circleGray}>
-                                </div>
+                                <img src={pet.foto} className={styles.circleGray} />
+                            </div>
                             ))} 
                         </div>  
                     }
