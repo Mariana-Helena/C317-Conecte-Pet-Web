@@ -43,6 +43,11 @@ export default function AgendamentoConsulta() {
     const [vet, setVet] = useState(false);
     const [clicked, setClicked]  = useState(false);
     /** 
+    * Consulta selecionada
+    */
+     const [selectedConsulta, setSelectedConsulta] = useState();
+    /** 
+    /** 
     ***********************************************
                     FUNÇÕES
     ***********************************************
@@ -135,7 +140,21 @@ export default function AgendamentoConsulta() {
     function handleClickMenuItem(rota) {
         history.push("/" + rota);
     }
-
+    /** 
+    * Abre o diaologue e seta a vacina selecionada
+    */
+    const handleDelete = (consultaSelecionada) => {
+        setOpen(true);
+        setSelectedConsulta(consultaSelecionada);    
+    }
+    /** 
+    * Executado após exclusão
+    */
+    const handleDeleteAfter = (value) => {
+        if (value == true) {
+            callApi1();
+        }
+    }
     return (
         <MenuSite>
             <form>
@@ -164,7 +183,8 @@ export default function AgendamentoConsulta() {
                     }
 
                 </div>
-                <ExcluirConsulta open={open} onClose={() => handleDialogClose()} />
+                <ExcluirConsulta open={open} onClose={() => handleDialogClose()} 
+                deleted={(value) => handleDeleteAfter(value)} consulta={selectedConsulta}/>
                 <div className={styles.campos} >
                     {consultas.length!=0?
                         <TableContainer component={Paper} className={styles.tableContainer} >
@@ -178,7 +198,7 @@ export default function AgendamentoConsulta() {
                                         <StyledTableCell align="center">Consulta</StyledTableCell>
                                         <StyledTableCell align="center">Horário</StyledTableCell>
                                         <StyledTableCell align="center">Observações</StyledTableCell>
-                                        <StyledTableCell/>
+                                        {vet && (<StyledTableCell/>)}
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -194,7 +214,7 @@ export default function AgendamentoConsulta() {
                                             <StyledTableCell align="center">{consulta.horario}</StyledTableCell>
                                             <StyledTableCell align="center">{consulta.observacoes}</StyledTableCell>
                                             <StyledTableCell align="center">
-                                            <HighlightOffIcon className={styles.closeIcon} onClick={() => setOpen(true)} />
+                                            {vet && (<HighlightOffIcon className={styles.closeIcon} onClick={() => handleDelete(consulta)} />)}
                                             </StyledTableCell>
                                         </StyledTableRow>
                                     ))}

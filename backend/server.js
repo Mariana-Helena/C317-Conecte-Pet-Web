@@ -61,6 +61,17 @@ app.get('/vacinas/:id_pet', (req, res) => {
   
 });
 
+app.delete('/veterinario/vacinas/:id', (req, res) => {
+  var response;
+  const collection = client.db("ConectePet").collection("Vacinas");    
+  collection.deleteOne({_id: ObjectId(req.params.id)}, function(err, result) {
+    if (err) throw err;
+    response=result;
+    res.send({ express: response });
+  });   
+  
+});
+
 app.get('/veterinario/vacinas/:vet_crmv', (req, res) => {
   var response;
   const collection = client.db("ConectePet").collection("Vacinas");    
@@ -76,6 +87,17 @@ app.get('/veterinario/consultas/:vet_crmv', (req, res) => {
   var response;
   const collection = client.db("ConectePet").collection("Consultas");    
   collection.find({crmv: req.params.vet_crmv}).toArray(function(err, result) {
+    if (err) throw err;
+    response=result;
+    res.send({ express: response });
+  });   
+  
+});
+
+app.delete('/veterinario/consultas/:id', (req, res) => {
+  var response;
+  const collection = client.db("ConectePet").collection("Consultas");    
+  collection.deleteOne({_id: ObjectId(req.params.id)}, function(err, result) {
     if (err) throw err;
     response=result;
     res.send({ express: response });

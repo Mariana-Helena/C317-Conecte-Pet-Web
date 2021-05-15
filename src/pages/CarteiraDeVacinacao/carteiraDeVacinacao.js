@@ -43,6 +43,11 @@ export default function RegistroVacina() {
 
     const [vet, setVet] = useState(false);
     const [clicked, setClicked]  = useState(false);
+
+    /** 
+    * Vacina selecionada
+    */
+     const [selectedVacina, setSelectedVacina] = useState();
     /** 
     ***********************************************
                     FUNÇÕES
@@ -142,6 +147,21 @@ export default function RegistroVacina() {
     function handleClickMenuItem(rota) {
         history.push("/" + rota);
     }
+    /** 
+    * Abre o diaologue e seta a vacina selecionada
+    */
+     const handleDelete = (vacinaSelecionada) => {
+        setOpen(true);
+        setSelectedVacina(vacinaSelecionada);    
+    }
+    /** 
+    * Executado após exclusão
+    */
+    const handleDeleteAfter = (value) => {
+        if (value == true) {
+            callApi1();
+        }
+    }
     return (
         <MenuSite>
             <form>
@@ -172,7 +192,8 @@ export default function RegistroVacina() {
                     }
 
                 </div>
-                <ExcluirVacina open={open} onClose={() => handleDialogClose()} />
+                <ExcluirVacina open={open} onClose={() => handleDialogClose()}
+                    deleted={(value) => handleDeleteAfter(value)} vacina={selectedVacina} />
                 <div className={styles.campos} >
                     {vacinas.length!=0 ?
                         <TableContainer component={Paper} className={styles.tableContainer} >
@@ -188,7 +209,7 @@ export default function RegistroVacina() {
                                         <StyledTableCell align="center">Aplicada/Agendada</StyledTableCell>
                                         {!vet && (<StyledTableCell align="center">Veterinário</StyledTableCell>)}
                                         <StyledTableCell align="center">Observações</StyledTableCell>
-                                        <StyledTableCell />
+                                        {vet && (<StyledTableCell />)}
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -205,7 +226,8 @@ export default function RegistroVacina() {
                                             <StyledTableCell align="center">{vacina.tipo}</StyledTableCell>
                                             {!vet && (<StyledTableCell align="center">{vacina.crmv}</StyledTableCell>)}
                                             <StyledTableCell align="center">{vacina.observacao}</StyledTableCell>
-                                            <StyledTableCell align="center"><HighlightOffIcon className={styles.closeIcon} onClick={() => setOpen(true)} /></StyledTableCell>
+                                            {vet && (<StyledTableCell align="center"><HighlightOffIcon className={styles.closeIcon} 
+                                            onClick={()=>handleDelete(vacina)} /></StyledTableCell>)}
                                         </StyledTableRow>
 
                                     ))}
