@@ -159,7 +159,7 @@ export default function RegistroVacina() {
     */
     const handleDeleteAfter = (value) => {
         if (value == true) {
-            callApi1();
+            window.location.reload();
         }
     }
     return (
@@ -170,7 +170,7 @@ export default function RegistroVacina() {
                     <span className={styles.titulo}> Vacinas do Pet</span>
                     <br />
                     {vet ?
-                        <Button variant="contained" className={styles.buttonContainedBlue}
+                        <Button id="button-registrar-vacina" variant="contained" className={styles.buttonContainedBlue}
                             onClick={() => handleClickMenuItem('vacinas/registro')} color='primary'> Registrar vacina</Button>
                         :
                         <div className={styles.divFotos}>
@@ -221,13 +221,13 @@ export default function RegistroVacina() {
                                             <StyledTableCell component="th" scope="row">
                                                 {vacina.fabricante}
                                             </StyledTableCell>
-                                            <StyledTableCell align="center">{vacina.vacina}</StyledTableCell>
+                                            <StyledTableCell align="center" id={`cell-vacina-${index}`} >{vacina.vacina}</StyledTableCell>
                                             <StyledTableCell align="center">{vacina.data}</StyledTableCell>
                                             <StyledTableCell align="center">{vacina.tipo}</StyledTableCell>
                                             {!vet && (<StyledTableCell align="center">{vacina.crmv}</StyledTableCell>)}
                                             <StyledTableCell align="center">{vacina.observacao}</StyledTableCell>
                                             {vet && (<StyledTableCell align="center"><HighlightOffIcon className={styles.closeIcon} 
-                                            onClick={()=>handleDelete(vacina)} /></StyledTableCell>)}
+                                            onClick={()=>handleDelete(vacina)} id={`button-excluir-${index}`} /></StyledTableCell>)}
                                         </StyledTableRow>
 
                                     ))}
@@ -241,7 +241,7 @@ export default function RegistroVacina() {
                         </div>
                         :
                          vet?
-                         <div>
+                         <div id="no-vaccine">
                              Nenhuma vacina encontrada!
                          </div>
                         :

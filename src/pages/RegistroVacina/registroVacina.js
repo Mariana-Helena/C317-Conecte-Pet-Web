@@ -151,6 +151,7 @@ export default function RegistroVacina() {
     return (
         <MenuSite>
             <Snackbar
+                id="snackbar"
                 open={openSnackbar}
                 autoHideDuration={6000}
                 onClose={() => setOpenSnackbar(false)}
@@ -262,8 +263,8 @@ export default function RegistroVacina() {
                             }
                         </FormHelperText>
                     </FormControl>
-                    <Button onClick={handleSearch} ><SearchIcon color='primary' /></Button>
-                    <Button onClick={handleClear}><ClearIcon color='primary' /></Button>
+                    <Button id="search" onClick={handleSearch} ><SearchIcon color='primary' /></Button>
+                    <Button  id="clear" onClick={handleClear}><ClearIcon color='primary' /></Button>
                     <br />
                     <div className={styles.container}>
                         <TextField

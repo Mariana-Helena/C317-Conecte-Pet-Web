@@ -152,7 +152,7 @@ export default function AgendamentoConsulta() {
     */
     const handleDeleteAfter = (value) => {
         if (value == true) {
-            callApi1();
+            window.location.reload();
         }
     }
     return (

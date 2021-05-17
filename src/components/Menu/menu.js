@@ -194,7 +194,7 @@ function MenuSite(props) {
             >
               <MenuItem onClick={() => logout()} >Sair</MenuItem>
             </Menu>
-            <Typography variant="h6" noWrap className={styles.userName} >
+            <Typography id="username" variant="h6" noWrap className={styles.userName} >
               {userName}
             </Typography>
             <KeyboardArrowDownIcon className={styles.userMenu} onClick={handleClickArrowDown} />
