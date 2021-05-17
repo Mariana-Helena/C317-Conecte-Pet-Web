@@ -81,6 +81,7 @@ export default function Login() {
     return (
         <div className={styles.background} style={{ backgroundImage: `url(${background})` }}>
             <Snackbar
+                id= "snackbar"
                 open={openSnackbar}
                 autoHideDuration={6000}
                 onClose={() => setOpenSnackbar(false)}
@@ -89,7 +90,7 @@ export default function Login() {
                     horizontal: 'right',
                 }}
             >
-                <div className={success ? styles.success : styles.error}>
+                <div id= "div-snackbar-message" className={success ? styles.success : styles.error}>
                     {message}
                 </div>
             </Snackbar>
@@ -100,7 +101,7 @@ export default function Login() {
                     <div className={styles.tituloDiv}>
                         <span className={styles.titulo}> Login </span>
                     </div>
-                    <TextField id="email" label="E-mail" size="small" variant="outlined"
+                    <TextField id= "textfield-email" label="E-mail" size="small" variant="outlined"
                         className={styles.textfield}
                         name='email'
                         inputRef={register({
@@ -121,7 +122,7 @@ export default function Login() {
                             }
                         </FormHelperText>}
                     />
-                    <TextField id="outlined-basic" label="Senha" size="small" variant="outlined"
+                    <TextField id= "textfield-senha" label="Senha" size="small" variant="outlined"
                         type="password" className={styles.textfield}
                         name='senha'
                         inputRef={register({
@@ -138,11 +139,11 @@ export default function Login() {
                     <Button className={styles.button} disabled={true}>
                         Esqueceu a senha?
                 </Button>
-                    <Button variant="contained" className={styles.buttonContainedBlue}
+                <Button id= "button-entrar" variant="contained" className={styles.buttonContainedBlue}
                         onClick={handleSubmit(onSubmit)} type='submit'>
                         Entrar
                 </Button>
-                    <Button variant="contained" className={styles.buttonContainedGray} onClick={() => handleClickMenuItem('/usuario/cadastro')}>
+                <Button id= "button-cadastrar" variant="contained" className={styles.buttonContainedGray} onClick={() => handleClickMenuItem('/usuario/cadastro')}>
                         Cadastrar
                 </Button>
                 </form>
