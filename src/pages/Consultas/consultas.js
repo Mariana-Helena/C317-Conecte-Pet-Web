@@ -213,9 +213,10 @@ export default function AgendamentoConsulta() {
                                             <StyledTableCell align="center">{consulta.data}</StyledTableCell>
                                             <StyledTableCell align="center">{consulta.horario}</StyledTableCell>
                                             <StyledTableCell align="center">{consulta.observacoes}</StyledTableCell>
-                                            <StyledTableCell align="center">
-                                            {vet && (<HighlightOffIcon className={styles.closeIcon} onClick={() => handleDelete(consulta)} />)}
-                                            </StyledTableCell>
+                                            {vet && ( <StyledTableCell align="center">
+                                            <HighlightOffIcon className={styles.closeIcon} 
+                                            onClick={() => handleDelete(consulta)} />
+                                            </StyledTableCell>)}
                                         </StyledTableRow>
                                     ))}
                                 </TableBody>
