@@ -99,29 +99,29 @@ export default function Pets() {
                     deleted={(value) => handleDeleteAfter(value)} pet={selectedPet} />
                 <div className={styles.primeiraDiv}>
                     <span className={styles.titulo}> Pets cadastrados</span>
-                    <Button variant="contained" className={styles.buttonContainedBlue}
+                    <Button id= "button-cadastrar" variant="contained" className={styles.buttonContainedBlue}
                         onClick={() => handleClickMenuItem('pets/cadastro')} >
                         Cadastrar Novo Pet
                     </Button>
                 </div>
                 {pets.map((pet) =>
                     <div className={styles.petDiv} key={pet._id}>
-                        <Button onClick={() => handleDelete(pet)} className={styles.closeIconButton} >
+                    <Button id={`button-excluir-${pet._id}`} onClick={() => handleDelete(pet)} className={styles.closeIconButton} >
                             <HighlightOffIcon className={styles.closeIcon} />
                         </Button>
                         {pet.foto ?
-                            <img src={pet.foto} className={styles.circleGray} />
+                            <img src={pet.foto} className={styles.circleGray}  id={`img-pet-foto-${pet._id}`}/>
                             :
-                            <div className={styles.circleGray} />
+                            <div className={styles.circleGray}/>
                         }
-                        <span className={styles.subtitulo}> {pet.nome} </span>
+                        <span className={styles.subtitulo} id={`span-pet-nome-${pet._id}`}> {pet.nome} </span>
                         <div>
-                            <p> <span className={styles.campos}>Espécie: </span> <span> {pet.especie}</span> </p>
-                            <p> <span className={styles.campos}>Raça: </span> <span> {pet.raca}</span> </p>
-                            <p> <span className={styles.campos}>Sexo: </span> <span> {pet.sexo}</span> </p>
-                            <p> <span className={styles.campos}>Idade: </span> <span> {pet.idade} anos</span> </p>
-                            <p> <span className={styles.campos}>Peso: </span> <span> {pet.peso} kg</span> </p>
-                            <p> <span className={styles.campos}>Observações: </span> <span> {pet.observacao ? pet.observacao : '-'}</span> </p>
+                            <p> <span className={styles.campos}>Espécie: </span> <span  id={`span-pet-especie-${pet._id}`}> {pet.especie}</span> </p>
+                            <p> <span className={styles.campos}>Raça: </span> <span id={`span-pet-raca-${pet._id}`}> {pet.raca}</span> </p>
+                            <p> <span className={styles.campos}>Sexo: </span> <span id={`span-pet-sexo-${pet._id}`}> {pet.sexo}</span> </p>
+                            <p> <span className={styles.campos}>Idade: </span> <span id={`span-pet-idade-${pet._id}`}> {pet.idade} anos</span> </p>
+                            <p> <span className={styles.campos}>Peso: </span> <span id={`span-pet-peso-${pet._id}`}> {pet.peso} kg</span> </p>
+                            <p> <span className={styles.campos}>Observações: </span> <span id={`span-pet-obs-${pet._id}`}> {pet.observacao ? pet.observacao : '-'}</span> </p>
                         </div>
                     </div>
                 )}

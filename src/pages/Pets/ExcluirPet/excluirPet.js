@@ -53,6 +53,7 @@ export default function ExcluirPet(props) {
       aria-describedby="alert-dialog-description"
     >
       <Snackbar
+        id= "snackbar"
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={() => setOpenSnackbar(false)}
@@ -61,7 +62,7 @@ export default function ExcluirPet(props) {
           horizontal: 'right',
         }}
       >
-        <div className={success ? styles.success : styles.error}>
+        <div id= "div-snackbar-message" className={success ? styles.success : styles.error}>
           {message}
         </div>
       </Snackbar>
@@ -72,10 +73,10 @@ export default function ExcluirPet(props) {
           </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button id= "button-cancelar" onClick={handleClose} color="primary">
           Cancelar
           </Button>
-        <Button onClick={handleDelete} color="primary" autoFocus>
+        <Button id= "button-confirmar" onClick={handleDelete} color="primary" autoFocus>
           Confirmar
           </Button>
       </DialogActions>
