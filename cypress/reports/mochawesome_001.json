@@ -1,0 +1,104 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-05-17T21:19:32.213Z",
+    "end": "2021-05-17T21:19:57.198Z",
+    "duration": 24985,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2076dfef-c7c2-4020-892a-0d6be592b9c6",
+      "title": "",
+      "fullFile": "cypress/integration/tests/vet_consultas.js",
+      "file": "cypress/integration/tests/vet_consultas.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3ef9989f-c410-4e21-903b-c33089ed49bc",
+          "title": "Caso de Teste: Verificar que as páginas do site do ConectePet estão funcionando e apresentam o contéudo correto.",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cenário: Testar registro e exclusão de consulta. ",
+              "fullTitle": "Caso de Teste: Verificar que as páginas do site do ConectePet estão funcionando e apresentam o contéudo correto. Cenário: Testar registro e exclusão de consulta. ",
+              "timedOut": null,
+              "duration": 19918,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://localhost:3000/');\ncy.get('#textfield-email').clear();\ncy.get('#textfield-senha').clear();\ncy.get('#textfield-email').type(userMail);\ncy.get('#textfield-senha').type(userPass);\ncy.get('#button-entrar').click();\ncy.get('#menu-consultas').click();\ncy.get('#button-agendar-consulta').click();\ncy.get('#email').type('jon@gmail.com');\ncy.get('#search').click();\ncy.get('#snackbar').should('contain.text', petMessage);\ncy.get('#pet').click();\ncy.get('#menu-pet > .MuiPaper-root > .MuiList-root > [tabindex=\"0\"]').click();\ncy.get('.MuiButton-containedPrimary').click();\ncy.get('#snackbar').should('contain.text', successMessage);\ncy.get('.MuiButton-containedSecondary').click();\ncy.get('#pet-nome-0').should('contain.text', 'Garfield');\ncy.get('#button-excluir-0').click();\ncy.get('#button-confirmar').click();\ncy.get('#sem-consulta').should('contain.text', 'Nenhuma consulta encontrada!');",
+              "err": {},
+              "uuid": "9d826b1f-f6c3-41f1-a47c-ab3f330b5c7b",
+              "parentUUID": "3ef9989f-c410-4e21-903b-c33089ed49bc",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9d826b1f-f6c3-41f1-a47c-ab3f330b5c7b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 19918,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.2.0"
+    }
+  }
+}

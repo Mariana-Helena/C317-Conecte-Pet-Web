@@ -162,7 +162,7 @@ export default function AgendamentoConsulta() {
                     <span className={styles.titulo}> Consultas do Pet</span>
                     <br />
                     {vet ?
-                        <Button variant="contained" className={styles.buttonContainedBlue}
+                        <Button variant="contained" className={styles.buttonContainedBlue} id={'button-agendar-consulta'}
                             onClick={() => handleClickMenuItem('consultas/agendamento')} color='primary'> Agendar Consulta </Button>
                         :
                         <div className={styles.divFotos}>
@@ -205,8 +205,8 @@ export default function AgendamentoConsulta() {
                                     {consultas.map((consulta,index) => (
                                         <StyledTableRow key={consulta}>
                                             <StyledTableCell align="center">{index}</StyledTableCell>
-                                            {vet && (<StyledTableCell align="center">{consulta.pet.nome}</StyledTableCell>)}
-                                            {vet && (<StyledTableCell align="center">{consulta.pet.dono}</StyledTableCell>)}
+                                            {vet && (<StyledTableCell align="center"  id={`pet-nome-${index}`}>{consulta.pet.nome}</StyledTableCell>)}
+                                            {vet && (<StyledTableCell align="center" >{consulta.pet.dono}</StyledTableCell>)}
                                             <StyledTableCell component="th" scope="row">
                                                 {consulta.crmv}
                                             </StyledTableCell>
@@ -215,7 +215,7 @@ export default function AgendamentoConsulta() {
                                             <StyledTableCell align="center">{consulta.observacoes}</StyledTableCell>
                                             {vet && ( <StyledTableCell align="center">
                                             <HighlightOffIcon className={styles.closeIcon} 
-                                            onClick={() => handleDelete(consulta)} />
+                                            onClick={() => handleDelete(consulta)} id={`button-excluir-${index}`}/>
                                             </StyledTableCell>)}
                                         </StyledTableRow>
                                     ))}
@@ -229,7 +229,7 @@ export default function AgendamentoConsulta() {
                         </div>
                         :
                         vet?
-                        <div>
+                        <div id="sem-consulta">
                             Nenhuma consulta encontrada!
                         </div>
                         :

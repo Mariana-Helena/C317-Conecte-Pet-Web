@@ -133,18 +133,18 @@ function MenuSite(props) {
       <List>
         <Divider />
         {!vet && (
-          <ListItem button onClick={() => handleClickMenuItem('pets')} selected={pets} classes={{ selected: styles.selectedItem }}>
+          <ListItem id={'menu-pets'} button onClick={() => handleClickMenuItem('pets')} selected={pets} classes={{ selected: styles.selectedItem }}>
             <ListItemIcon> <PetsIcon className={pets ? styles.itemSelected : styles.item} /> </ListItemIcon>
             <span className={pets ? styles.textSelected : styles.text}>  Pets</span>
           </ListItem>
         )}
         <Divider />
-        <ListItem button onClick={() => handleClickMenuItem('vacinas')} selected={vacinas} classes={{ selected: styles.selectedItem }}>
+        <ListItem id={'menu-vacinas'} button onClick={() => handleClickMenuItem('vacinas')} selected={vacinas} classes={{ selected: styles.selectedItem }}>
           <ListItemIcon> <FaSyringe className={vacinas ? styles.vaccineIconSelected : styles.vaccineIcon} /> </ListItemIcon>
           <span className={vacinas ? styles.textSelected : styles.text}>   Carteira de vacinação</span>
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => handleClickMenuItem('consultas')} selected={consultas} classes={{ selected: styles.selectedItem }}>
+        <ListItem id={'menu-consultas'} button onClick={() => handleClickMenuItem('consultas')} selected={consultas} classes={{ selected: styles.selectedItem }}>
           <ListItemIcon> <EventIcon className={consultas ? styles.itemSelected : styles.item} /> </ListItemIcon>
           <span className={consultas ? styles.textSelected : styles.text}>   Consultas </span>
         </ListItem>

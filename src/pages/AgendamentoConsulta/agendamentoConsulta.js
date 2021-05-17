@@ -146,6 +146,7 @@ export default function AgendamentoConsulta() {
     return (
         <MenuSite>
             <Snackbar
+                id='snackbar'
                 open={openSnackbar}
                 autoHideDuration={6000}
                 onClose={() => setOpenSnackbar(false)}
@@ -257,8 +258,8 @@ export default function AgendamentoConsulta() {
                             }
                         </FormHelperText>
                     </FormControl>
-                    <Button onClick={handleSearch} ><SearchIcon color='primary' /></Button>
-                    <Button onClick={handleClear}><ClearIcon color='primary' /></Button>
+                    <Button id='search' onClick={handleSearch} ><SearchIcon color='primary' /></Button>
+                    <Button id='clear' onClick={handleClear}><ClearIcon color='primary' /></Button>
                     <br />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <FormControl variant="outlined" className={styles.formControl} size='small'>

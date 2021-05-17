@@ -1,0 +1,199 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-05-17T21:18:43.204Z",
+    "end": "2021-05-17T21:19:04.133Z",
+    "duration": 20929,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "0d6bd613-875b-4cdf-a7fd-2f218f137df9",
+      "title": "",
+      "fullFile": "cypress/integration/tests/login.js",
+      "file": "cypress/integration/tests/login.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "668f2e34-8f48-4893-bf2b-96a0d5f00d44",
+          "title": "Caso de Teste: Verificar que as páginas do site do ConectePet estão funcionando e apresentam o contéudo correto.",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cenário: Entrar no site do ConectePet",
+              "fullTitle": "Caso de Teste: Verificar que as páginas do site do ConectePet estão funcionando e apresentam o contéudo correto. Cenário: Entrar no site do ConectePet",
+              "timedOut": null,
+              "duration": 3798,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://localhost:3000/');\ncy.get('.makeStyles-titulo-11').should('contain.text', 'Login');",
+              "err": {},
+              "uuid": "af851050-719d-49c0-9fa1-7828ace08c13",
+              "parentUUID": "668f2e34-8f48-4893-bf2b-96a0d5f00d44",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cenário: Testar o form com valores de E-mail e Senha válidos. ",
+              "fullTitle": "Caso de Teste: Verificar que as páginas do site do ConectePet estão funcionando e apresentam o contéudo correto. Cenário: Testar o form com valores de E-mail e Senha válidos. ",
+              "timedOut": null,
+              "duration": 6775,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://localhost:3000/');\ncy.get('#textfield-email').clear();\ncy.get('#textfield-senha').clear();\ncy.get('#textfield-email').type(userMail);\ncy.get('#textfield-senha').type(userPass);\ncy.get('#button-entrar').click();\ncy.get('#username').should('contain.text', userName);",
+              "err": {},
+              "uuid": "cc654a69-e08f-4346-b15b-09599d2f2f9d",
+              "parentUUID": "668f2e34-8f48-4893-bf2b-96a0d5f00d44",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cenário: Testar o form com valores de E-mail e Senha incorreta. ",
+              "fullTitle": "Caso de Teste: Verificar que as páginas do site do ConectePet estão funcionando e apresentam o contéudo correto. Cenário: Testar o form com valores de E-mail e Senha incorreta. ",
+              "timedOut": null,
+              "duration": 2452,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://localhost:3000/');\ncy.get('#textfield-email').clear();\ncy.get('#textfield-senha').clear();\ncy.get('#textfield-email').type(userMail);\ncy.get('#textfield-senha').type(wrongPass);\ncy.get('#button-entrar').click();\ncy.get('#snackbar').should('contain.text', errorMessage);",
+              "err": {},
+              "uuid": "0460724d-ebd7-4726-b8ac-758de6763095",
+              "parentUUID": "668f2e34-8f48-4893-bf2b-96a0d5f00d44",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cenário: Testar o form com valores de E-mail e Senha vazios. ",
+              "fullTitle": "Caso de Teste: Verificar que as páginas do site do ConectePet estão funcionando e apresentam o contéudo correto. Cenário: Testar o form com valores de E-mail e Senha vazios. ",
+              "timedOut": null,
+              "duration": 1427,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://localhost:3000/');\ncy.get('#textfield-email').clear();\ncy.get('#textfield-senha').clear();\ncy.get('#button-entrar').click();\ncy.get('#textfield-email-helper-text > .MuiFormHelperText-root').should('contain.text', requiredMessage);\ncy.get('#textfield-senha-helper-text > .MuiFormHelperText-root').should('contain.text', requiredMessage);",
+              "err": {},
+              "uuid": "9e569037-834f-42b5-86c0-e23d71235b2d",
+              "parentUUID": "668f2e34-8f48-4893-bf2b-96a0d5f00d44",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cenário: Testar o form com valores de E-mail inválido e Senha. ",
+              "fullTitle": "Caso de Teste: Verificar que as páginas do site do ConectePet estão funcionando e apresentam o contéudo correto. Cenário: Testar o form com valores de E-mail inválido e Senha. ",
+              "timedOut": null,
+              "duration": 2108,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://localhost:3000/');\ncy.get('#textfield-email').clear();\ncy.get('#textfield-senha').clear();\ncy.get('#textfield-email').type(wrongMail);\ncy.get('#textfield-senha').type(userPass);\ncy.get('#button-entrar').click();\ncy.get('#textfield-email-helper-text > .MuiFormHelperText-root').should('contain.text', invalidEmailMessage);",
+              "err": {},
+              "uuid": "aea48d45-6f26-4e49-bf14-fcccfff22861",
+              "parentUUID": "668f2e34-8f48-4893-bf2b-96a0d5f00d44",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cenário: Testar clicar no botão Cadastrar. ",
+              "fullTitle": "Caso de Teste: Verificar que as páginas do site do ConectePet estão funcionando e apresentam o contéudo correto. Cenário: Testar clicar no botão Cadastrar. ",
+              "timedOut": null,
+              "duration": 1317,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://localhost:3000/');\ncy.get('#button-cadastrar').click();\ncy.get('.MuiToolbar-root > .MuiTypography-root').should('contain.text', 'Cadastrar Usuário');",
+              "err": {},
+              "uuid": "03459001-8479-4d44-95f4-ceb1ff20b708",
+              "parentUUID": "668f2e34-8f48-4893-bf2b-96a0d5f00d44",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "af851050-719d-49c0-9fa1-7828ace08c13",
+            "cc654a69-e08f-4346-b15b-09599d2f2f9d",
+            "0460724d-ebd7-4726-b8ac-758de6763095",
+            "9e569037-834f-42b5-86c0-e23d71235b2d",
+            "aea48d45-6f26-4e49-bf14-fcccfff22861",
+            "03459001-8479-4d44-95f4-ceb1ff20b708"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 17877,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.2.0"
+    }
+  }
+}

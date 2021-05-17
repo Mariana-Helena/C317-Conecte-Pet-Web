@@ -62,10 +62,10 @@ export default function ExcluirConsulta(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button id="button-cancelar" onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          <Button onClick={handleDelete} color="primary" autoFocus>
+          <Button id="button-confirmar" onClick={handleDelete} color="primary" autoFocus>
             Confirmar
           </Button>
         </DialogActions>
