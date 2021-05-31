@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# Conecte Pet (Aplicação Web)
+<p align="center">
+<img src="https://github.com/Mariana-Helena/C317-Conecte-Pet-Web/blob/main/src/images/Logo.png" height="300" width="300" >
+</p>
+<p align="center">Figura 1 - Logo do projeto</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p> Conecte Pet é uma aplicação web para acompanhamento/monitoramento médico veterinário de animais domésticos, oferecendo um serviço de agendamento de consultas, acesso ao histórico de vacinação e acesso aos dados dos pets.  </p>
 
-## Available Scripts
+<p>O projeto foi feito para a disciplina de Tópicos Especiais - C317 com a finalidade de aprendizagem e prática dos fundamentos para desenvolvimento web e mobile. </p>
 
-In the project directory, you can run:
+ ### 🎯 Objetivo da aplicação
+<p>  O objetivo do sistema é oferecer uma plataforma digital para manter o histórico médico veterinário dos animais domésticos e, deste modo, auxiliar tanto as clínicas veterinárias como os donos de pet. Um dos grandes motivadores dessa ideia é a substituição dos registros em papel, como por exemplo registro de vacina, pois documentos impressos geralmente são perdidos dificultando o acompanhamento médico veterinário do animal. Essa redução de papel também auxilia na questão da sustentabilidade.  
+Com o desenvolvimento da aplicação o agendamento de consultas pode ser agilizado e o trabalho do veterinário é facilitado por ter acesso a todos dados do animal. 
+Portanto, o público-alvo desse projeto são clínicas veterinárias e donos de animais domésticos. </p>
 
-### `npm start`
+### 💻 Funcionalidades
+#### Dono de pet:
+- Criar conta
+- Cadastrar pet
+- Visualizar pets cadastrados
+- Excluir pet
+- Visualizar vacinas (aplicadas/agendadas) de cada pet
+- Visualizar consultas de cada pet
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Veterinário:
+- Criar conta
+- Registrar/agendar aplicação de vacina
+- Visualizar vacinas aplicadas/agendadas 
+- Excluir registro de vacinação
+- Agendar consulta
+- Visualizar consultas agendadas 
+- Excluir registro de consulta
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 🛠️ Construído com
 
-### `npm test`
+**IDE**: [Visual Studio Code](https://code.visualstudio.com/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Front-End**: [React](https://pt-br.reactjs.org/)
 
-### `npm run build`
+**Back-End**: [NodeJS](https://nodejs.org/en/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Linguagens**: [Html, CSS e Javascript](https://www.devmedia.com.br/primeiros-passos-no-html5-javascript-e-css3/25647)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Armazenamento de dados**: [MongoDB Atlas](https://www.mongodb.com/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Framework de teste**: [Cypress](https://www.cypress.io/)
 
-### `npm run eject`
+**Gerenciamento de dependências**: [npn](https://www.npmjs.com/)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Controle de versões**: [GitHub](https://github.com/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Interface Gráfica**: [Material-UI](https://material-ui.com/pt/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## ✒️ Autores
 
-## Learn More
+* **Mariana Helena Inês Moreira** - [Mariana](https://github.com/Mariana-Helena)
+* **Sinara Pimenta Medeiros** - [Sinara](https://github.com/SinaraPimenta)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 📄 Licença
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://badges.mit-license.org/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Este projeto está sob a licença MIT - veja o arquivo [LICENSE.txt](https://github.com/Mariana-Helena/C317-Conecte-Pet-Web/blob/main/LICENSE) para detalhes.
 
-### Code Splitting
+⌨️ com ❤️ por Mariana e Sinara 😊
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
