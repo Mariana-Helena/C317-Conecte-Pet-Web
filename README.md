@@ -45,14 +45,14 @@ git clone https://github.com/Mariana-Helena/C317-Conecte-Pet-Web.git
 ### 📋 Pré-requisitos 
 - npm
 
-### 🔧 Instalação das dependências
+### 🔧 Instalando as dependências
 <p> Para instalar as dependências do projeto é necessário digitar o comando no terminal:</p>
 
 ```
 npm install 
 ```
 
-### 👩‍💻 Execução 
+### 👩‍💻 Executando o projeto
 <p>Para execução do projeto, digite:</p>
 
 ```
