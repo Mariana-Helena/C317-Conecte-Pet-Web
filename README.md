@@ -14,7 +14,12 @@ Com o desenvolvimento da aplicação o agendamento de consultas pode ser agiliza
 Portanto, o público-alvo desse projeto são clínicas veterinárias e donos de animais domésticos. </p>
 
 ### 💻 Funcionalidades
-#### Dono de pet:
+
+![image](https://user-images.githubusercontent.com/70379653/120219688-01c7c000-c212-11eb-8871-938b28ccb038.png)
+
+<p align="left">Figura 2 - Use Case </p>
+
+#### Usuário (Dono de pet):
 - Criar conta
 - Cadastrar pet
 - Visualizar pets cadastrados
@@ -31,6 +36,33 @@ Portanto, o público-alvo desse projeto são clínicas veterinárias e donos de 
 - Visualizar consultas agendadas 
 - Excluir registro de consulta
 
+### 🚀 Começando
+Para obter uma cópia do projeto a fim de operá-lo/testá-lo de sua máquina,clone o repositório em uma pasta na sua máquina:
+```
+$ git clone https://github.com/Mariana-Helena/C317-Conecte-Pet-Web.git
+```
+### 📋 Pré-requisitos para execução
+- IDE para execução de códigos Python (ex: Visual Studio Code)
+- Python 3.7 ou 3.8
+- pipenv 
+
+### 🔧 Instalação das dependências
+<p> Para instalar as bibliotecas empregadas no projeto é necessário digitar o comando no terminal:</p>
+
+```
+npm install 
+```
+
+### 👩‍💻 Execução 
+<p>Para execução do projeto, digite o comando no terminal:</p>
+
+```
+npm run dev
+```
+
+<p>Após a execução o servidor estará rodando na porta 5000 e a página web no localhost 3000.</p>
+
+
 ### 🛠️ Construído com
 
 **IDE**: [Visual Studio Code](https://code.visualstudio.com/)
@@ -45,7 +77,7 @@ Portanto, o público-alvo desse projeto são clínicas veterinárias e donos de 
 
 **Framework de teste**: [Cypress](https://www.cypress.io/)
 
-**Gerenciamento de dependências**: [npn](https://www.npmjs.com/)
+**Gerenciamento de dependências**: [npm](https://www.npmjs.com/)
 
 **Controle de versões**: [GitHub](https://github.com/)
 
