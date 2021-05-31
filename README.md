@@ -1,17 +1,16 @@
-# Conecte Pet (Aplicação Web)
+# 💻 Conecte Pet - Aplicação Web 
 <p align="center">
 <img src="https://github.com/Mariana-Helena/C317-Conecte-Pet-Web/blob/main/src/images/Logo.png" height="300" width="300" >
 </p>
 <p align="center">Figura 1 - Logo do projeto</p>
 
-<p> Conecte Pet é uma aplicação web para acompanhamento/monitoramento médico veterinário de animais domésticos, oferecendo um serviço de agendamento de consultas, acesso ao histórico de vacinação e acesso aos dados dos pets.  </p>
+<p> Conecte Pet é uma aplicação para acompanhamento/monitoramento médico veterinário de animais domésticos, oferecendo um serviço de agendamento de consultas, acesso ao histórico de vacinação e acesso aos dados dos pets.  </p>
 
-<p>O projeto foi feito para a disciplina de Tópicos Especiais - C317 com a finalidade de aprendizagem e prática dos fundamentos para desenvolvimento web e mobile. </p>
+<p>O projeto foi feito para a disciplina de Tópicos Especiais (C317) com a finalidade de aprendizagem e prática das ferramentas de desenvolvimento web e mobile. </p>
 
  ### 🎯 Objetivo da aplicação
 <p>  O objetivo do sistema é oferecer uma plataforma digital para manter o histórico médico veterinário dos animais domésticos e, deste modo, auxiliar tanto as clínicas veterinárias como os donos de pet. Um dos grandes motivadores dessa ideia é a substituição dos registros em papel, como por exemplo registro de vacina, pois documentos impressos geralmente são perdidos dificultando o acompanhamento médico veterinário do animal. Essa redução de papel também auxilia na questão da sustentabilidade.  
-Com o desenvolvimento da aplicação o agendamento de consultas pode ser agilizado e o trabalho do veterinário é facilitado por ter acesso a todos dados do animal. 
-Portanto, o público-alvo desse projeto são clínicas veterinárias e donos de animais domésticos. </p>
+Com o desenvolvimento da aplicação o agendamento de consultas pode ser agilizado e o trabalho do veterinário é facilitado por ter acesso a todos dados do animal.</p>
 
 ### 💻 Funcionalidades
 
@@ -37,30 +36,52 @@ Portanto, o público-alvo desse projeto são clínicas veterinárias e donos de 
 - Excluir registro de consulta
 
 ### 🚀 Começando
-Para obter uma cópia do projeto a fim de operá-lo/testá-lo de sua máquina,clone o repositório em uma pasta na sua máquina:
+ Para obter uma cópia do projeto a fim de operá-lo/testá-lo, clone o repositório em uma pasta na sua máquina: 
+
 ```
-$ git clone https://github.com/Mariana-Helena/C317-Conecte-Pet-Web.git
+git clone https://github.com/Mariana-Helena/C317-Conecte-Pet-Web.git
 ```
-### 📋 Pré-requisitos para execução
-- IDE para execução de códigos Python (ex: Visual Studio Code)
-- Python 3.7 ou 3.8
-- pipenv 
+
+### 📋 Pré-requisitos 
+- npm
 
 ### 🔧 Instalação das dependências
-<p> Para instalar as bibliotecas empregadas no projeto é necessário digitar o comando no terminal:</p>
+<p> Para instalar as dependências do projeto é necessário digitar o comando no terminal:</p>
 
 ```
 npm install 
 ```
 
 ### 👩‍💻 Execução 
-<p>Para execução do projeto, digite o comando no terminal:</p>
+<p>Para execução do projeto, digite:</p>
 
 ```
 npm run dev
 ```
 
-<p>Após a execução o servidor estará rodando na porta 5000 e a página web no localhost 3000.</p>
+<p>Após a execução, o servidor estará rodando na porta 5000 e a página web no localhost 3000.</p>
+
+### ⚙️ Executando os testes
+<p> Foram implementados alguns testes utilizando o framework de teste Cypress.</p>
+
+<p>Para abrir a interface do Cypress, digite o seguinte comando no terminal:</p>
+
+```
+./node_modules/.bin/cypress open
+```
+
+<p>Para executar os testes via terminal, digite:</p>
+
+```
+./node_modules/.bin/cypress run --spec 'cypress/integration/tests/**/'
+```
+
+<p>Para gerar o relatório HTML dos testes, primeiro certifique-se que os arquivos mochawesome_XXX.json foram gerados. Caso estes tenham sido salvos fora da pasta cypress/reports, mova-os para esse diretório. Depois, execute os comandos:</p>
+
+```
+npx mochawesome-merge "cypress/reports/*.json" > mochawesome.json 
+npx marge mochawesome.json 
+```
 
 
 ### 🛠️ Construído com
