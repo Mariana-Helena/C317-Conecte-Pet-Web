@@ -1,0 +1,123 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-05-30T18:01:14.355Z",
+    "end": "2021-05-30T18:01:46.645Z",
+    "duration": 32290,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b7446ff5-e309-4134-b91f-521c727e017b",
+      "title": "",
+      "fullFile": "cypress/integration/tests/vet_vacinas.js",
+      "file": "cypress/integration/tests/vet_vacinas.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "74e659fd-dcb9-477e-8fa2-3de78056dae6",
+          "title": "Caso de Teste: Verificar que as páginas do site do ConectePet estão funcionando e apresentam o contéudo correto.",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cenário: Testar registro e exclusão de vacina. ",
+              "fullTitle": "Caso de Teste: Verificar que as páginas do site do ConectePet estão funcionando e apresentam o contéudo correto. Cenário: Testar registro e exclusão de vacina. ",
+              "timedOut": null,
+              "duration": 20543,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://localhost:3000/');\ncy.get('#textfield-email').clear();\ncy.get('#textfield-senha').clear();\ncy.get('#textfield-email').type(userMail);\ncy.get('#textfield-senha').type(userPass);\ncy.get('#button-entrar').click();\ncy.get('#button-registrar-vacina').click();\ncy.get('#email').type('jon@gmail.com');\ncy.get('#search').click();\ncy.get('#snackbar').should('contain.text', petMessage);\ncy.get('#pet').click();\ncy.get('#menu-pet > .MuiPaper-root > .MuiList-root > [tabindex=\"0\"]').click();\ncy.get('#vacina').type('Polivalente');\ncy.get('#fabricante').type('Pfizer');\ncy.get('.MuiButton-containedPrimary').click();\ncy.get('#snackbar').should('contain.text', successMessage);\ncy.get('.MuiButton-containedSecondary').click();\ncy.get('#cell-vacina-0').should('contain.text', 'Polivalente');\ncy.get('#button-excluir-0').click();\ncy.get('#button-confirmar').click();\ncy.get('#no-vaccine').should('contain.text', 'Nenhuma vacina encontrada!');",
+              "err": {},
+              "uuid": "3702f227-e4d7-4d38-b693-3c724d1d4fa9",
+              "parentUUID": "74e659fd-dcb9-477e-8fa2-3de78056dae6",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cenário: Testar pet não encontrado durante registro de vacina. ",
+              "fullTitle": "Caso de Teste: Verificar que as páginas do site do ConectePet estão funcionando e apresentam o contéudo correto. Cenário: Testar pet não encontrado durante registro de vacina. ",
+              "timedOut": null,
+              "duration": 6927,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://localhost:3000/');\ncy.get('#textfield-email').clear();\ncy.get('#textfield-senha').clear();\ncy.get('#textfield-email').type(userMail);\ncy.get('#textfield-senha').type(userPass);\ncy.get('#button-entrar').click();\ncy.get('#button-registrar-vacina').click();\ncy.get('#email').type('jon1@gmail.com');\ncy.get('#search').click();\ncy.get('#snackbar').should('contain.text', noPetMessage);",
+              "err": {},
+              "uuid": "8c1c9dff-59e3-4b22-8a1e-6e22c1d3d92e",
+              "parentUUID": "74e659fd-dcb9-477e-8fa2-3de78056dae6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3702f227-e4d7-4d38-b693-3c724d1d4fa9",
+            "8c1c9dff-59e3-4b22-8a1e-6e22c1d3d92e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 27470,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.2.0"
+    }
+  }
+}
